@@ -1,4 +1,3 @@
-// src/hooks/usePosts.js
 import { useState, useEffect } from 'react';
 import useGet from './hooks/useGet'; // 커스텀 훅 가져오기
 import usePost from './hooks/usePost'; // 커스텀 훅 가져오기

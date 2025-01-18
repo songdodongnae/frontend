@@ -1,9 +1,8 @@
-// src/hooks/usePosts.js
 import { useState, useEffect } from 'react';
 import { fetchData } from '../apiRequest';
 import urls from '../config/apiUrls.json'
 
-const useGet = (endpoint) => {
+const useGet = (url, endpoint) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true); // 로딩 상태 관리
     const [error, setError] = useState(null); // 에러 상태 관리
@@ -12,7 +11,7 @@ const useGet = (endpoint) => {
         const getPosts = async () => {
             try {
                 setLoading(true); // 데이터 로딩 시작
-                const data = await fetchData(urls[endpoint]);
+                const data = await fetchData(url, urls[endpoint]);
                 setPosts(data);
             } catch (error) {
                 setError(error); // 에러 발생 시 처리

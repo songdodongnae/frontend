@@ -4,7 +4,7 @@ import usePost from './hooks/usePost'; // 커스텀 훅 가져오기
 import urls from './config/apiUrls.json'
 
 function App() {
-    const { posts, loading, error } = useGet(urls['naver-re'], 'post'); // 훅을 사용하여 게시글, 로딩, 에러 상태 받기
+    const { posts, loading, error } = useGet(urls['base-url'], "post"); // 훅을 사용하여 게시글, 로딩, 에러 상태 받기
 
     if (loading) {
         return <div>Loading...</div>; // 로딩 중일 때 표시할 UI
@@ -21,7 +21,7 @@ function App() {
             <ul>
                 {posts.map((post) => (
                 <li key={post.id}>
-                    <h2>{post.name}</h2>
+                    <h2>{post.title}</h2>
                     <p>{post.body}</p>
                 </li>
                 ))}

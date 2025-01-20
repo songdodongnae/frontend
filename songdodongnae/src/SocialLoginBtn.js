@@ -3,10 +3,9 @@ import urls from './config/loginUrls.json';
 import { useLocation } from 'react-router-dom';
 
 const SocialLoginBtn = () => {
+    const location = useLocation();
     const handleClick = (url) => {
         window.location.href = url;
-        const location = useLocation();
-        const code = new URL(location.toString()).searchParams.get('accessToken');
     };
 
     return (

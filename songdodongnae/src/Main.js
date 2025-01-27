@@ -1,7 +1,19 @@
 import React from 'react';
 import icon from './images/logo128.png'
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
+
+    const navigate = useNavigate();
+
+    const goToMyPage = () => {
+        navigate('/MyPage');
+    };
+
+    const goToLogin = () => {
+        navigate('/login');
+    };
+
     return (
         <div className="main-page">
             {/* 헤드 */}
@@ -9,6 +21,8 @@ const Main = () => {
                 <a href='/'>
                     <img className='icon' src={icon}/>
                 </a>
+                <span onClick={goToMyPage}>마이페이지</span>
+                <span onClick={goToLogin}>로그인</span>
             </header>
 
             {/* 네비게이션 */}

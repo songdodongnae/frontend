@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchData } from "./apiClient";
+import { fetchData } from "../module/apiClient.js";
 
 const MyPage = () => {
     const [data, setData] = useState(null);

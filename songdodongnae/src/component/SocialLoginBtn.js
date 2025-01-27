@@ -1,11 +1,11 @@
-import './css/SocialLoginBtn.css'
+import '../css/SocialLoginBtn.css'
 import React from 'react';
-import urls from './config/loginUrls.json';
+import urls from '../config/loginUrls.json';
 import { useLocation } from 'react-router-dom';
 
-import googleLogo from './images/google-logo.png'
-import naverLogo from './images/naver-logo.png'
-import kakaoLogo from './images/kakao-logo.png'
+import googleLogo from '../images/google-logo.png'
+import naverLogo from '../images/naver-logo.png'
+import kakaoLogo from '../images/kakao-logo.png'
 
 const SocialLoginBtn = () => {
   const location = useLocation();

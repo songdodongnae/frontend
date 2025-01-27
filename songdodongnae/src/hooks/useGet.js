@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchData } from '../apiRequest';
+import { fetchData } from '../module/apiRequest';
 import urls from '../config/apiUrls.json'
 
 const useGet = (url, endpoint) => {

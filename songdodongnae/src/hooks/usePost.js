@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { postData } from '../apiRequest';
+import { postData } from '../module/apiRequest';
 import urls from '../config/apiUrls.json'
 
 const usePost = (url, endpoint, data) => {

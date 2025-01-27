@@ -1,11 +1,11 @@
 import './css/App.css'
 import React from 'react';
-import SocialLoginBtn from './SocialLoginBtn';
-import CallbackPage from './CallbackPage';
-import Main from './Main';
+import SocialLoginBtn from './component/SocialLoginBtn';
+import CallbackPage from './page/CallbackPage';
+import Main from './page/MainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // BrowserRouter 추가
-import ApiTest from './ApiTest';
-import MyPage from './MyPage';
+import ApiTest from './test/ApiTest';
+import MyPage from './page/MyPage';
 
 function App() {
   

@@ -1,5 +1,5 @@
 import axios from "axios";
-import url from "./config/apiUrls.json"
+import url from "../config/apiUrls.json"
 
 // Axios 인스턴스 생성
 const apiClient = axios.create({

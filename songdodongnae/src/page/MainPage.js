@@ -1,5 +1,5 @@
 import React from 'react';
-import icon from './images/logo128.png'
+import icon from '../images/logo128.png'
 import { useNavigate } from "react-router-dom";
 
 const Main = () => {

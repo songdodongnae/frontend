@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { saveToken } from "./tokenStorage";
+import { saveToken } from "../module/tokenStorage.js";
 
 const CallbackPage = () => {
     useEffect(() => {

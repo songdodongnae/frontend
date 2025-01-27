@@ -1,21 +1,36 @@
+import './css/SocialLoginBtn.css'
 import React from 'react';
 import urls from './config/loginUrls.json';
 import { useLocation } from 'react-router-dom';
 
-const SocialLoginBtn = () => {
-    const location = useLocation();
-    const handleClick = (url) => {
-        window.location.href = url;
-    };
+import googleLogo from './images/google-logo.png'
+import naverLogo from './images/naver-logo.png'
+import kakaoLogo from './images/kakao-logo.png'
 
-    return (
-        <div>
-            <h2> 소셜 로그인 </h2>
-            <span onClick={() => handleClick(urls['naver-login'])}> 네이버 로그인 </span>
-            <span onClick={() => handleClick(urls['kakao-login'])}> 카카오 로그인 </span>
-            <span onClick={() => handleClick(urls['google-login'])}> 구글 로그인 </span>
+const SocialLoginBtn = () => {
+  const location = useLocation();
+  const handleClick = (url) => {
+    window.location.href = url;
+  };
+
+  return (
+    <div className='login-container'>
+      <div className='main-display'>
+        <div className='welcome-text'>
+          <div>송도동네에<br/>오신 것을 환영해요!</div>
         </div>
-    );
+        <div className='login-buttons'>
+          <span className='google-button' onClick={() => handleClick(urls['google-login'])}><img src={googleLogo}/>구글 로그인</span>
+          <span className='naver-button' onClick={() => handleClick(urls['naver-login'])}><img src={naverLogo}/>네이버 로그인</span>
+          <span className='kakao-button' onClick={() => handleClick(urls['kakao-login'])}><img src={kakaoLogo}/>카카오 로그인</span>
+        </div>
+      </div>
+      <div className='without-login'>
+        <span className='without-text'>로그인 없이 이용하기</span>{/* 클릭시 기능 추가 필요 */}
+      </div>
+    </div>
+
+  );
 };
 
 export default SocialLoginBtn;

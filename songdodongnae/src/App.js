@@ -1,6 +1,5 @@
-import './App.css';
+import './css/App.css'
 import React from 'react';
-//import { useNavigate } from 'react-router-dom';
 import SocialLoginBtn from './SocialLoginBtn';
 import CallbackPage from './CallbackPage';
 import Main from './Main';
@@ -22,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

@@ -1,8 +1,8 @@
 import './css/App.css'
 import React from 'react';
-import SocialLoginBtn from './component/SocialLoginBtn';
+import LoginPage from './page/LoginPage';
 import CallbackPage from './page/CallbackPage';
-import Main from './page/MainPage';
+import MainPage from './page/MainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // BrowserRouter 추가
 import ApiTest from './test/ApiTest';
 import MyPage from './page/MyPage';
@@ -12,10 +12,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/auth" element={<CallbackPage />} />
           <Route path="/MyPage" element={<MyPage />} />
-          <Route path='/login' element={<SocialLoginBtn />} />
+          <Route path='/login' element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

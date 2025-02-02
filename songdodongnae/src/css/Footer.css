@@ -71,4 +71,14 @@
     flex-direction: column;
     margin-top: 40px;
     margin-left: 407px;
+    gap: 5px;
+
+    color: var(--Primary_100, #FFEA96);
+
+    /* Text_sm */
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 19.6px */
 }

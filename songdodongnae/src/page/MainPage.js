@@ -1,6 +1,10 @@
 import React from 'react';
 import icon from '../images/logo128.png'
 import { useNavigate } from "react-router-dom";
+import Header from "../component/Header.js"
+import Navigation from "../component/Navigation.js"
+import Footer from "../component/Footer.js"
+import AdBanner from "../component/AdBanner.js"
 
 const Main = () => {
 
@@ -16,29 +20,9 @@ const Main = () => {
 
     return (
         <div className="main-page">
-            {/* 헤드 */}
-            <header className="header">
-                <a href='/'>
-                    <img className='icon' src={icon}/>
-                </a>
-                <span onClick={goToMyPage}>마이페이지</span>
-                <span onClick={goToLogin}>로그인</span>
-            </header>
-
-            {/* 네비게이션 */}
-            <nav className="navigation">
-                <ul>
-                    <li><a href="/">축제 일정</a></li>
-                    <li><a href="/about">코스 추천</a></li>
-                    <li><a href="/services">송도 맛집 리스트</a></li>
-                </ul>
-            </nav>
-
-            {/* 광고 */}
-            <section className="advertisement">
-                <h2>광고 배너</h2>
-                {/* 광고 내용 추가 */}
-            </section>
+            <Header />
+            <Navigation />
+            <AdBanner />
 
             {/* 컨텐츠1 */}
             <section className="content1">
@@ -57,6 +41,7 @@ const Main = () => {
                 <h2>컨텐츠3</h2>
                 {/* 세 번째 컨텐츠 내용 추가 */}
             </section>
+            <Footer />
         </div>
     );
 };

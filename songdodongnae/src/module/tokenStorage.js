@@ -4,7 +4,9 @@ import axios from 'axios';
 // 쿠키에서 토큰을 가져와 로컬 스토리지에 저장하고 쿠키에서 삭제하는 함수
 export const saveToken = () => {
     const accessToken = Cookies.get("Authorization");
+    const fullToken = Cookies.get();
     console.log("accessToken:",accessToken);
+    console.log("쿠키 전체 :", fullToken);
     
     if (accessToken) {
         localStorage.setItem('accessToken', accessToken);

@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
     const navigate = useNavigate(); 
 
-const goToMain = () => {
-    navigate('/');
-}
+    const goToMain = () => {
+        navigate('/');
+    }
 
-const goToLogin =() => {
-    navigate('/login');
-}
+    const goToLogin =() => {
+        navigate('/login');
+    }
 
     return (
         <div className="header">

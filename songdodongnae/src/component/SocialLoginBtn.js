@@ -1,33 +1,14 @@
 import '../css/SocialLoginBtn.css'
-import React, { useState } from 'react';
-import urls from '../config/loginUrls.json';
-import s_urls from '../config/apiUrls.json';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+
+import { loginRequest } from '../module/loginRequest.js';
 
 import googleLogo from '../images/google-logo.svg';
 import naverLogo from '../images/naver-logo.svg';
 import kakaoLogo from '../images/kakao-logo.svg';
 
-import useGet from '../hooks/useGet.js';
-
 const SocialLoginBtn = () => {
-  const handleButtonClick = async (url) => {
-    try {
-      const response = await axios.get(urls['login-base']+urls[url], {
-        /**
-         * CORS 설정이 필요하면 켜줍니다.
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        }, */
-        withCredentials: true,  // 쿠키 포함 (필요 시)
-      });
-
-      console.log('Response data:', response.data);
-    } catch (error) {
-      console.error('Axios error:', error);
-    }
+  const loginButtonClick = (url) => {
+    loginRequest(url);
   };
 
   return (
@@ -37,9 +18,9 @@ const SocialLoginBtn = () => {
           <div>송도동네에<br/>오신 것을 환영해요!</div>
         </div>
         <div className='login-buttons'>
-          <span className='google-button' onClick={() => handleButtonClick('google-login')}><img src={googleLogo} width="20px" height="20px"/>구글 로그인</span>
-          <span className='naver-button' onClick={() => handleButtonClick('naver-login')}><img src={naverLogo} width="16px" height="16px"/>네이버 로그인</span>
-          <span className='kakao-button' onClick={() => handleButtonClick('kakao-login')}><img src={kakaoLogo} width="18px" height="18px"/>카카오 로그인</span>
+          <span className='google-button' onClick={() => loginButtonClick('google-login')}><img src={googleLogo} width="20px" height="20px"/>구글 로그인</span>
+          <span className='naver-button' onClick={() => loginButtonClick('naver-login')}><img src={naverLogo} width="16px" height="16px"/>네이버 로그인</span>
+          <span className='kakao-button' onClick={() => loginButtonClick('kakao-login')}><img src={kakaoLogo} width="18px" height="18px"/>카카오 로그인</span>
         </div>
       </div>
       <div className='without-login'>

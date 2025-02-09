@@ -1,4 +1,5 @@
 import '../css/SocialLoginBtn.css'
+import loginUrls from '../config/loginUrls.json'
 
 import { loginRequest } from '../module/loginRequest.js';
 
@@ -8,7 +9,7 @@ import kakaoLogo from '../images/kakao-logo.svg';
 
 const SocialLoginBtn = () => {
   const loginButtonClick = (url) => {
-    loginRequest(url);
+    window.location.href = loginUrls['login-base']+loginUrls[url];
   };
 
   return (

@@ -22,6 +22,7 @@ const Main = () => {
         <div className="main-page">
             <Header />
             <Navigation />
+            <h3>2025.02.09 Update</h3>
             <AdBanner />
 
             {/* 컨텐츠1 */}

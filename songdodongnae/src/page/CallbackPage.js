@@ -1,16 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { saveToken } from "../module/tokenStorage.js";
 
 const CallbackPage = () => {
-    const [token, setToken] = useState(localStorage.getItem('accessToken'));  // 상태로 토큰 관리
+    const [token, setToken] = useState(localStorage.getItem("accessToken"));
+
     useEffect(() => {
-        console.log("saveToken 전");
-        saveToken();  // 쿠키에서 토큰을 가져와 로컬 스토리지에 저장
-        setToken(localStorage.getItem('accessToken'));  // 로컬 스토리지에서 토큰을 다시 가져와 상태를 업데이트
-        console.log("saveToken 후");
+        const fetchToken = async () => {
+            console.log("saveToken 전");
+            await saveToken(); // 비동기적으로 실행
+            console.log("saveToken 후");
+            setToken(localStorage.getItem("accessToken")); // 저장 후 가져오기
+        };
+
+        fetchToken();
     }, []);
 
     console.log("localStorage에서 가져온 토큰:", token);
+
     return (
         <div>
             <h3>Redirect Page 입니다.</h3>
@@ -19,4 +25,4 @@ const CallbackPage = () => {
     );
 };
 
-export default CallbackPage 
+export default CallbackPage;

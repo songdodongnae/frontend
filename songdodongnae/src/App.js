@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/auth" element={<CallbackPage />} />
           <Route path="/MyPage" element={<MyPage />} />
-          <Route path='/login' element={<LoginPage />} />
+          <Route path='/slogin' element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

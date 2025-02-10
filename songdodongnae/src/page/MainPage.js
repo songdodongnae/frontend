@@ -15,14 +15,14 @@ const Main = () => {
     };
 
     const goToLogin = () => {
-        navigate('/login');
+        navigate('/slogin');
     };
 
     return (
         <div className="main-page">
             <Header />
             <Navigation />
-            <h3>2025.02.09 Update</h3>
+            <h3>2025.02.09 Night Update</h3>
             <AdBanner />
 
             {/* 컨텐츠1 */}

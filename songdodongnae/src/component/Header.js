@@ -13,7 +13,7 @@ const Header = () => {
     }
 
     const goToLogin =() => {
-        navigate('/login');
+        navigate('/slogin');
     }
 
     return (

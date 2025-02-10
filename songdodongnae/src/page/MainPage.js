@@ -20,9 +20,10 @@ const Main = () => {
 
     return (
         <div className="main-page">
+            {/*2025.02.10 Update*/}
             <Header />
             <Navigation />
-            <h3>2025.02.09 Night Update</h3>
+
             <AdBanner />
 
             {/* 컨텐츠1 */}

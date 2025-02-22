@@ -1,0 +1,10 @@
+.body {
+    display: flex;
+    width: 100%; 
+    flex-direction: row;
+    flex-shrink: 0;    
+    margin-top: 47px;
+    align-items: center;
+    justify-content: center;
+    gap: 64px ;
+}

@@ -1,0 +1,49 @@
+.series-header {
+    display: flex;
+    gap: 49px;
+    align-items: center;
+}
+
+.series-title {
+    color: #000;
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}
+
+.overall {
+    color: var(--Black_600, #666);
+
+    /* Text_sm */
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 19.6px */
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: 6%; /* 0.84px */
+    text-underline-offset: 22%; /* 3.08px */
+    text-underline-position: from-font;color: var(--Black_600, #666);
+    text-align: center;
+
+    /* Text_sm */
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 19.6px */
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: 6%; /* 0.84px */
+    text-underline-offset: 22%; /* 3.08px */
+    text-underline-position: from-font;
+
+    cursor: pointer;
+}

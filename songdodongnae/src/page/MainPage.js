@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Header from "../component/Header.js"
 import Navigation from "../component/Navigation.js"
 import Footer from "../component/Footer.js"
-import AdBanner from "../component/AdBanner.js"
+import Series from '../component/Series.js';
+import Curation from '../component/Curation.js';
+import Creator from '../component/Creator.js';
+import '../css/Main.css'
 
 const Main = () => {
 
@@ -23,26 +26,11 @@ const Main = () => {
             {/*2025.02.10 Update*/}
             <Header />
             <Navigation />
-
-            <AdBanner />
-
-            {/* 컨텐츠1 */}
-            <section className="content1">
-                <h2>컨텐츠1</h2>
-                {/* 첫 번째 컨텐츠 내용 추가 */}
-            </section>
-
-            {/* 컨텐츠2 */}
-            <section className="content2">
-                <h2>컨텐츠2</h2>
-                {/* 두 번째 컨텐츠 내용 추가 */}
-            </section>
-
-            {/* 컨텐츠3 */}
-            <section className="content3">
-                <h2>컨텐츠3</h2>
-                {/* 세 번째 컨텐츠 내용 추가 */}
-            </section>
+            <div className='body'>
+                <Series className="series" />
+                <Curation className="curation" />
+                <Creator className="creator" />
+            </div>
             <Footer />
         </div>
     );

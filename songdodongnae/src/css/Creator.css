@@ -1,0 +1,16 @@
+.creator-header {
+    display: flex;
+    gap: 49px;
+    align-items: center;
+}
+
+.creator-title {
+    color: #000;
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}

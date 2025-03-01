@@ -17,13 +17,9 @@ const Main = () => {
         navigate('/MyPage');
     };
 
-    const goToLogin = () => {
-        navigate('/login');
-    };
-
     return (
         <div className="main-page">
-            {/*2025.02.10 Update*/}
+            {/*2025.03.01 Update*/}
             <Header />
             <Navigation />
             <div className='body'>

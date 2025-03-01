@@ -18,7 +18,7 @@ const Main = () => {
     };
 
     const goToLogin = () => {
-        navigate('/slogin');
+        navigate('/login');
     };
 
     return (

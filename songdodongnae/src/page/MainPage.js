@@ -27,9 +27,9 @@ const Main = () => {
             <Header />
             <Navigation />
             <div className='body'>
-                <Series className="series" />
-                <Curation className="curation" />
-                <Creator className="creator" />
+                <Series />
+                <Curation />
+                <Creator />
             </div>
             <Footer />
         </div>

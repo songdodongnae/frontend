@@ -1,16 +1,71 @@
-.creator-header {
+.creator {
     display: flex;
-    gap: 49px;
+    width: 121px;
+    padding: 29px 11px 31px 11px;
+    flex-direction: column;
     align-items: center;
+    gap: 15px;
+
+    border-radius: 100px;
+    background: var(--Black_50, #EFEFEF);
+    margin-top: 9px;
+}
+
+.creator-header {
+    align-self: stretch;
 }
 
 .creator-title {
     color: #000;
-
-    /* Title_sm */
+    text-align: center;
     font-family: "Noto Sans KR";
-    font-size: 24px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 600;
-    line-height: 140%; /* 33.6px */
+    font-weight: 500;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: -1.12px;
+}
+
+.creator-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+}
+
+.creator-box {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    padding: 7px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    border-radius: 179px;
+    background: #FFF;
+}
+
+.creator-chara {
+    width: 38px;
+    height: 48.364px;
+    flex-shrink: 0;
+    aspect-ratio: 38.00/48.36;
+}
+
+.creator-disc {
+    width: 80%;
+    height: 28px;
+    flex-shrink: 0;
+
+    color: #000;
+    text-align: center;
+    font-family: "NotoSansKR";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 14px */
+    letter-spacing: -0.7px;
+    word-break: keep-all;
 }

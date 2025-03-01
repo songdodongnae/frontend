@@ -10,7 +10,7 @@ const Curation = () => {
     }
 
     return (
-        <div>
+        <div className="curation">
             <div className="curation-header">
                 <div className="curation-title">방금 올라온 큐레이션</div>
                 <div className="overall" onClick={() => goToCuration()}>전체보기</div>

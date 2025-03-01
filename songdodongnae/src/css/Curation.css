@@ -1,6 +1,10 @@
+.curation {
+    margin-right: 50px;
+}
+
 .curation-header {
     display: flex;
-    gap: 49px;
+    gap: 279px;
     align-items: center;
 }
 

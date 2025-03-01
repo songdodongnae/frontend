@@ -1,3 +1,7 @@
+.series {
+    margin-right: 72px;
+}
+
 .series-header {
     display: flex;
     gap: 49px;

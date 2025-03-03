@@ -3,7 +3,7 @@
 }
 
 .curation-header {
-    display: flex;
+    display: flex; 
     gap: 279px;
     align-items: center;
 }

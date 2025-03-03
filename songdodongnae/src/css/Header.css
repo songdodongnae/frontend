@@ -10,7 +10,7 @@
 
 .header-contents {
     display: flex;
-    width: 960px;
+    width: 970px;
     justify-content: center;
     align-items: flex-end;
     gap: 106px;
@@ -25,7 +25,7 @@
 
     color: var(--Black_800, #2E2E2E);
     text-align: right;
-    font-family: "NanumSquare_ac";
+    font-family: "Noto Sans KR";
     font-size: 8px;
     font-style: normal;
     font-weight: 700;

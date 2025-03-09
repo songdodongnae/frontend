@@ -9,7 +9,8 @@ div{
     align-items: center;
     gap: 40px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 290px;
+    margin-bottom: 144px;
 }
 
 .main-display {
@@ -54,7 +55,7 @@ div{
     gap: 15px;
     align-self: stretch;
 
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid var(--Black_100, #DDD);
     background: var(--white, #FFF);
 
@@ -79,7 +80,7 @@ div{
     gap: 15px;
     align-self: stretch;
 
-    border-radius: 5px;
+    border-radius: 10px;
     background: var(--naver-bg, #03C75A);
 
     color: var(--naver-text, #FFF);
@@ -103,7 +104,7 @@ div{
     gap: 10px;
     align-self: stretch;
 
-    border-radius: 5px;
+    border-radius: 10px;
     background: var(--kakao-bg, #FEE500);
 
     color: var(--kakao-text, rgba(0, 0, 0, 0.85));
@@ -119,8 +120,6 @@ div{
 }
 
 .without-login {
-    align-self: stretch;
-
     color: var(--Black_600, #666);
     text-align: center;
     
@@ -135,7 +134,7 @@ div{
     text-decoration-skip-ink: none;
     text-decoration-thickness: auto;
     text-underline-offset: 25%; /* 3px */
-    text-underline-position:below;
+    text-underline-position: from-font;
 }
 
 .without-text {

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { saveToken } from "../module/tokenStorage.js";
+import { useNavigate } from "react-router-dom";
 
 const CallbackPage = () => {
     const [token, setToken] = useState(localStorage.getItem("accessToken"));
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchToken = async () => {
@@ -15,12 +17,19 @@ const CallbackPage = () => {
         fetchToken();
     }, []);
 
+    useEffect(() => {
+        const timer = setTimeout(()=> {
+            navigate("/");
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, [navigate]);
+
     console.log("localStorage에서 가져온 토큰:", token);
 
     return (
         <div>
             <h3>Redirect Page 입니다.</h3>
-            <h3>토큰 : {token}</h3>
         </div>
     );
 };

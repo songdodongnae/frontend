@@ -5,6 +5,9 @@
     flex-shrink: 0;
     height: 64.24px;
     align-items: center;
+    position: fixed;
+    top: 126px;
+    z-index: 1000;
 
     border-top: 1px solid var(--Black_100, #DDD);
     border-bottom: 1px solid var(--Black_100, #DDD);
@@ -38,5 +41,9 @@
     line-height: 140%; /* 25.2px */
 
     cursor: pointer;
+}
+
+.navi-li:hover {
+    color: var(--Primary_700, #FFCD00);
 }
 

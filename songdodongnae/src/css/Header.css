@@ -3,9 +3,17 @@
     width: 100%; 
     flex-direction: column;
     flex-shrink: 0;    
-    margin-top: 50px;
-    margin-bottom: 32px;
+    padding-top: 50px;
+    padding-bottom: 32px;
     align-items: center;
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    background-color: #FFF;
+
+    z-index: 1000;
 }
 
 .header-contents {

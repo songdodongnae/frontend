@@ -1,6 +1,13 @@
 .series {
+    padding-top: 38px;
+    margin-top: 190px;
     margin-right: 72px;
-    margin-left: 126px;
+    height: calc(100vh - 228px);
+    overflow-y: auto;
+    position: sticky;
+    top: 190px;
+    bottom: 0px;
+    left: 240px;
 }
 
 .series-header {

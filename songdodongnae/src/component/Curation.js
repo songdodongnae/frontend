@@ -15,7 +15,7 @@ const Curation = () => {
     }
 
     useEffect(() => {
-        fetch("https://picsum.photos/v2/list?page=1&limit=10") // 더미 API
+        fetch("https://picsum.photos/v2/list?page=1&limit=9") // 더미 API
             .then((response) => response.json())
             .then((data) => setCuration(data))
             .catch((error) => console.error("Error fetching ads:", error));

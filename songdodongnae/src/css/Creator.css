@@ -6,9 +6,12 @@
     align-items: center;
     gap: 15px;
 
+    position: sticky;
+    top: 238px;
+
     border-radius: 100px;
     background: var(--Black_50, #EFEFEF);
-    margin-top: 9px;
+    margin-top: 237px;
 }
 
 .creator-header {

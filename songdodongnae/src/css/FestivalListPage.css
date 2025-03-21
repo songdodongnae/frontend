@@ -3,3 +3,91 @@
     flex-direction: column;
     align-items: center;
 }
+
+.festival-group {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 48px;
+    margin-bottom: 158px;
+}
+
+.festivals-item {
+    display: flex;
+    width: 960px;
+    align-items: center;
+}
+
+.festivals-img-container {
+    width: 480px;
+    height: 427px;
+
+
+}
+
+.festivals-thumbnail {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px 0px 0px 30px;
+}
+
+.festivals-info-container {
+    display: flex;
+    width: 480px;
+    height: 427px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+
+    border-radius: 0px 30px 30px 0px;
+    background: var(--Black_50, #EFEFEF);
+}
+
+.festivals-item-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    align-self: stretch;
+
+    padding: 25px 38px 219px 25px;
+
+    color: var(--Black_900, #1C1814);
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}
+
+.festivals-item-disc {
+    color: var(--Black_900, #1C1814);
+
+    /* Text_lg_1 */
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 25.2px */
+
+    padding: 0px 38px 16px 25px;
+    word-break: break-all;
+}
+
+.festivals-contents-num {
+    color: var(--Black_700, #4D4D4D);
+
+    /* Text_lg_2 */
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 25.2px */
+
+    padding: 0px 38px 25px 25px;
+}

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import '../css/FestivalCalendar.css';
 import dayjs from 'dayjs';
 
+import rightArrow from '../images/right-arrow.svg';
+
 const FestivalCalendar = () => {
     const [currentMonth, setCurrentMonth] = useState(dayjs());
 
@@ -58,10 +60,26 @@ const FestivalCalendar = () => {
                     <div className="festival-category-header-text">카테고리</div>
                 </div>
                 <div className="festival-category-body">
-                    <div className="festival-category-compo">음악</div>
-                    <div className="festival-category-compo">스포츠</div>
-                    <div className="festival-category-compo">음식</div>
-                    <div className="festival-category-compo">기타</div>
+                    <div className="festival-category-compo">
+                        <div className="dot yellow" />
+                        <div className="festival-category-text">음악</div>
+                        <img className="right-arrow" src={rightArrow} />
+                    </div>
+                    <div className="festival-category-compo">
+                        <div className="dot red" />
+                        <div className="festival-category-text">스포츠</div>
+                        <img className="right-arrow" src={rightArrow} />
+                    </div>
+                    <div className="festival-category-compo">
+                        <div className="dot blue" />
+                        <div className="festival-category-text">음식</div>
+                        <img className="right-arrow" src={rightArrow} />
+                    </div>
+                    <div className="festival-category-compo">
+                        <div className="dot skyblue" />
+                        <div className="festival-category-text">기타</div>
+                        <img className="right-arrow" src={rightArrow} />
+                    </div>
                 </div>
             </div>
             <div className="calendar">

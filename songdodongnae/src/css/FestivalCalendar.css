@@ -28,7 +28,7 @@
     justify-content: left;
     align-items: start;
 
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 
 }
 
@@ -54,14 +54,46 @@
 }
 
 .festival-category-compo {
-    color: var(--Black_50, #EFEFEF);
+    display: flex;
 
+    align-items: center;
+    justify-content: space-between;
+}
+
+.festival-category-text {
+    width: 100%;
+    color: var(--Black_50, #EFEFEF);
     /* Text_md */
     font-family: "Noto Sans KR";
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 140%; /* 22.4px */
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    margin-right: 8px;
+    margin-left: 3px;
+}
+
+.yellow {
+    background-color: #FDD947;
+}
+
+.red {
+    background-color: #F85E11;
+}
+
+.blue {
+    background-color: #3D53E4;
+}
+
+.skyblue {
+    background-color: #47C9FD;
 }
 
 .calendar {

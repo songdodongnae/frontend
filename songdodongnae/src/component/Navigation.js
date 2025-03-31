@@ -12,10 +12,10 @@ const Navigation = () => {
     return (
         <div className="navigation">
             <ul className="navi-ul">
-                <li className="navi-li" onClick={() => goFromNavi('/story')}>송도동네 이야기</li> 
-                <li className="navi-li" onClick={() => goFromNavi('/infoSongdo')}>송도의 모든 것</li>
-                <li className="navi-li" onClick={() => goFromNavi('/edition')}>송도동네 에디션</li>
-                <li className="navi-li" onClick={() => goFromNavi('/festivalList')}>송도 축제 모두 보기</li>
+                <li className="navi-li navi-li-1" onClick={() => goFromNavi('/story')}>송도동네 이야기</li> 
+                <li className="navi-li navi-li-2" onClick={() => goFromNavi('/infoSongdo')}>송도의 모든 것</li>
+                <li className="navi-li navi-li-3" onClick={() => goFromNavi('/edition')}>송도동네 에디션</li>
+                <li className="navi-li navi-li-4" onClick={() => goFromNavi('/festivalList')}>송도 축제 모두 보기</li>
             </ul>
         </div>
     )

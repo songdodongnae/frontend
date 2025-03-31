@@ -31,7 +31,7 @@
 .navi-li {
     float: left;
 
-    color: var(--Black_800, #2E2E2E);
+    color: var(--Black_200, #C6C6C6);
 
     /* Text_lg_1 */
     font-family: "Noto Sans KR";
@@ -44,6 +44,6 @@
 }
 
 .navi-li:hover {
-    color: var(--Primary_700, #FFCD00);
+    color: var(--Black_800, #2E2E2E);
 }
 

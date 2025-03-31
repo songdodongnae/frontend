@@ -122,15 +122,3 @@
     padding: 0px 38px 25px 25px;
 }
 
-
-.navi-li {
-color: var(--Black_800, #2E2E2E);
-}
-
-.navi-li-4:hover {
-    color: var(--Primary_700, #FFCD00);
-}
-
-.navi-li-4 {
-    color: var(--Primary_700, #FFCD00);
-}

@@ -1,0 +1,142 @@
+.story-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.story-body {
+    display: flex;
+    width: 960px;
+    
+}
+.story-sns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 228px;
+    gap: 38px;
+}
+
+.story-sns-title {
+    color: #000;
+    margin-left: 8px;
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}
+
+.story-sns-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.story-sns-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 276px;
+    height: 320px;
+
+    
+    border-radius: 30px 30px 30px 30px ;
+
+    transition: box-shadow 0.25s ease; /* 부드럽게 변하는 효과 */
+}
+
+.story-sns-item:hover {
+    box-shadow: 0px 10px 22.4px 3px rgba(0, 0, 0, 0.15);
+}
+
+.story-sns-img-container {
+    width: 100%;
+    height: 209px;
+
+
+}
+
+.story-sns-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+    border-radius: 30px 30px 0px 0px ;
+    
+    background: var(--Primary_50, #FFF4C9);
+}
+
+.story-sns-info-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+
+    border-radius: 0px 0px 30px 30px;
+    background: var(--Black_800, #2E2E2E);
+}
+
+.story-sns-chara {
+    width: 14px;
+    height: 13.285px;
+
+    padding: 15px 0px 0px 25px;
+}
+
+.story-sns-item-title {
+    color: var(--white, #FFF);
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 22.4px */
+
+    padding: 2px 0px 0px 25px;
+}
+
+.story-sns-contents-num {
+    color: var(--Black_50, #EFEFEF);
+    font-family: "Noto Sans KR";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 14px */
+
+    padding: 26px 0px 18px 25px;
+}
+
+.story-main {
+    display: flex;
+    flex-direction: column;
+    margin-top: 251px;
+    margin-left: 49px;
+    margin-bottom: 642px;
+    justify-content: center;
+    align-items: center;
+    gap: 62px;
+    overflow: hidden;
+}
+
+.story-main-title {
+    color: #000;
+
+    /* Title_md */
+    font-family: "Noto Sans KR";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 50.4px */
+}
+
+.story-para {
+    color: #000;
+
+    /* Text_md */
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+}
+

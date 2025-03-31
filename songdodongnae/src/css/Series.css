@@ -127,3 +127,22 @@
 
     padding: 26px 0px 18px 25px;
 }
+
+
+.story-page .navi-li-1:hover {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.story-page .navi-li-1 {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.festival-list-page .navi-li-4:hover {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.festival-list-page .navi-li-4 {
+    color: var(--Primary_700, #FFCD00);
+}
+
+

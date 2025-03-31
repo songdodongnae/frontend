@@ -47,3 +47,29 @@
     color: var(--Black_800, #2E2E2E);
 }
 
+
+.story-page .navi-li-1:hover {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.story-page .navi-li {
+    color: var(--Black_800, #2E2E2E);
+}
+
+.story-page .navi-li-1 {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.festival-list-page .navi-li-4:hover {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.festival-list-page .navi-li {
+    color: var(--Black_800, #2E2E2E);
+}
+
+.festival-list-page .navi-li-4 {
+    color: var(--Primary_700, #FFCD00);
+}
+
+

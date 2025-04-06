@@ -36,6 +36,8 @@
 .theme-book-item {
     position: relative;
     height: 191px;
+
+    cursor: pointer;
 }
 
 .theme-book-img-container {

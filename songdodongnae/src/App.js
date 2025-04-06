@@ -12,6 +12,10 @@ import FestivalListPage from './page/FestivalListPage';
 import SeriesPage from './page/SeriesPage';
 import CurationPage from './page/CurationPage';
 import CreatorPage from './page/CreatorPage';
+import SeriesPage1 from './page/SeriesPage1';
+import SeriesPage2 from './page/SeriesPage2';
+import SeriesPage3 from './page/SeriesPage3';
+import SeriesPage4 from './page/SeriesPage4';
 
 
 
@@ -31,6 +35,10 @@ function App() {
           <Route path='/series' element={<SeriesPage />} />
           <Route path='/curation' element={<CurationPage />} />
           <Route path='/creator' element={<CreatorPage />} />
+          <Route path='/seriesPage1' element={<SeriesPage1 />} />
+          <Route path='/seriesPage2' element={<SeriesPage2 />} />
+          <Route path='/seriesPage3' element={<SeriesPage3 />} />
+          <Route path='/seriesPage4' element={<SeriesPage4 />} />
       </Routes>
     </BrowserRouter>
   );

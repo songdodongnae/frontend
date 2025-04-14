@@ -29,7 +29,7 @@ const Series = () => {
     return (
         <div className="series">
             <div className="series-header">
-                <div className="series-title">송도동네 시리즈</div>
+                <div className="series-title">송도동네 <span class="highlight">시리즈</span></div>
             </div>
             {/*   @@@ 시리즈를 api로 할지 결정 후에 주석 처리
             <div className="series-body">

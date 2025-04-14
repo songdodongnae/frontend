@@ -3,10 +3,10 @@ import Header from "../component/Header.js";
 import Navigation from "../component/Navigation.js";
 import Footer from "../component/Footer.js";
 import FestivalCalendar from "../component/FestivalCalendar.js";
-import "../css/FestivalListPage.css"
+import "../css/NaviBarPage4.css"
 import bookmark from "../images/festivalBookmark.svg";
 
-const FestivalListPage = () => {
+const NaviBarPage4 = () => {
 
     const [festivals, setFestivals] = useState([]);
 
@@ -45,4 +45,4 @@ const FestivalListPage = () => {
     )
 }
 
-export default FestivalListPage;
+export default NaviBarPage4;

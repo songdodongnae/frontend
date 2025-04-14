@@ -41,26 +41,6 @@
     padding-left: 8px;
 }
 
-.overall {
-    color: var(--Black_600, #666);
-
-    /* Text_sm */
-    font-family: "Noto Sans KR";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 140%; /* 19.6px */
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: none;
-    text-decoration-thickness: 6%; /* 0.84px */
-    text-underline-offset: 22%; /* 3.08px */
-    text-underline-position: from-font;color: var(--Black_600, #666);
-    text-align: center;
-
-    cursor: pointer;
-}
-
 .series-body {
     display: flex;
     flex-direction: column;
@@ -157,4 +137,18 @@
     color: var(--Primary_700, #FFCD00);
 }
 
+.highlight {
+    position: relative;
+}
 
+.highlight::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 0.35em; /* 선의 두께 */
+    background-color:  var(--Primary_700, #FFE680); /* 하이라이트 색 */
+    transform: translateY(-30%);
+    z-index: -1; /* 글자 뒤로 */
+}

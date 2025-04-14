@@ -3,10 +3,10 @@ import Header from "../component/Header.js";
 import Navigation from "../component/Navigation.js";
 import Footer from "../component/Footer.js";
 
-import '../css/StoryPage.css';
+import '../css/NaviBarPage1.css';
 import storyPic1 from '../images/story-pic-1.jpg';
 
-const StoryPage = () => {
+const NaviBarPage1 = () => {
 
     return (
         <div className="story-page">
@@ -70,4 +70,4 @@ const StoryPage = () => {
     )
 }
 
-export default StoryPage;
+export default NaviBarPage1;

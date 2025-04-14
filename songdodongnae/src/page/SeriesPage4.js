@@ -37,7 +37,7 @@ const SeriesPage4 = () => {
             <Header />
             <Navigation />
             <div className="theme-book">
-                <div className="theme-book-title">송도 맛집 테마북</div>
+                <div className="theme-book-title">송도 맛집 테마북 </div>
                 <div className="theme-book-body">
                     {currentItems.map((tb, index) => (
                         <div key={tb.id} className="theme-book-item">

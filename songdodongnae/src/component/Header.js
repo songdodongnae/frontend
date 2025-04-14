@@ -20,8 +20,9 @@ const Header = () => {
         <div className="header">
             <div className="header-contents">
                 <div className="main-logo" onClick={goToMain}>
-                    송도동네
-                    <img src={HeaderLogo} />
+                    <div className="main-logo-text-1">송도동네</div>
+                    <img className="main-logo-img" src={HeaderLogo} />
+                    <div className="main-logo-text-2">감도 높은 송도동 F&B 큐레이션</div>
                 </div>
                 <div className="search-sign">
                     <div className="search-box">

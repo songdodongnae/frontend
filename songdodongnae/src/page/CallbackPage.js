@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { saveToken } from "../module/tokenStorage.js";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { saveTokenFromCookie } from "../module/tokenStorage.js";
+import { AuthContext } from "../contexts/AuthContext"; // 추가
 
 const CallbackPage = () => {
-    const [token, setToken] = useState(localStorage.getItem("accessToken"));
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchToken = async () => {
-            console.log("saveToken 전");
-            await saveToken(); // 비동기적으로 실행
-            console.log("saveToken 후");
-            setToken(localStorage.getItem("accessToken")); // 저장 후 가져오기
+        const fetchAndSaveToken = async () => {
+            const tokens = await saveTokenFromCookie(); // access, refresh 반환하도록 수정 필요
+            if (tokens) {
+                const { accessToken, refreshToken } = tokens;
+                login(accessToken, refreshToken); // 로그인 상태 업데이트
+            }
+            navigate("/");
         };
 
-        fetchToken();
-    }, []);
-
-    useEffect(() => {
-        const timer = setTimeout(()=> {
-            navigate("/");
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, [navigate]);
-
-    console.log("localStorage에서 가져온 토큰:", token);
+        fetchAndSaveToken();
+    }, [login, navigate]);
 
     return (
         <div>

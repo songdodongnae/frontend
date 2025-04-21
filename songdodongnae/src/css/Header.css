@@ -64,7 +64,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 112px; 
 }
 
 .search-box {
@@ -130,11 +129,57 @@ input {
 
 .sign {
     display: flex;
+    flex-direction: row;
+}
+
+.login-btn {
+    display: flex;
     justify-content: center;
     align-items: flex-end;
     gap: 3px;
 
+    margin-left: 112px;
+
     color: var(--Black_700, #4D4D4D);
+
+    /* Caption */
+    font-family: "Noto Sans KR";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 16.8px */
+
+    cursor: pointer;
+}
+
+.my-page-btn {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 3px;
+
+    margin-left: 81px;
+
+    color: var(--Black_600, #666);
+
+    /* Caption */
+    font-family: "Noto Sans KR";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 16.8px */
+
+    cursor: pointer;
+}
+
+.logout-btn {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    margin-left: 16px;
+
+    color: var(--Blue_100, #71B8FA);
 
     /* Caption */
     font-family: "Noto Sans KR";

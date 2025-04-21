@@ -1,0 +1,229 @@
+.creator-title-text {
+    margin-top: 323px;
+    margin-bottom: 151px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 21px;
+}
+
+.creator-title-text-1 {
+    color: #000;
+
+    /* Title_lg */
+    font-family: "Noto Sans KR";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 67.2px */
+}
+
+.creator-title-text-2 {
+    color: #000;
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}
+
+.creator-page-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 66px;
+
+    margin-bottom: 993px;
+
+}
+
+.creator-mascotte {
+    display: flex;
+    flex-direction: column;
+    
+    height: 80vh;
+
+    overflow-y: scroll;
+}
+
+.creator-mascotte::-webkit-scrollbar {
+    width: 11px;
+
+}
+
+.creator-mascotte::-webkit-scrollbar-thumb {
+    border-radius: 73px;
+    background: #D9D9D9;
+}
+
+.creator-mascotte-title {
+    display: flex;
+    padding-bottom: 18px;
+
+    margin-left: 8px;
+
+    color: #000;
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}
+
+.creator-mascotte-body {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 18px;
+    margin-right: 31px;
+}
+
+.creator-others {
+    display: flex;
+    flex-direction: column;
+    
+    height: 80vh;
+
+    overflow-y: scroll;
+}
+
+.creator-others::-webkit-scrollbar {
+    width: 11px;
+
+}
+
+.creator-others::-webkit-scrollbar-thumb {
+    border-radius: 73px;
+    background: #D9D9D9;
+}
+
+.creator-others-title {
+    display: flex;
+    flex-direction: row;
+
+    gap: 170px;
+    padding-bottom: 18px;
+    margin-right: 31px;
+
+    justify-content: space-around;
+
+    color: #000;
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}
+
+.creator-others-body {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: 18px;
+    margin-right: 31px;
+}
+
+.creator-item {
+    display: flex;
+
+    width: 405px;
+
+    padding-top: 19px;
+    padding-bottom: 55px;
+    flex-direction: column;
+
+    border-radius: 30px;
+    background: var(--Black_50, #EFEFEF);
+}
+
+.creator-article-container {
+    display: flex;
+    width: 115px;
+    height: 42px;
+    margin-left: 19px;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.70);
+}
+
+.creator-article-num {
+    display: flex;
+    justify-content: flex-start;
+
+    color: var(--Black_700, #4D4D4D);
+    text-align: center;
+    
+    /* Text_md */
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+}
+
+.creator-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 26px;
+    padding-left: 64px;
+    padding-right: 64px;
+}
+
+.creator-img-container {
+    display: flex;
+    width: 144px;
+    height: 144px;
+    padding: 7px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+
+    border-radius: 179px;
+    background: #FFF;
+}
+
+.creator-thumbnail {
+    width: 144px;
+    height: 144px;
+    border-radius: 179px;
+}
+
+.creator-item-title {
+    color: #000;
+    text-align: center;
+    
+    /* Text_lg_1 */
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 25.2px */
+}
+
+.creator-item-intro {
+    color: #000;
+    text-align: center;
+    
+    /* Text_md */
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+
+    word-break: break-all;
+}

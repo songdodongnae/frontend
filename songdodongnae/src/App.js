@@ -6,7 +6,12 @@ import { AuthProvider } from './contexts/AuthContext'; // AuthProvider import
 import LoginPage from './page/LoginPage';
 import CallbackPage from './page/CallbackPage';
 import MainPage from './page/MainPage';
-import MyPage from './page/MyPage';
+import MyPage from './page/MyPage/MyPageLayout';
+import Profile from './page/MyPage/Profile';
+import SavedCuration from './page/MyPage/SavedCuration';
+import Creator from './page/MyPage/Creator';
+import Inquiry from './page/MyPage/Inquiry';
+import Withdraw from './page/MyPage/Withdraw';
 import NaviBarPage1 from './page/NaviBarPage1';
 import NaviBarPage2 from './page/NaviBarPage2';
 import NaviBarPage3 from './page/NaviBarPage3';
@@ -26,7 +31,13 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/auth" element={<CallbackPage />} />
-          <Route path="/MyPage" element={<MyPage />} />
+          <Route path="/MyPage" element={<MyPage />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="saved" element={<SavedCuration />} />
+            <Route path="creator" element={<Creator />} />
+            <Route path="inquiry" element={<Inquiry />} />
+            <Route path="withdraw" element={<Withdraw />} />
+          </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/naviBarPage1" element={<NaviBarPage1 />} />
           <Route path="/naviBarPage2" element={<NaviBarPage2 />} />

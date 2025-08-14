@@ -1,0 +1,9 @@
+.body {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 2fr 2fr 1fr; /* 2:1:1 비율 */
+    /* 또는 grid-template-columns: 1fr 1fr 1fr; /* 1:1:1 비율 */
+    gap: 10px; /* 컴포넌트 간 간격 */
+    justify-content: center;
+    align-items: start;
+}

@@ -1,0 +1,75 @@
+.navigation {
+    display: flex;
+    width: 100%; 
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 64.24px;
+    align-items: center;
+    position: fixed;
+    top: 126px;
+    z-index: 1000;
+
+    border-top: 1px solid var(--Black_100, #DDD);
+    border-bottom: 1px solid var(--Black_100, #DDD);
+    background: #FFF;
+
+    box-shadow: 3px 2px 10px 0px rgba(0, 0, 0, 0.02);
+}
+
+.navi-ul {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 960px;
+    height: 100%;     
+    gap: 34px;
+    padding-inline-start: 0px;
+
+    list-style: none;
+}
+
+.navi-li {
+    float: left;
+
+    color: var(--Black_200, #C6C6C6);
+
+    /* Text_lg_1 */
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 25.2px */
+
+    cursor: pointer;
+}
+
+.navi-li:hover {
+    color: var(--Black_800, #2E2E2E);
+}
+
+
+.story-page .navi-li-1:hover {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.story-page .navi-li {
+    color: var(--Black_800, #2E2E2E);
+}
+
+.story-page .navi-li-1 {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.festival-list-page .navi-li-4:hover {
+    color: var(--Primary_700, #FFCD00);
+}
+
+.festival-list-page .navi-li {
+    color: var(--Black_800, #2E2E2E);
+}
+
+.festival-list-page .navi-li-4 {
+    color: var(--Primary_700, #FFCD00);
+}
+
+

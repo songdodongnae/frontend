@@ -1,0 +1,234 @@
+.festival-calendar {
+    display: flex;
+    flex-direction: row;
+    width: 960px;
+    border-radius: 40px;
+    background: var(--Black_800, #2E2E2E);
+    margin-top: 220px;
+    margin-bottom: 51px;
+}
+
+.festival-category {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    width: 201px;
+    align-items: left;
+
+    
+    border-right: 2px solid var(--Black_100, #DDD);
+    border-right-style: dashed;
+}
+
+.festival-category-header {
+    display: flex; 
+    flex-shrink: 0;
+    padding-left: 29px;
+    padding-top: 39px;
+    justify-content: left;
+    align-items: start;
+
+    margin-bottom: 20px;
+
+}
+
+.festival-category-header-text {
+    display: flex;
+    color: #FFF;
+    /* Text_lg_1 */
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 25.2px */
+}
+
+.festival-category-body {
+    display: flex;
+    flex-direction: column;
+    width: 162px;
+    padding-top: 8px;
+    border-top: 1px solid var(--Black_600, #666);
+    gap: 11px;
+    margin-left: 21px;
+}
+
+.festival-category-compo {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.festival-category-text {
+    width: 100%;
+    color: var(--Black_50, #EFEFEF);
+    /* Text_md */
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+    margin-right: 8px;
+    margin-left: 3px;
+}
+
+.yellow {
+    background-color: #FDD947;
+}
+
+.red {
+    background-color: #F85E11;
+}
+
+.blue {
+    background-color: #3D53E4;
+}
+
+.skyblue {
+    background-color: #47C9FD;
+}
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 19px;
+    padding-bottom: 19px;
+    color: #fff;
+
+    /* Title_sm */
+    font-family: "Noto Sans KR";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 33.6px */
+}
+
+.days-of-week {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: rgba(217, 217, 217, 0.15);
+
+    width: 707px;
+    height: 31px;
+    flex-shrink: 0;
+
+    border-radius: 51px;
+
+}
+
+.day-of-week {
+    text-align: center;
+    color: #FFF;
+
+    /* Text_lg_1 */
+    font-family: "Noto Sans KR";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 25.2px */
+    
+}
+
+.day-of-week:nth-child(7n+1) { /*일요일 (첫 번째 열) */
+    color: var(--Orange_700, #D54226);
+}
+
+.day-of-week:nth-child(7n) { /*토요일 (마지막 열) */
+    color: var(--Blue_100, #71B8FA);
+}
+
+.days {
+    display: grid;
+    width: 707px;
+    height: 489px;
+    grid-template-columns: repeat(7, 1fr);
+    height: auto;
+    margin-bottom: 32px;
+    margin-top: 18px;
+}
+
+.day {
+    height: 104px;
+    text-align: center;
+    position: relative;
+    border-right: 1px solid var(--Black_600, #666);; /* 오른쪽 테두리만 추가 */
+    border-right-style: dashed;
+    border-bottom: 1px solid var(--Black_600, #666);; /* 아래쪽 테두리만 추가 */
+    box-sizing: border-box; /* 테두리가 추가되어도 크기가 유지되도록 설정 */
+    
+    color: #FFF;
+
+    /* Text_md */
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+
+}
+
+.day:nth-child(7n+1) { /*일요일 (첫 번째 열) */
+    color: var(--Orange_700, #D54226);
+}
+
+.day:nth-child(7n) { /*토요일 (마지막 열) */
+    color: var(--Blue_100, #71B8FA);
+    border-right: none;
+}
+
+.day:nth-child(-n+7) { /*첫번째줄*/
+    height: 80px;
+}
+
+.day:nth-child(-n+7) span {
+    position: relative;
+    top: -12px; /* 원하는 만큼 조정 */
+    display: inline-block; /* 인라인 요소라면 블록 성질 추가 */
+}
+
+.day:nth-last-child(-n+7) { /*마지막줄*/
+    height: 97px;
+    border-bottom: none;
+}
+
+.event {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    background-color: #ffcc00;
+    font-size: 10px;
+    padding: 2px;
+}
+
+.prev-day {
+    padding: 10px;
+    border-right: 1px solid #ccc; /* 오른쪽 테두리만 추가 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리만 추가 */
+}
+
+.next-day {
+    padding: 10px;
+    border-right: 1px solid #ccc; /* 오른쪽 테두리만 추가 */
+    border-bottom: 1px solid #ccc; /* 아래쪽 테두리만 추가 */
+}

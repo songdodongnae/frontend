@@ -92,7 +92,11 @@ const CreatorPage = () => {
                         </div>
                     </div>
                 </div>
+<<<<<<< Updated upstream
                 <div className="creator-others">
+=======
+                {/* <div className="creator-others">
+>>>>>>> Stashed changes
                     <div className="creator-others-title">
                         <div className="creator-others-title-text">송도동네 친구들</div>
                         <div className="overall">전체보기</div>
@@ -113,7 +117,11 @@ const CreatorPage = () => {
                             </div>
                         ))} 
                     </div>
+<<<<<<< Updated upstream
                 </div>
+=======
+                </div> */}
+>>>>>>> Stashed changes
             </div>
             
             <Footer />

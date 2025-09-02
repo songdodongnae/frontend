@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+<<<<<<< Updated upstream
 import "../css/Curation.css";
+=======
+import "../css/Home.css";
+>>>>>>> Stashed changes
 import bookmark from '../images/bookmark.svg'
 
 export default function Curation() {
@@ -31,6 +35,7 @@ export default function Curation() {
     }, []);
 
     return (
+<<<<<<< Updated upstream
         <div className="curation">
             <div className="curation-header">
                 <div className="curation-title">방금 올라온 <span className="highlight">큐레이션</span></div>
@@ -40,6 +45,17 @@ export default function Curation() {
                     <div 
                         key={item.id} 
                         className="curation-item"
+=======
+        <div className="home">
+            <div className="home-header">
+                <div className="home-title">방금 올라온 <span className="highlight">큐레이션</span></div>
+            </div>
+            <div className="home-body">
+                {curation.map((item) => (
+                    <div 
+                        key={item.id} 
+                        className="home-item"
+>>>>>>> Stashed changes
                         onClick={() => navigate(`/places/${item.id}`)}
                         style={{
                             cursor: 'pointer',

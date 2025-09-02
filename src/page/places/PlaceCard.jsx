@@ -2,8 +2,12 @@ import { Link } from "react-router-dom";
 
 export default function PlaceCard({ place }) {
   return (
+<<<<<<< Updated upstream
     <Link to={`/places/${place.id}`} className="card">
      
+=======
+    <Link to={`/places/${place.id}`} className="card">    
+>>>>>>> Stashed changes
      
 
       <div key={place.id} className="theme-book-item">

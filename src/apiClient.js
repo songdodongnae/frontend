@@ -1,9 +1,17 @@
 import axios from "axios";
+<<<<<<< Updated upstream
 import url from "./config/apiUrls.json"
 
 // Axios 인스턴스 생성
 const apiClient = axios.create({
     baseURL: url['base-url'], // 백엔드 API 기본 URL
+=======
+//import url from "./config/apiUrls.json"
+
+// Axios 인스턴스 생성
+export const apiClient = axios.create({
+    // 백엔드 API 기본 URL
+>>>>>>> Stashed changes
     timeout: 5000, // 요청 제한 시간 (ms)
 });
 

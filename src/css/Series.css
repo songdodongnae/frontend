@@ -1,4 +1,5 @@
 .series {
+<<<<<<< Updated upstream
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -9,6 +10,23 @@
 
 .series::-webkit-scrollbsar {
     width: 11px;
+=======
+    padding-top: 10vh;
+    padding-left: 140px;
+    margin-right: 20px;
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 190px;
+    bottom: 0px;
+    padding-right: 33px;
+
+}
+
+.series::-webkit-scrollbar {
+    width: 11px;
+
+>>>>>>> Stashed changes
 }
 
 .series::-webkit-scrollbar-thumb {
@@ -18,6 +36,7 @@
 
 .series-header {
     display: flex;
+<<<<<<< Updated upstream
     gap: 49px;
     align-items: flex-end;
     justify-content: flex-end;
@@ -28,27 +47,54 @@
 
 .series-title {
     color: #000;
+=======
+    flex-direction: column;
+    gap: 49px;
+    align-items: flex-end;
+    margin-right: 22%;
+
+}
+
+.series-title {
+   
+    color: #000;
+
+    /* Title_sm */
+>>>>>>> Stashed changes
     font-family: "Noto Sans KR";
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
+<<<<<<< Updated upstream
     line-height: 140%;
+=======
+    line-height: 140%; /* 33.6px */
+
+>>>>>>> Stashed changes
 }
 
 .series-body {
     display: flex;
     flex-direction: column;
+<<<<<<< Updated upstream
     gap: 30px;
     align-items: flex-end;
     margin-right: 2vh;
     width: 100%;
     max-width: 600px; /* grid 중앙 컬럼에 맞춰 조정 */
     padding: 20px;
+=======
+    gap: 40px;
+    padding-top: 36px;
+    align-items: flex-end;
+
+>>>>>>> Stashed changes
 }
 
 .series-item {
     display: flex;
     flex-direction: column;
+<<<<<<< Updated upstream
     width: 100%;
     max-width: 60%;
     border-radius: 20px;
@@ -62,17 +108,39 @@
     transform: translateY(-5px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     cursor: pointer;
+=======
+    align-items: right;
+
+    width: 50%;
+    height: 320px;
+    border-radius: 30px 30px 30px 30px ;
+
+    transition: transform 0.2s ease, box-shadow 0.25s ease; /* 부드럽게 변하는 효과 */
+
+}
+.series-item:hover {
+    box-shadow: 0px 10px 22.4px 3px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+
+    cursor: pointer;
+
+>>>>>>> Stashed changes
 }
 
 .series-img-container {
     width: 100%;
+<<<<<<< Updated upstream
     height: 200px;
     background: #FFF4C9;
+=======
+    height: 209px;
+>>>>>>> Stashed changes
 }
 
 .series-thumbnail {
     width: 100%;
     height: 100%;
+<<<<<<< Updated upstream
     object-fit: cover;
     background: #FFF4C9;
 }
@@ -81,12 +149,31 @@
     padding: 20px;
     background: #2E2E2E;
     color: #fff;
+=======
+    object-fit:fill;
+    border-radius: 30px 30px 0px 0px ;
+}
+
+.series-info-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+
+    border-radius: 0px 0px 30px 30px;
+    background: var(--Black_800, #2E2E2E);
+>>>>>>> Stashed changes
 }
 
 .series-chara {
     width: 14px;
     height: 13.285px;
+<<<<<<< Updated upstream
     margin-bottom: 8px;
+=======
+
+    padding: 15px 0px 0px 25px;
+>>>>>>> Stashed changes
 }
 
 .series-item-title {
@@ -95,19 +182,37 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
+<<<<<<< Updated upstream
     line-height: 140%;
     margin-bottom: 8px;
+=======
+    line-height: 140%; /* 22.4px */
+
+    padding: 2px 0px 0px 25px;
+>>>>>>> Stashed changes
 }
 
 .series-contents-num {
     color: var(--Black_50, #EFEFEF);
     font-family: "Noto Sans KR";
+<<<<<<< Updated upstream
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: 140%;
 }
 
+=======
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 14px */
+
+    padding: 26px 0px 18px 25px;
+}
+
+
+>>>>>>> Stashed changes
 .story-page .navi-li-1:hover {
     color: var(--Primary_700, #FFCD00);
 }
@@ -134,6 +239,7 @@
     left: 0;
     right: 0;
     top: 50%;
+<<<<<<< Updated upstream
     height: 0.35em;
     background-color: var(--Primary_700, #FFE680);
     transform: translateY(-30%);
@@ -167,3 +273,10 @@
         max-width: 100%;
     }
 }
+=======
+    height: 0.35em; /* 선의 두께 */
+    background-color:  var(--Primary_700, #FFE680); /* 하이라이트 색 */
+    transform: translateY(-30%);
+    z-index: -1; /* 글자 뒤로 */
+}
+>>>>>>> Stashed changes

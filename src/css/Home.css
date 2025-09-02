@@ -1,0 +1,56 @@
+.home {
+    padding-top: 20vh;
+    padding-left: 20px;
+    margin-right: 20px;
+    height: 100vh;
+    overflow-y: auto; 
+    padding-right: 33px;
+    
+}
+
+.home::-webkit-scrollbar {
+  width: 11px;
+
+}
+
+.home::-webkit-scrollbar-thumb {
+   border-radius: 1px;
+    background: #D9D9D9;
+}
+
+
+
+.home-header {
+    
+    display: flex;
+
+    justify-content: flex-start;
+    text-align: left; align-self: flex-start;   /* 추가: 부모의 center 정렬 무시 */
+    width: 100%;              /* 필요 시 추가 */
+    font-family: "Noto Sans KR";
+    font-size: 1.5rem; /* 10rem에서 3rem으로 조정 */
+    font-weight: 600;
+    line-height: 140%;
+    color: #333;
+}
+
+.home-body {
+    margin-top: 5vh;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+    width: 100%;
+    max-width: 960px;
+}
+
+
+@media (min-width: 768px) {
+    .home-body {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .home-body {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

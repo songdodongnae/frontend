@@ -1,10 +1,7 @@
 {
   "name": "songdodongnae",
   "version": "0.1.0",
-<<<<<<< Updated upstream
-=======
   "proxy": "http://ec2-43-202-55-250.ap-northeast-2.compute.amazonaws.com:8080",
->>>>>>> Stashed changes
   "private": true,
   "dependencies": {
     "axios": "^1.7.9",
@@ -18,10 +15,8 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-<<<<<<< Updated upstream
-=======
     "tailwind": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
->>>>>>> Stashed changes
+
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,14 +39,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< Updated upstream
-=======
+
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.12",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17"
->>>>>>> Stashed changes
+
   }
 }

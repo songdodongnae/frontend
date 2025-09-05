@@ -11,17 +11,19 @@ export interface FestivalDetail {
   creatorName: string;
   startDate: string;
   endDate: string;
+  startTime: string;
+  endTime: string;
   timeDescription: string;
-  latitude: number;
-  longitude: number;
-  address: string;
-  fee: string;
-  contact: string;
   homePageUrl: string;
-  reservationUrl: string;
+  reservationUrl: string;  
   description: string;
   onelineDescription: string;
   mainImage: string;
+  latitude?: number;
+  longitude?: number;
+  address?: string;
+  fee?: string;
+  contact?: string;  
   images?: string[];
 }
 

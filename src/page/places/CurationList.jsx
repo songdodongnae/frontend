@@ -4,11 +4,7 @@ import PlaceCard from "./PlaceCard";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
-<<<<<<< Updated upstream
-import "../../css/SeriesPage4.css";
-=======
 import "../../css/Curation.css";
->>>>>>> Stashed changes
 
 export const sampleData = [
   {
@@ -58,31 +54,11 @@ export const sampleData = [
   }
 ];
 
-<<<<<<< Updated upstream
-export default function PlaceListPage() {
-=======
 export default function CurationList() {
->>>>>>> Stashed changes
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // true로 변경
   const location = useLocation();
-<<<<<<< Updated upstream
-  console.log(location);
-  
-  // 이전 페이지 경로에 따른 제목 설정
-  const getTitle = () => {
-    if (location.state?.from === 'theme') {
-      return '송도 맛집 테마북';
-    }
-    else if (location.pathname === '/infoSongdo') {
-      return '모든 큐레이션';
-    }
-    else if (location.pathname === '/edition') {
-      return 'TOP 10 큐레이션';
-    }
-    return '송도 미식 시리즈';
-=======
   console.log("data", data);
   
   // 이전 페이지 경로에 따른 제목 설정
@@ -100,7 +76,6 @@ export default function CurationList() {
    
     
     
->>>>>>> Stashed changes
   };
 
 
@@ -119,11 +94,7 @@ export default function CurationList() {
   // 로딩 중일 때 표시
   if (loading) {
     return (
-<<<<<<< Updated upstream
-      <div className="series-page-4">
-=======
       <div className="curation">
->>>>>>> Stashed changes
         <Header />
         <Navigation />
         <div className="theme-book">
@@ -138,11 +109,7 @@ export default function CurationList() {
   // 데이터가 없을 때 표시
   if (!data || data.length === 0) {
     return (
-<<<<<<< Updated upstream
-      <div className="series-page-4">
-=======
       <div className="curation">
->>>>>>> Stashed changes
         <Header />
         <Navigation />
         <div className="theme-book">
@@ -156,14 +123,6 @@ export default function CurationList() {
 
   return (
 
-<<<<<<< Updated upstream
-    <div className="series-page-4">
-      <Header />
-      <Navigation />
-      <div className="top-banner">
-          <div className="top-banner-title">{getTitle()}</div>
-        </div>
-=======
     <div className="curation">
       <Header />
       <Navigation />
@@ -181,7 +140,6 @@ export default function CurationList() {
               )}
           </div>
       </div>
->>>>>>> Stashed changes
 
 
       <div className="theme-book">       
@@ -192,11 +150,8 @@ export default function CurationList() {
           ))}
         </div>
       </div>
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
       <Footer />
     </div>
   );

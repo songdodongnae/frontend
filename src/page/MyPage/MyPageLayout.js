@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from 'react-router-dom';
-<<<<<<< Updated upstream
-
-
-export default function MyPageLayout() {
-    return (
-        <div className="flex">
-            <aside className="w-1/4">
-                <div className="mypage-title">마이페이지</div>
-                <nav className="flex flex-col space-y-2">
-                    <Link to="profile">회원정보 수정</Link>
-                    <Link to="saved">저장한 큐레이션</Link>
-                    <Link to="creator">크리에이터</Link>
-                    <Link to="inquiry">1:1 문의</Link>
-                    <Link to="withdraw">회원탈퇴</Link>
-                </nav>
-            </aside>
-            <main className="w-3/4">
-                <Outlet />
-            </main>
-=======
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import Navigation from "../../component/Navigation";
 
 export default function MyPageLayout() {
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    // /mypage에 접근했을 때 자동으로 /mypage/admin으로 리다이렉트
+    useEffect(() => {
+        if (location.pathname === '/mypage') {
+            navigate('/mypage/admin', { replace: true });
+        }
+    }, [location.pathname, navigate]);
+    
+    // 현재 경로에 따라 활성화된 메뉴 결정
+    const getActiveClass = (path) => {
+        const currentPath = location.pathname;
+        if (path === 'admin' && (currentPath.endsWith('/admin') || currentPath.endsWith('/mypage'))) {
+            return "block w-full px-4 py-3 text-left text-white bg-blue-600 rounded-lg transition-colors duration-200";
+        }
+        if (currentPath.endsWith(`/${path}`)) {
+            return "block w-full px-4 py-3 text-left text-white bg-blue-600 rounded-lg transition-colors duration-200";
+        }
+        return "block w-full px-4 py-3 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200";
+    };
+
     return (
         <div className="min-h-screen bg-gray-50"> 
             <Header />
@@ -42,41 +44,41 @@ export default function MyPageLayout() {
                             <nav className="space-y-3">
                                 <Link 
                                     to="admin" 
-                                    className="block w-full px-4 py-3 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200"
+                                    className={getActiveClass('admin')}
                                 >
                                     어드민
                                 </Link>
                                 <Link 
                                     to="profile" 
-                                    className="block w-full px-4 py-3 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200"
+                                    className={getActiveClass('profile')}
                                 >
                                     회원정보 수정
                                 </Link>
                                 
                                 <Link 
                                     to="saved" 
-                                    className="block w-full px-4 py-3 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200"
+                                    className={getActiveClass('saved')}
                                 >
                                     저장한 큐레이션
                                 </Link>
                                 
                                 <Link 
                                     to="creator" 
-                                    className="block w-full px-4 py-3 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200"
+                                    className={getActiveClass('creator')}
                                 >
                                     크리에이터
                                 </Link>
                                 
                                 <Link 
                                     to="inquiry" 
-                                    className="block w-full px-4 py-3 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200"
+                                    className={getActiveClass('inquiry')}
                                 >
                                     1:1 문의
                                 </Link>
                                 
                                 <Link 
                                     to="withdraw" 
-                                    className="block w-full px-4 py-3 text-left text-gray-700 bg-gray-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors duration-200"
+                                    className={getActiveClass('withdraw')}
                                 >
                                     회원탈퇴
                                 </Link>
@@ -94,7 +96,6 @@ export default function MyPageLayout() {
             </div>
             
             <Footer />
->>>>>>> Stashed changes
         </div>
     )
 };

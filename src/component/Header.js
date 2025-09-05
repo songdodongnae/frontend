@@ -8,10 +8,8 @@ import { AuthContext } from "../contexts/AuthContext.js"; // AuthContext import
 
 const Header = () => {
     const { accessToken, logout } = useContext(AuthContext); // 로그인 상태와 logout 함수 가져오기
-<<<<<<< Updated upstream
-=======
-    console.log("accessToken", accessToken)
->>>>>>> Stashed changes
+
+
     const navigate = useNavigate(); 
 
     const goToMain = () => {

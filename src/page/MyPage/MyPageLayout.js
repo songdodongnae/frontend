@@ -88,7 +88,7 @@ export default function MyPageLayout() {
                     
                     {/* 메인 콘텐츠 */}
                     <main className="flex-1">
-                        <div className="bg-white rounded-lg shadow-md p-6 min-h-[500px]">
+                        <div className="bg-white rounded-lg shadow-md p-6 min-h-[500px] min-w-[90vh]">
                             <Outlet />
                         </div>
                     </main>

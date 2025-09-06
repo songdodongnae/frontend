@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useGet, usePost, useDelete } from '../../hooks/festivals';
 
 export default function Admin() {
-  const [activeTab, setActiveTab] = useState('festival');
+  const [activeTab, setActiveTab] = useState('festivals');
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
   // API 훅들
-  const { data, loading, error, execute: refetch } = useGet('/api/festivals', { currentPage: 1, pageSize: 100 }, false, []);
-  const { execute: createPost, loading: creating, error: createError } = usePost('/api/festivals');
+  const { data, loading, error, execute: refetch } = useGet(`/api/${activeTab}`, { currentPage: 1, pageSize: 100 }, false, []);
+  const { execute: createPost, loading: creating, error: createError } = usePost(`/api/${activeTab}`);
   const { execute: updatePost, loading: updating, error: updateError } = usePost('/api/festivals');
   const { execute: deletePost, loading: deleting, error: deleteError } = useDelete(null);
 
@@ -66,8 +66,8 @@ export default function Admin() {
   });
 
   const tabs = [
-    { id: 'festival', label: '축제' },
-    { id: 'restaurant', label: '맛집' },
+    { id: 'festivals', label: '축제' },
+    { id: 'delicious-spots', label: '맛집' },
     { id: 'curation', label: '큐레이션' },
     { id: 'creator', label: '크리에이터' }
   ];
@@ -286,7 +286,7 @@ export default function Admin() {
   const handleDelete = async (id) => {
     if (window.confirm('정말로 이 글을 삭제하시겠습니까?')) {
       try {
-        await deletePost({ url: `/api/festivals/${id}` });
+        await deletePost({ url: `/api/${activeTab}/${id}` });
         await refetch();
         alert('삭제되었습니다!');
       } catch (err) {
@@ -296,8 +296,8 @@ export default function Admin() {
   };
 
   const getTypeLabel = (type) => ({ 
-    festival: '축제', 
-    restaurant: '맛집', 
+    festivals: '축제', 
+    'delicious-spots': '맛집', 
     curation: '큐레이션',
     creator: '크리에이터'
   }[type] || type);
@@ -311,7 +311,7 @@ export default function Admin() {
 
   const renderFormFields = () => {
     switch (activeTab) {
-      case 'festival':
+      case 'festivals':
         return (
           <div className="mt-6 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -344,7 +344,7 @@ export default function Admin() {
           </div>
         );
 
-      case 'restaurant':
+      case 'delicious-spots':
         return (
           <div className="mt-6 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

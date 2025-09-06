@@ -3,26 +3,30 @@ import { useParams } from "react-router-dom";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
-import { sampleData } from "./PlaceList"; // 공통 데이터 import
 import "../../css/PlaceDetailpage.css";
+import { useGet } from "../../hooks/festivals";
 
 export default function PlaceDetailPage() {
-  const { id } = useParams(); // 문자열로 들어옴
+  const { id } = useParams();
   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(place)
+
+  const { data: apiData, loading: apiLoading, error } = useGet(`/api/delicious-spots/${id}`, { currentPage: 1, pageSize: 100 }, true, []);
+
+  console.log('API data:', apiData);
+  console.log('Selected place:', place);
 
   useEffect(() => {
-    // 공통 데이터에서 해당 ID의 장소 찾기
-    const foundPlace = sampleData.find(p => p.id === parseInt(id));
-    if (foundPlace) {
-      setPlace(foundPlace);
+    if (apiData) {
+      // API 데이터에서 해당 ID의 장소 찾기
+      
+      setPlace(apiData.data);
+      setLoading(false);
     }
-    setLoading(false);
-  }, [id]);
+  }, [apiData, id]);
 
   // 로딩 중일 때 표시
-  if (loading) {
+  if (loading || apiLoading) {
     return (
       <div className="series-page-4">
         <Header />
@@ -45,46 +49,113 @@ export default function PlaceDetailPage() {
     );
   }
 
-  // place가 설정된 후에만 렌더링
   return (
     <div className="series-page-4">
       <Header />
       <Navigation />
-      <img src={place.image} alt={place.name} className="place-main-image" />
+      
+      {/* 메인 이미지 */}
+      {place.thumbnailImageUrl ? (
+        <img src={place.thumbnailImageUrl} alt={place.title} className="place-main-image" />
+      ) : (
+        <div 
+          className="place-main-image"
+          style={{
+            backgroundColor: 'skyblue',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#999',
+            fontSize: '18px'
+          }}
+        >
+          이미지 없음
+        </div>
+      )}
       
       <div className="place-detail">
+        {/* 헤더 정보 */}
         <div className="place-header">
-          
           <div className="place-info">
-            <h1 className="place-title">{place.name}</h1>
-            <p className="place-category">{place.category}</p>
+            <h1 className="place-title">{place.title}</h1>
+            
             <p className="place-address">{place.address}</p>
-            <div className="place-rating">⭐ {place.rating}</div>
+            <div className="place-ratings">
+              <div className="rating-item">
+                <span className="rating-label">네이버</span>
+                <span className="rating-value">⭐ {place.naverRating || 'N/A'}</span>
+              </div>
+              <div className="rating-item">
+                <span className="rating-label">카카오</span>
+                <span className="rating-value">⭐ {place.kakaoRating || 'N/A'}</span>
+              </div>
+            </div>
+            <div className="place-price">가격: {place.price ? `${place.price.toLocaleString()}원` : '정보 없음'}</div>
           </div>
         </div>
         
+        {/* 한 줄 설명 */}
         <div className="place-description">
-          <h2>장소 소개</h2>
-          <p>{place.description}</p>
+          <h2>한 줄 소개</h2>
+          <p>{place.onelineDescription || '설명이 없습니다.'}</p>
         </div>
         
+        {/* 상세 설명 */}
+        <div className="place-description">
+          <h2>상세 설명</h2>
+          <p>{place.description || '설명이 없습니다.'}</p>
+        </div>
+        
+        {/* 추가 이미지들 */}
+        {place.imageUrls && place.imageUrls.length > 0 && (
+          <div className="place-images">
+            <h2>추가 이미지</h2>
+            <div className="image-gallery">
+              {place.imageUrls.map((imageUrl, index) => (
+                <img 
+                  key={index} 
+                  src={imageUrl} 
+                  alt={`${place.title} 이미지 ${index + 1}`}
+                  className="gallery-image"
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* 운영 정보 */}
         <div className="place-details">
           <div className="detail-item">
-            <h3>연락처</h3>
-            <p>{place.phone}</p>
+            <h3>🕒 운영시간</h3>
+            <p>{place.timeDescription || '정보 없음'}</p>
           </div>
+          
           <div className="detail-item">
-            <h3>운영시간</h3>
-            <p>{place.hours}</p>
+            <h3>⏰ 대기시간</h3>
+            <p>{place.waiting || '정보 없음'}</p>
           </div>
+          
           <div className="detail-item">
-            <h3>주요 특징</h3>
-            <ul>
-              {/* {place.menu.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))} */}
-            </ul>
+            <h3>🅿️ 주차</h3>
+            <p>{place.parking || '정보 없음'}</p>
           </div>
+          
+          <div className="detail-item">
+            <h3>🍽️ 추천 메뉴</h3>
+            <p>{place.suggestionMenu || '정보 없음'}</p>
+          </div>
+          
+          <div className="detail-item">
+            <h3>📞 연락처</h3>
+            <p>{place.contact || '정보 없음'}</p>
+          </div>
+          
+          {place.instagram && (
+            <div className="detail-item">
+              <h3>📱 인스타그램</h3>
+              <p>{place.instagram}</p>
+            </div>
+          )}
         </div>
       </div>
       

@@ -59,7 +59,7 @@ export default function CurationList() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true); // true로 변경
   const location = useLocation();
-  console.log("data", data);
+
   
   // 이전 페이지 경로에 따른 제목 설정
   const getTitle = () => {

@@ -18,7 +18,7 @@
     "tailwind": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
 
     "start": "react-scripts start",
-    "build": "react-scripts build",
+   "build": "node node_modules/react-scripts/bin/react-scripts.js build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -41,6 +41,8 @@
     ]
 
   },
+  "engines": { "node": "20.x" },
+  "packageManager": "npm@10",
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.12",
     "autoprefixer": "^10.4.21",

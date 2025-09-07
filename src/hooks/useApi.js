@@ -24,6 +24,7 @@ export default function useApi({ method, url, auto = false, defaultParams = {}, 
         data: finalBody,
         headers: {
           accept: '*/*',
+          'Content-Type': 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         withCredentials: true,

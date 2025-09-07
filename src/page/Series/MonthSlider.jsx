@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './MonthSlider.css';
 
 const months = [
@@ -17,8 +17,37 @@ const months = [
 ];
 
 export default function MonthSlider({ onMonthSelect }) {
-  const [selectedMonth, setSelectedMonth] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // 현재 날짜의 달로 초기값 설정
+  const [selectedMonth, setSelectedMonth] = useState(() => {
+    const currentMonth = new Date().getMonth() + 1;
+    return months.find(month => month.id === currentMonth) || months[0];
+  });
+  
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    const currentMonth = new Date().getMonth() + 1;
+    return Math.max(0, currentMonth - 3); // 현재 달을 중앙에 위치시키기 위해 조정
+  });
+
+  // 컴포넌트 마운트 시 부모에게 현재 달 전달
+  useEffect(() => {
+    if (onMonthSelect && selectedMonth) {
+      onMonthSelect(selectedMonth);
+    }
+  }, [onMonthSelect, selectedMonth]);
+
+  // currentIndex가 변경될 때마다 선택된 달도 업데이트
+  useEffect(() => {
+    const visibleMonths = months.slice(currentIndex, currentIndex + visibleCards);
+    const middleIndex = Math.floor(visibleMonths.length / 2);
+    const newSelectedMonth = visibleMonths[middleIndex];
+    
+    if (newSelectedMonth && newSelectedMonth.id !== selectedMonth?.id) {
+      setSelectedMonth(newSelectedMonth);
+      if (onMonthSelect) {
+        onMonthSelect(newSelectedMonth);
+      }
+    }
+  }, [currentIndex, onMonthSelect]);
 
   // 한 번에 보여줄 카드의 개수 (화면 너비에 맞춰 조정)
   const visibleCards = 5;

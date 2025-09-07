@@ -4,7 +4,7 @@ import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
 import "../../css/PlaceDetailpage.css";
-import { useGet } from "../../hooks/festivals";
+import { useGet } from "../../hooks/httpShortcuts";
 
 export default function PlaceDetailPage() {
   const { id } = useParams();

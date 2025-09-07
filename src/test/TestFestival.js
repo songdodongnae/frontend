@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useGet, usePost, useDelete } from '../hooks/festivals';
+import { useGet, usePost, useDelete } from '../hooks/httpShortcuts';
 
 export default function TestFestival() {
   const [showResult, setShowResult] = useState(false);

@@ -55,19 +55,7 @@ export default function MyPageLayout() {
                                     회원정보 수정
                                 </Link>
                                 
-                                <Link 
-                                    to="saved" 
-                                    className={getActiveClass('saved')}
-                                >
-                                    저장한 큐레이션
-                                </Link>
                                 
-                                <Link 
-                                    to="creator" 
-                                    className={getActiveClass('creator')}
-                                >
-                                    크리에이터
-                                </Link>
                                 
                                 <Link 
                                     to="inquiry" 

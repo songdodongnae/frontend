@@ -6,17 +6,22 @@ import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
 import "../../css/PlaceList.css";
-import { useGet } from '../../hooks/festivals';
+import { useGet } from '../../hooks/httpShortcuts';
 
 
 export default function PlaceList() {
+  const location = useLocation();
+
+  const activeTab = location.state?.from==='festivals' ? 'festivals' : 'delicious-spots';
+  
+  const { data, loading, error, execute: refetch } = useGet(`/api/${activeTab}`, { currentPage: 1, pageSize: 100 }, true, []);
+
+  const [selectedMonth, setSelectedMonth] = useState(() => {
+    const currentMonth = new Date().getMonth() + 1; // getMonth()는 0부터 시작하므로 +1
+    return { id: currentMonth, name: `${currentMonth}월` };
+  });
 
   
-  const { data, loading, error, execute: refetch } = useGet('/api/delicious-spots', { currentPage: 1, pageSize: 100 }, true, []);
-
-  const [selectedMonth, setSelectedMonth] = useState(null);
-  const location = useLocation();
-  console.log(location);
   
   // 이전 페이지 경로에 따른 제목 설정
   const getTitle = () => {
@@ -24,7 +29,7 @@ export default function PlaceList() {
     if (location.state?.from === 'theme') {
       return '송도 맛집 테마북';
     }
-    else if (location.state?.from === 'festival'){
+    else if (location.state?.from === 'festivals'){
       if (selectedMonth) {
         return `${selectedMonth.id}월의 송도동네 축제 일정입니다`;
       }
@@ -84,7 +89,7 @@ export default function PlaceList() {
       <Navigation />     
 
       <div className="theme-book">
-        {location.state?.from === 'festival' && (
+        {location.state?.from === 'festivals' && (
           <MonthSlider onMonthSelect={handleMonthSelect} />
         )}
         <div className="theme-book-title">{getTitle()}</div>        

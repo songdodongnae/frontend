@@ -60,7 +60,7 @@ const SocialLoginBtn = () => {
 
           <div className="social-btn-wrapper">
             {recentProvider === 'google' && <div className="recent-badge">최근 로그인</div>}
-            <span className='google-button' onClick={() => handleLoginClick()}>
+            <span className='google-button' onClick={() => loginButtonClick('google-login', 'google')}>
               <img src={googleLogo} width="20px" height="20px" />구글 로그인
             </span>
           </div>
@@ -84,7 +84,7 @@ const SocialLoginBtn = () => {
             </span>
           </div>
 
-        <span className='without-text'>로그인 없이 이용하기</span>
+        <span className='without-text' onClick={()=> handleLoginClick()}>로그인 없이 이용하기</span>
     </div>
     </div>
     </div>

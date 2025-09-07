@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../css/Home.css";
-
+import { useGet } from "../hooks/httpShortcuts";
 import bookmark from '../images/bookmark.svg'
 
 export default function Curation() {
-    const [curation, setCuration] = useState([]);
+    const {data} = useGet('/api/curations', { currentPage: 1, pageSize: 100 }, true, []);
+    console.log("data", data?.data?.content)
+    const [curation, setCuration] = useState();
     const navigate = useNavigate();
 
     const [charaName, setCharaName] = useState(['송이', '도동이', '동이', '네이']);
@@ -39,7 +41,9 @@ export default function Curation() {
                 <div className="home-title">방금 올라온 <span className="highlight">큐레이션</span></div>
             </div>
             <div className="home-body">
-                {curation.map((item) => (
+
+
+                {data?.data?.content.map((item) => (
                     <div 
                         key={item.id} 
                         className="home-item"
@@ -47,7 +51,7 @@ export default function Curation() {
                         onClick={() => navigate(`/places/${item.id}`)}
                         style={{
                             cursor: 'pointer',
-                            background: `linear-gradient(135deg, ${item.color}, ${item.color}dd)`,
+                            background: 'gray',
                             borderRadius: '12px',
                             padding: '20px',
                             color: 'white',
@@ -55,7 +59,8 @@ export default function Curation() {
                         }}
                     >
                         <h3>{item.title}</h3>
-                        <p>{item.description}</p>
+                        <h4>ID: {item.id}</h4>
+                        
                     </div>
                 ))}
             </div>

@@ -72,7 +72,7 @@ const Series = () => {
             
             <div className="flex flex-col w-full gap-1 pt-9 items-end">
 
-            <div className="pt-20 mr-5 mb-5 text-black font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] whitespace-nowrap">
+            <div className="pt-4 mr-5 mb-5 text-black font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] whitespace-nowrap">
                 송도동네 <span className="relative">
                     <span className="relative z-10">시리즈</span>
                     <span className="absolute left-0 right-0 top-1/2 h-[0.35em] bg-[#FFE680] transform -translate-y-[30%] -z-10"></span>

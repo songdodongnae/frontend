@@ -9,8 +9,6 @@ import MainPage from './page/MainPage';
 
 import MyPageLayout from './page/MyPage/MyPageLayout';
 import Profile from './page/MyPage/Profile';
-import SavedCuration from './page/MyPage/SavedCuration';
-import Creator from './page/MyPage/Creator';
 import Inquiry from './page/MyPage/Inquiry';
 import Withdraw from './page/MyPage/Withdraw';
 
@@ -38,8 +36,6 @@ function App() {
           <Route path="/mypage" element={<MyPageLayout />}>
             <Route path="admin" element={<Admin />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="saved" element={<SavedCuration />} />
-            <Route path="creator" element={<Creator />} />
             <Route path="inquiry" element={<Inquiry />} />
             <Route path="withdraw" element={<Withdraw />} />
           </Route>

@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
-import { useGet, usePost, useDelete } from '../../hooks/festivals';
+import React, { useState, useEffect } from 'react';
+import { useGet, usePost, useDelete } from '../../hooks/httpShortcuts';
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('festivals');
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  // API 훅들
-  const { data, loading, error, execute: refetch } = useGet(`/api/${activeTab}`, { currentPage: 1, pageSize: 100 }, false, []);
+  
+  const { data, loading, error, execute: refetch } = useGet(`/api/${activeTab}`, { currentPage: 1, pageSize: 100 }, true, [activeTab]);
+  
+  const { data: item } = useGet(`/api/${activeTab}/${editingId}`, { currentPage: 1, pageSize: 100 }, true, [editingId]);
   const { execute: createPost, loading: creating, error: createError } = usePost(`/api/${activeTab}`);
   const { execute: updatePost, loading: updating, error: updateError } = usePost('/api/festivals');
   const { execute: deletePost, loading: deleting, error: deleteError } = useDelete(null);
 
   console.log("data", data);
-  
 
   const posts = data?.data?.content || [];
+  const itemData = item?.data || [];
   
-  console.log("posts", posts)
+  console.log("posts", posts);
+  console.log("activeTab", activeTab);
 
   const [currentPost, setCurrentPost] = useState({
 
+    
     festivalDetail: {
       title: '송도 원두의 꽃 축제',
       creatorName: '송이',
@@ -34,8 +38,14 @@ export default function Admin() {
       onelineDescription: '송도의 아름다운 꽃과 함께하는 춘 축제!',
       description: '테스트 설명',
       mainImage: 'https://example.com/festival-main.jpg',
+      latitude: '',
+      longitude: '',
+      address: '',
+      fee: '',
+      contact: '',
+      images: ''
     },
-    restaurantDetail: {          // type이 restaurant일 때 사용하는 상세 필드
+    restaurantDetail: {    
       title: "송도 파스타 전문점123",
       creatorName: "송이",
       startTime: "21:00",
@@ -43,45 +53,108 @@ export default function Admin() {
       timeDescription: "월~금 09:00-22:00, 주말 10:00-23:00",
       description: "송도에서 가장 유명한 파스타 전문점으로, 수제 파스타와 신선한 소스가 인상적인 곳입니다.",
       thumbnailImageUrl: "https://example.com/thumbnail.jpg",
-      onelineDescription: "송도 최고의 파스타 맛집!"
+      onelineDescription: "송도 최고의 파스타 맛집!",
+      latitude: '',
+      longitude: '',
+      address: '',
+      price: '',
+      naverRating: '',
+      kakaoRating: '',
+      waiting: '',
+      parking: '',
+      suggestionMenu: '',
+      imageUrls: '',
+      instagram: '',
+      contact: ''
     },
     curationDetail: {            // type이 curation일 때 사용하는 상세 필드
-      title: '',
-      description: '',
-      places: '',
-      mainImage: '',
-      images: '',
-      tags: '',
-      author: ''
+      type: 'DELICIOUS_SPOT',
+      ids: [0],
+      creatorName: "송이",
+      title: "송도 1만원대 맛집 5개",
+      description: "설명",
+      imageUrl: ""
     },
     creatorDetail: {             // type이 creator일 때 사용하는 상세 필드
-      name: '',
-      role: '',
-      description: '',
-      profileImage: '',
-      socialLinks: '',
-      specialties: '',
-      contact: ''
+      "name": "송이",
+      "introduction": "매콤한 음식을 좋아하는 크리에이터",
+      "description": "string",
+      "image": "string"
     }
   });
 
   const tabs = [
     { id: 'festivals', label: '축제' },
     { id: 'delicious-spots', label: '맛집' },
-    { id: 'curation', label: '큐레이션' },
+    { id: 'curations', label: '큐레이션' },
     { id: 'creator', label: '크리에이터' }
   ];
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
-    setCurrentPost(prev => ({
-      ...prev,
-      type: tabId
-    }));
+    resetForm(); // 폼 초기화
+  };
+
+  const getCurrentAuthorValue = () => {
+    switch (activeTab) {
+      case 'festivals':
+        return currentPost.festivalDetail.creatorName;
+      case 'delicious-spots':
+        return currentPost.restaurantDetail.creatorName;
+      case 'curations':
+        return currentPost.curationDetail.creatorName;
+      case 'creator':
+        return currentPost.creatorDetail.name;
+      default:
+        return '';
+    }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
+    // author 필드 처리
+    if (name === 'author') {
+      switch (activeTab) {
+        case 'festivals':
+          setCurrentPost(prev => ({
+            ...prev,
+            festivalDetail: {
+              ...prev.festivalDetail,
+              creatorName: value
+            }
+          }));
+          break;
+        case 'delicious-spots':
+          setCurrentPost(prev => ({
+            ...prev,
+            restaurantDetail: {
+              ...prev.restaurantDetail,
+              creatorName: value
+            }
+          }));
+          break;
+        case 'curations':
+          setCurrentPost(prev => ({
+            ...prev,
+            curationDetail: {
+              ...prev.curationDetail,
+              creatorName: value
+            }
+          }));
+          break;
+        case 'creator':
+          setCurrentPost(prev => ({
+            ...prev,
+            creatorDetail: {
+              ...prev.creatorDetail,
+              name: value
+            }
+          }));
+          break;
+      }
+      return;
+    }
     
     // 각 타입별 detail 필드 처리
     if (name.startsWith('festivalDetail.')) {
@@ -108,7 +181,9 @@ export default function Admin() {
         ...prev,
         curationDetail: {
           ...prev.curationDetail,
-          [key]: value
+          [key]: key === 'ids' 
+            ? value.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id))
+            : value
         }
       }));
     } else if (name.startsWith('creatorDetail.')) {
@@ -132,15 +207,32 @@ export default function Admin() {
       if (isEditing) {
         // 수정 로직
         await updatePost({ 
-          url: `/api/festivals/${editingId}`,
+          url: `/api/${activeTab}/${editingId}`,
           body: { ...currentPost, id: editingId, updatedAt: new Date().toISOString() }
         });
         setIsEditing(false);
         setEditingId(null);
       } else {
-        // 생성 로직
+        // 생성 로직 - 탭별로 다른 데이터 전송
+        let postData;
+        switch (activeTab) {
+          case 'festivals':
+            postData = currentPost.festivalDetail;
+            break;
+          case 'delicious-spots':
+            postData = currentPost.restaurantDetail;
+            break;
+          case 'curations':
+            postData = currentPost.curationDetail; // 위 JSON 형식의 데이터
+            break;
+          case 'creator':
+            postData = currentPost.creatorDetail;
+            break;
+          default:
+            postData = currentPost.festivalDetail;
+        }
         
-        await createPost({ body: { ...currentPost.festivalDetail } });
+        await createPost({ body: postData });
       }
       
       // 데이터 새로고침
@@ -155,133 +247,136 @@ export default function Admin() {
   const resetForm = () => {
     setCurrentPost({
       festivalDetail: {
-        title: '',
-        creatorName: '',
-        startDate: '',
-        endDate: '',
-        startTime: '',
-        endTime: '',
-        timeDescription: '',
+        title: '송도 원두의 꽃 축제',
+        creatorName: '송이',
+        startDate: '2024-05-15',
+        endDate: '2024-05-20',
+        startTime: '11:00',
+        endTime: '21:00',
+        timeDescription: '매일 10:00-21:00, 우천시 일정 변경',
+        homePageUrl: 'https://songdofestival.com',
+        reservationUrl: 'https://booking.songdofestival.com',
+        onelineDescription: '송도의 아름다운 꽃과 함께하는 춘 축제!',
+        description: '테스트 설명',
+        mainImage: 'https://example.com/festival-main.jpg',            
         latitude: '',
         longitude: '',
         address: '',
         fee: '',
         contact: '',
-        homePageUrl: '',
-        reservationUrl: '',
-        description: '',
-        onelineDescription: '',
-        mainImage: '',
-        images: ''
+        images: []
       },
       restaurantDetail: {
        title: "송도 파스타 전문점123",
        creatorName: "송이",
-       startTime: "21:00",
-       endTime: "21:00",
+       startTime: "12:00",
+       endTime: "19:00",
        timeDescription: "월~금 09:00-22:00, 주말 10:00-23:00",
        description: "송도에서 가장 유명한 파스타 전문점으로, 수제 파스타와 신선한 소스가 인상적인 곳입니다.",
        thumbnailImageUrl: "https://example.com/thumbnail.jpg",
-       onelineDescription: "송도 최고의 파스타 맛집!"
+       onelineDescription: "송도 최고의 파스타 맛집!",
+       latitude: '',
+       longitude: '',
+       price: '',
+       naverRating: '',
+       kakaoRating: '',
+       wating: '',
+       parking: '',
+       suggestionMenu: '',
+       imageUrls: [],
+       instagram: '',
+       contact: ''
       },
       curationDetail: {
-        title: '',
-        description: '',
-        places: '',
-        mainImage: '',
-        images: '',
-        tags: '',
-        author: ''
+        type: 'DELICIOUS_SPOT',
+        ids: [0],
+        creatorName: "송이",
+        title: "송도 1만원대 맛집 5개",
+        description: "새 설명",
+        imageUrl: "asdf"
+       
       },
       creatorDetail: {
-        name: '',
-        role: '',
-        description: '',
-        profileImage: '',
-        socialLinks: '',
-        specialties: '',
-        contact: ''
+        "name": "송이",
+        "introduction": "매콤한 음식을 좋아하는 크리에이터",
+        "description": "string",
+        "image": "string"
       }
     });
   };
-
+  console.log('response', item)
   const handleEdit = (post) => {
-    setCurrentPost({
-      
-      festivalDetail: {
-        title: post.festivalDetail?.title || '',
-        creatorName: post.festivalDetail?.creatorName || '',
-        startDate: post.festivalDetail?.startDate || '',
-        endDate: post.festivalDetail?.endDate || '',
-        startTime: post.festivalDetail?.startTime || '',
-        endTime: post.festivalDetail?.endTime || '',
-        timeDescription: post.festivalDetail?.timeDescription || '',
-        latitude: post.festivalDetail?.latitude ?? '',
-        longitude: post.festivalDetail?.longitude ?? '',
-        address: post.festivalDetail?.address || '',
-        fee: post.festivalDetail?.fee || '',
-        contact: post.festivalDetail?.contact || '',
-        homePageUrl: post.festivalDetail?.homePageUrl || '',
-        reservationUrl: post.festivalDetail?.reservationUrl || '',
-        description: post.festivalDetail?.description || '',
-        onelineDescription: post.festivalDetail?.onelineDescription || '',
-        mainImage: post.festivalDetail?.mainImage || '',
-        images: Array.isArray(post.festivalDetail?.images)
-          ? post.festivalDetail.images.join(', ')
-          : (post.festivalDetail?.images || '')
-      },
-      restaurantDetail: {
-        name: post.restaurantDetail?.name || '',
-        category: post.restaurantDetail?.category || '',
-        address: post.restaurantDetail?.address || '',
-        phone: post.restaurantDetail?.phone || '',
-        operatingHours: post.restaurantDetail?.operatingHours || '',
-        priceRange: post.restaurantDetail?.priceRange || '',
-        description: post.restaurantDetail?.description || '',
-        mainImage: post.restaurantDetail?.mainImage || '',
-        images: Array.isArray(post.restaurantDetail?.images)
-          ? post.restaurantDetail.images.join(', ')
-          : (post.restaurantDetail?.images || ''),
-        latitude: post.restaurantDetail?.latitude || '',
-        longitude: post.restaurantDetail?.longitude || '',
-        rating: post.restaurantDetail?.rating || '',
-        tags: Array.isArray(post.restaurantDetail?.tags)
-          ? post.restaurantDetail.tags.join(', ')
-          : (post.restaurantDetail?.tags || '')
-      },
-      curationDetail: {
-        title: post.curationDetail?.title || '',
-        description: post.curationDetail?.description || '',
-        places: Array.isArray(post.curationDetail?.places)
-          ? post.curationDetail.places.join(', ')
-          : (post.curationDetail?.places || ''),
-        mainImage: post.curationDetail?.mainImage || '',
-        images: Array.isArray(post.curationDetail?.images)
-          ? post.curationDetail.images.join(', ')
-          : (post.curationDetail?.images || ''),
-        tags: Array.isArray(post.curationDetail?.tags)
-          ? post.curationDetail.tags.join(', ')
-          : (post.curationDetail?.tags || ''),
-        author: post.curationDetail?.author || ''
-      },
-      creatorDetail: {
-        name: post.creatorDetail?.name || '',
-        role: post.creatorDetail?.role || '',
-        description: post.creatorDetail?.description || '',
-        profileImage: post.creatorDetail?.profileImage || '',
-        socialLinks: Array.isArray(post.creatorDetail?.socialLinks)
-          ? post.creatorDetail.socialLinks.join(', ')
-          : (post.creatorDetail?.socialLinks || ''),
-        specialties: Array.isArray(post.creatorDetail?.specialties)
-          ? post.creatorDetail.specialties.join(', ')
-          : (post.creatorDetail?.specialties || ''),
-        contact: post.creatorDetail?.contact || ''
-      }
-    });
-    setActiveTab(post.type);
     setIsEditing(true);
     setEditingId(post.id);
   };
+
+  // itemData가 로드되면 폼을 업데이트하는 useEffect 추가
+  useEffect(() => {
+    if (isEditing && itemData && Object.keys(itemData).length > 0) {
+      setCurrentPost({
+        festivalDetail: {
+          title: itemData.title || '',
+          creatorName: itemData.creatorName || '',
+          startDate: itemData.startDate || '',
+          endDate: itemData.endDate || '',
+          startTime: itemData.startTime || '',
+          endTime: itemData.endTime || '',
+          timeDescription: itemData.timeDescription || '',
+          latitude: itemData.latitude || '',
+          longitude: itemData.longitude || '',
+          address: itemData.address || '',
+          fee: itemData.fee || '',
+          contact: itemData.contact || '',
+          homePageUrl: itemData.homePageUrl || '',
+          reservationUrl: itemData.reservationUrl || '',
+          description: itemData.description || '',
+          onelineDescription: itemData.onelineDescription || '',
+          mainImage: itemData.mainImage || '',
+          images: Array.isArray(itemData.images)
+            ? itemData.images.join(', ')
+            : (itemData.images || '')
+        },
+        restaurantDetail: {
+          title: itemData.title || '',
+          creatorName: itemData.creatorName || '',
+          latitude: itemData.latitude || '',
+          longitude: itemData.longitude || '',
+          address: itemData.address || '',
+          price: itemData.price || '',
+          naverRating: itemData.naverRating || '',
+          kakaoRating: itemData.kakaoRating || '',
+          startTime: itemData.startTime || '',
+          endTime: itemData.endTime || '',
+          timeDescription: itemData.timeDescription || '',
+          waiting: itemData.waiting || '',
+          parking: itemData.parking || '',
+          suggestionMenu: itemData.suggestionMenu || '',
+          description: itemData.description || '',
+          thumbnailImageUrl: itemData.thumbnailImageUrl || '',
+          imageUrls: Array.isArray(itemData.imageUrls)
+            ? itemData.imageUrls.join(', ')
+            : (itemData.imageUrls || ''),
+          onelineDescription: itemData.onelineDescription || '',
+          instagram: itemData.instagram || '',
+          contact: itemData.contact || ''
+        },
+        curationDetail: {
+          type: itemData.type || 'DELICIOUS_SPOT',
+          ids: Array.isArray(itemData.ids) ? itemData.ids : (itemData.ids || []),
+          creatorName: itemData.creatorName || '',
+          title: itemData.title || '',
+          description: itemData.description || '',
+          imageUrl: itemData.imageUrl || ''
+        },
+        creatorDetail: {
+          name: itemData.name || '',
+          description: itemData.description || '',
+          image: itemData.image || '',
+          introduction: itemData.introduction || ''
+        }
+      });
+    }
+  }, [isEditing, itemData]);
 
   const handleDelete = async (id) => {
     if (window.confirm('정말로 이 글을 삭제하시겠습니까?')) {
@@ -296,16 +391,15 @@ export default function Admin() {
   };
 
   const getTypeLabel = (type) => ({ 
-    festivals: '축제', 
-    'delicious-spots': '맛집', 
-    curation: '큐레이션',
-    creator: '크리에이터'
+    festival: '축제', 
+    'delicious-spot': '맛집', 
+  
   }[type] || type);
   
     
-  const getAuthorLabel = (author) => ({ song: '송이', dodong: '도이', dong: '동이', ne: '네이' }[author] || author);
+  const getAuthorLabel = (author) => ({ song: '송이', parang: '파랑', dodong: '도동' }[author] || author);
   const getAuthorColor = (author) =>
-    ({ song: 'bg-pink-100 text-pink-800', dodong: 'bg-green-100 text-green-800', dong: 'bg-blue-100 text-blue-800', ne: 'bg-purple-100 text-purple-800' }[
+    ({ song: 'bg-pink-100 text-pink-800', dodong: 'bg-green-100 text-green-800', parang: 'bg-blue-100 text-blue-800' }[
       author
     ] || 'bg-gray-100 text-gray-800');
 
@@ -348,19 +442,25 @@ export default function Admin() {
         return (
           <div className="mt-6 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <input name="restaurantDetail.name" value={currentPost.restaurantDetail.name} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="맛집명(name)" required/>
-              <input name="restaurantDetail.category" value={currentPost.restaurantDetail.category} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="카테고리(category)" required/>
-              <input name="restaurantDetail.address" value={currentPost.restaurantDetail.address} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="주소(address)" required/>
-              <input name="restaurantDetail.phone" value={currentPost.restaurantDetail.phone} onChange={handleInputChange} className="input" placeholder="전화번호(phone)" />
-              <input name="restaurantDetail.operatingHours" value={currentPost.restaurantDetail.operatingHours} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="운영시간(operatingHours)" required/>
-              <input name="restaurantDetail.priceRange" value={currentPost.restaurantDetail.priceRange} onChange={handleInputChange} className="input" placeholder="가격대(priceRange)" />
-              <input name="restaurantDetail.latitude" value={currentPost.restaurantDetail.latitude} onChange={handleInputChange} className="input" placeholder="위도(latitude)" />
-              <input name="restaurantDetail.longitude" value={currentPost.restaurantDetail.longitude} onChange={handleInputChange} className="input" placeholder="경도(longitude)" />
-              <input name="restaurantDetail.rating" value={currentPost.restaurantDetail.rating} onChange={handleInputChange} className="input" placeholder="평점(rating)" />
-              <input name="restaurantDetail.tags" value={currentPost.restaurantDetail.tags} onChange={handleInputChange} className="input md:col-span-2" placeholder="태그들(쉼표로 구분)" />
-              <input name="restaurantDetail.mainImage" value={currentPost.restaurantDetail.mainImage} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="메인 이미지 URL" required/>
-              <input name="restaurantDetail.images" value={currentPost.restaurantDetail.images} onChange={handleInputChange} className="input md:col-span-2" placeholder="추가 이미지 URL들(쉼표로 구분)" />
-            </div>
+            <input name="restaurantDetail.title" value={currentPost.restaurantDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="맛집명(title)" required/>
+            <input name="restaurantDetail.latitude" value={currentPost.restaurantDetail.latitude} onChange={handleInputChange} className="input" placeholder="위도(latitude)" />
+            <input name="restaurantDetail.longitude" value={currentPost.restaurantDetail.longitude} onChange={handleInputChange} className="input" placeholder="경도(longitude)" />
+            <input name="restaurantDetail.address" value={currentPost.restaurantDetail.address} onChange={handleInputChange} className="input " placeholder="주소(address)" />
+            <input name="restaurantDetail.price" value={currentPost.restaurantDetail.price} onChange={handleInputChange} className="input" placeholder="가격(price)" />
+            <input name="restaurantDetail.naverRating" value={currentPost.restaurantDetail.naverRating} onChange={handleInputChange} className="input" placeholder="네이버 평점(naverRating)" />
+            <input name="restaurantDetail.kakaoRating" value={currentPost.restaurantDetail.kakaoRating} onChange={handleInputChange} className="input" placeholder="카카오 평점(kakaoRating)" />
+            <input name="restaurantDetail.startTime" value={currentPost.restaurantDetail.startTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="시작시간(startTime)" required/>
+            <input name="restaurantDetail.endTime" value={currentPost.restaurantDetail.endTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="종료시간(endTime)" required/>
+            <input name="restaurantDetail.timeDescription" value={currentPost.restaurantDetail.timeDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="운영시간 설명(timeDescription)" required/>
+            <input name="restaurantDetail.waiting" value={currentPost.restaurantDetail.waiting} onChange={handleInputChange} className="input" placeholder="대기시간(waiting)" />
+            <input name="restaurantDetail.parking" value={currentPost.restaurantDetail.parking} onChange={handleInputChange} className="input" placeholder="주차 정보(parking)" />
+            <input name="restaurantDetail.suggestionMenu" value={currentPost.restaurantDetail.suggestionMenu} onChange={handleInputChange} className="input" placeholder="추천 메뉴(suggestionMenu)" />
+            <input name="restaurantDetail.thumbnailImageUrl" value={currentPost.restaurantDetail.thumbnailImageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="썸네일 이미지 URL" required/>
+            <input name="restaurantDetail.imageUrls" value={currentPost.restaurantDetail.imageUrls} onChange={handleInputChange} className="input " placeholder="추가 이미지 URL들(쉼표로 구분)" />
+            <input name="restaurantDetail.onelineDescription" value={currentPost.restaurantDetail.onelineDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="한 줄 설명(onelineDescription)" required/>
+            <input name="restaurantDetail.instagram" value={currentPost.restaurantDetail.instagram} onChange={handleInputChange} className="input" placeholder="인스타그램(instagram)" />
+            <input name="restaurantDetail.contact" value={currentPost.restaurantDetail.contact} onChange={handleInputChange} className="input" placeholder="연락처(contact)" />
+          </div>      
             <textarea
               name="restaurantDetail.description"
               value={currentPost.restaurantDetail.description}
@@ -373,16 +473,26 @@ export default function Admin() {
           </div>
         );
 
-      case 'curation':
+      case 'curations':
         return (
           <div className="mt-6 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input name="curationDetail.title" value={currentPost.curationDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="큐레이션 제목(title)" required/>
-              <input name="curationDetail.author" value={currentPost.curationDetail.author} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="큐레이션 작성자(author)" required/>
-              <input name="curationDetail.places" value={currentPost.curationDetail.places} onChange={handleInputChange} className="input md:col-span-2" placeholder="포함된 장소들(쉼표로 구분)" />
-              <input name="curationDetail.tags" value={currentPost.curationDetail.tags} onChange={handleInputChange} className="input md:col-span-2" placeholder="태그들(쉼표로 구분)" />
-              <input name="curationDetail.mainImage" value={currentPost.curationDetail.mainImage} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="메인 이미지 URL" required/>
-              <input name="curationDetail.images" value={currentPost.curationDetail.images} onChange={handleInputChange} className="input md:col-span-2" placeholder="추가 이미지 URL들(쉼표로 구분)" />
+              
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">타입(type)</label>
+                <select
+                  name="curationDetail.type"
+                  value={currentPost.curationDetail.type}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="FESTIVAL">축제</option>
+                  <option value="DELICIOUS_SPOT">맛집</option>
+                </select>
+              </div>
+              <input name="curationDetail.ids" value={Array.isArray(currentPost.curationDetail.ids) ? currentPost.curationDetail.ids.join(', ') : currentPost.curationDetail.ids} onChange={handleInputChange} className="input md:col-span-2" placeholder="포함된 ID들(쉼표로 구분)" />
+              <input name="curationDetail.imageUrl" value={currentPost.curationDetail.imageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="이미지 URL" required/>
             </div>
             <textarea
               name="curationDetail.description"
@@ -401,11 +511,8 @@ export default function Admin() {
           <div className="mt-6 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input name="creatorDetail.name" value={currentPost.creatorDetail.name} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="크리에이터 이름(name)" required/>
-              <input name="creatorDetail.role" value={currentPost.creatorDetail.role} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="역할(role)" required/>
-              <input name="creatorDetail.contact" value={currentPost.creatorDetail.contact} onChange={handleInputChange} className="input" placeholder="연락처(contact)" />
-              <input name="creatorDetail.specialties" value={currentPost.creatorDetail.specialties} onChange={handleInputChange} className="input md:col-span-2" placeholder="전문 분야들(쉼표로 구분)" />
-              <input name="creatorDetail.socialLinks" value={currentPost.creatorDetail.socialLinks} onChange={handleInputChange} className="input md:col-span-2" placeholder="소셜 링크들(쉼표로 구분)" />
-              <input name="creatorDetail.profileImage" value={currentPost.creatorDetail.profileImage} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="프로필 이미지 URL" required/>
+              <input name="creatorDetail.introduction" value={currentPost.creatorDetail.introduction} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="introcuction" required/>
+              <input name="creatorDetail.image" value={currentPost.creatorDetail.image} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="프로필 이미지 URL" required/>
             </div>
             <textarea
               name="creatorDetail.description"
@@ -428,8 +535,7 @@ export default function Admin() {
     <div className="p-6">
       {/* 탭 네비게이션 */}
       
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">Admin</h1>
-        <div className="flex space-x-1 mb-4 bg-gray-100 p-1 rounded-lg">
+         <div className="flex space-x-1 mb-4 bg-gray-100 p-1 rounded-lg">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -454,19 +560,19 @@ export default function Admin() {
         <form onSubmit={handleSubmit} className="space-y-4">
          
 
-          <div>
+          {activeTab != 'creator'? <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">작성자</label>
             <select
               name="author"
-              value={currentPost.festivalDetail.creatorName}
+              value={getCurrentAuthorValue()}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="song">송이</option>
-              <option value="dodong">파랑</option>
-              <option value="dong">도동이</option>
+              <option value="dodong">도동</option>
+              <option value="parang">파랑</option>
             </select>
-          </div>
+          </div>: ''}
 
           {renderFormFields()}
 
@@ -495,13 +601,13 @@ export default function Admin() {
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">작성된 글 목록</h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">LIST</h2>
         {loading && <div className="text-center py-8 text-gray-500">로딩 중...</div>}
         {/* {error && <div className="text-center py-8 text-red-500">에러: {error.message}</div>}
         {deleteError && <div className="text-center py-8 text-red-500">삭제 에러: {deleteError.message}</div>} */}
         
         {loading ? (
-          <div className="text-center py-8 text-gray-500">작성된 글이 없습니다.</div>
+          ''
         ) : (
           <div className="space-y-4">
             {posts.map(post => (
@@ -509,8 +615,8 @@ export default function Admin() {
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium bg-white text-black border border-gray-300`}>{getTypeLabel(post.type)}</span>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAuthorColor(post.author)}`}>{getAuthorLabel(post.author)}</span>
+                      {post.type? <span className={`px-2 py-1 rounded-full text-xs font-medium bg-white text-black border border-gray-300`}> {getTypeLabel(post.type)} </span> : '' }
+                      {post.creatorName? <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAuthorColor(post.creatorName)}`}>{getAuthorLabel(post.creatorName)}</span> : '' }
                       <h3 className="text-lg font-semibold text-gray-800">{post.title}</h3>
                     </div>
                     

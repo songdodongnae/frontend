@@ -1,14 +1,16 @@
-// src/hooks/httpShortcuts.js
-import useApi from './useApi';
+import useApi from './useApi'; 
 
-export const useGet = (url, defaultParams = {}, auto = true, deps = []) =>
-  useApi({ method: 'GET', url, auto, defaultParams, deps });
+export const useGet = (url, defaultParams = {}, auto = true, deps = [], auth = 'auto') => 
+  
+  useApi({ method: 'GET', url, auto, defaultParams, deps, auth }); 
+  
+export const usePost = (url, defaultBody = null, auth = 'auto') => 
+  
+  useApi({ method: 'POST', url, auto: false, defaultBody, auth }); 
 
-export const usePost = (url, defaultBody = null) =>
-  useApi({ method: 'POST', url, auto: false, defaultBody });
+export const usePatch = (url, auth = true) => 
+  
+  useApi({ method: 'PATCH', url, auto: false, auth });
 
-export const usePatch = (url) =>
-  useApi({ method: 'PATCH', url, auto: false });
-
-export const useDelete = (url) =>
-  useApi({ method: 'DELETE', url, auto: false });
+export const useDelete = (url, auth = true) => 
+  useApi({ method: 'DELETE', url, auto: false, auth });

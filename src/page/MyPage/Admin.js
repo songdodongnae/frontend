@@ -7,9 +7,13 @@ export default function Admin() {
   const [editingId, setEditingId] = useState(null);
 
   
-  const { data, loading, error, execute: refetch } = useGet(`/api/${activeTab}`, { currentPage: 1, pageSize: 100 }, true, [activeTab]);
   
-  const { data: item } = useGet(`/api/${activeTab}/${editingId}`, { currentPage: 1, pageSize: 100 }, true, [editingId]);
+ const { data, loading, error, execute: refetch } = useGet(
+    editingId ? `/api/${activeTab}/${editingId}` : null, 
+    { currentPage: 1, pageSize: 100 }, 
+    !!editingId, // editingId가 있을 때만 auto 실행
+    [editingId]
+  );
   const { execute: createPost, loading: creating, error: createError } = usePost(`/api/${activeTab}`);
   const { execute: updatePost, loading: updating, error: updateError } = usePost('/api/festivals');
   const { execute: deletePost, loading: deleting, error: deleteError } = useDelete(null);

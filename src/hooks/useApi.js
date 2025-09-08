@@ -2,33 +2,77 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function useApi({ method, url, auto = false, defaultParams = {}, defaultBody = null, deps = [] }) {
+/**
+ * @param {'GET'|'POST'|'PUT'|'PATCH'|'DELETE'} method
+ * @param {string} url
+ * @param {boolean} [auto=false]
+ * @param {object} [defaultParams={}]
+ * @param {any} [defaultBody=null]
+ * @param {any[]} [deps=[]]
+ * @param {'auto'|true|false} [auth='auto']  // ← 토큰 부착 정책
+ *   - 'auto': 토큰 있으면 붙이고 없으면 안 붙임(기본)
+ *   - true:  반드시 토큰 필요(최대 300ms 대기 후 붙임)
+ *   - false: 절대 Authorization 안 붙임(공개 엔드포인트용)
+ * @param {boolean} [withCredentials=false]  // 쿠키 인증 쓸 때만 true
+ */
+export default function useApi({
+  method,
+  url,
+  auto = false,
+  defaultParams = {},
+  defaultBody = null,
+  deps = [],
+  auth = 'auto',
+  withCredentials = false,
+}) {
   const [data, setData] = useState(null);
   const [params, setParams] = useState(defaultParams);
   const [body, setBody] = useState(defaultBody);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const waitForTokenIfNeeded = async () => {
+    if (auth === true) {
+      const start = Date.now();
+      while (!localStorage.getItem('accessToken') && Date.now() - start < 300) {
+        await new Promise((r) => setTimeout(r, 50));
+      }
+    }
+  };
+
   const execute = useCallback(async (override = {}) => {
     const finalParams = override.params ?? params;
     const finalBody = override.body ?? body;
     const finalUrl = override.url ?? url;
+
     setLoading(true);
     setError(null);
+
     try {
+      await waitForTokenIfNeeded();
+
+      // Authorization 부착 정책
       const token = localStorage.getItem('accessToken');
+      const shouldAttachAuth =
+        auth === true ? true :
+        auth === false ? false :
+        !!token; // 'auto'
+
+      const headers = {
+        accept: '*/*',
+        ...(finalBody != null ? { 'Content-Type': 'application/json' } : {}),
+        ...(shouldAttachAuth && token ? { Authorization: `Bearer ${token}` } : {}),
+      };
+
       const res = await axios.request({
         method,
         url: finalUrl,
         params: finalParams,
         data: finalBody,
-        headers: {
-          accept: '*/*',
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        withCredentials: true,
-      })
+        headers,
+        withCredentials,
+      });
+
       setData(res.data);
       return res.data;
     } catch (e) {
@@ -37,7 +81,8 @@ export default function useApi({ method, url, auto = false, defaultParams = {}, 
     } finally {
       setLoading(false);
     }
-  }, [method, url, params, body]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [method, url, params, body, auth, withCredentials]);
 
   useEffect(() => {
     if (auto) execute().catch(() => {});

@@ -45,12 +45,17 @@ export default function useApi({
     const finalBody = override.body ?? body;
     const finalUrl = override.url ?? url;
 
+    // url이 없으면 요청하지 않음
+    if (!finalUrl) {
+      setData(null);
+      return null;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
       await waitForTokenIfNeeded();
-
       // Authorization 부착 정책
       const token = localStorage.getItem('accessToken');
       const shouldAttachAuth =
@@ -85,7 +90,8 @@ export default function useApi({
   }, [method, url, params, body, auth, withCredentials]);
 
   useEffect(() => {
-    if (auto) execute().catch(() => {});
+    // url 없으면 자동 호출 금지
+    if (auto && url) execute().catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 

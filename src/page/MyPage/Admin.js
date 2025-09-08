@@ -1,30 +1,64 @@
 import React, { useState, useEffect } from 'react';
-import { useGet, usePost, useDelete } from '../../hooks/httpShortcuts';
+import { useGet, usePost, usePatch, useDelete } from '../../hooks/httpShortcuts';
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('festivals');
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  
-  
- const { data, loading, error, execute: refetch } = useGet(
-    editingId ? `/api/${activeTab}/${editingId}` : null, 
-    { currentPage: 1, pageSize: 100 }, 
-    !!editingId, // editingId가 있을 때만 auto 실행
-    [editingId]
+    
+    // 컴포넌트 내부
+  const baseUrl = `/api/${activeTab}`;
+  const isPublicPost = activeTab === 'festivals'; // 필요시 조건 더 추가
+
+  // 리스트
+  const {
+    data: listResp,
+    loading,
+    error: listError,
+    execute: refetch,
+  } = useGet(
+    baseUrl,
+    { currentPage: 1, pageSize: 100 },
+    true,
+    [activeTab],           // activeTab 바뀔 때 자동 조회
+    'auto'                 // 토큰 있으면 붙이고, 없으면 안 붙임
   );
-  const { execute: createPost, loading: creating, error: createError } = usePost(`/api/${activeTab}`);
-  const { execute: updatePost, loading: updating, error: updateError } = usePost('/api/festivals');
-  const { execute: deletePost, loading: deleting, error: deleteError } = useDelete(null);
 
-  console.log("data", data);
+  // 단건(편집용)
+  const itemUrl = editingId ? `${baseUrl}/${editingId}` : null;
+  const {
+    data: itemResp,
+    error: itemError,
+  } = useGet(
+    itemUrl,
+    {},
+    !!editingId,           // editingId 있을 때만 자동 조회
+    [editingId],
+    'auto'
+  );
 
-  const posts = data?.data?.content || [];
-  const itemData = item?.data || [];
+  // 생성
+  const {
+    execute: createPost,
+    error: createError,
+  } = usePost(baseUrl, null, isPublicPost ? false : 'auto'); // 공개면 auth:false
+
+  // 수정(PATCH)
+  const {
+    execute: updatePost,
+    error: updateError,
+  } = usePatch('', true);  // URL은 호출 시 override, auth는 보호 API면 true
+
+  // 삭제(DELETE)
+  const {
+    execute: deletePost,
+    error: deleteError,
+  } = useDelete('', true); // URL은 호출 시 override
+
+  const posts = listResp?.data?.content ?? [];
+  const itemData = itemResp?.data ?? null;
   
-  console.log("posts", posts);
-  console.log("activeTab", activeTab);
 
   const [currentPost, setCurrentPost] = useState({
 
@@ -47,7 +81,7 @@ export default function Admin() {
       address: '',
       fee: '',
       contact: '',
-      images: ''
+      images: []
     },
     restaurantDetail: {    
       title: "송도 파스타 전문점123",
@@ -96,6 +130,8 @@ export default function Admin() {
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
+    setIsEditing(false);
+    setEditingId(null);
     resetForm(); // 폼 초기화
   };
 
@@ -308,7 +344,7 @@ export default function Admin() {
       }
     });
   };
-  console.log('response', item)
+  
   const handleEdit = (post) => {
     setIsEditing(true);
     setEditingId(post.id);
@@ -413,7 +449,7 @@ export default function Admin() {
         return (
           <div className="mt-6 space-y-3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <input name="festivalDetail.title" value={currentPost.festivalDetail.title} onChange={handleInputChange} className="input" placeholder="행사명(title)" required/>     
+              <input name="festivalDetail.title" value={currentPost.festivalDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="행사명(title)" required/>     
               <input name="festivalDetail.startDate" value={currentPost.festivalDetail.startDate} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="시작일(YYYY-MM-DD)" required/>
               <input name="festivalDetail.endDate" value={currentPost.festivalDetail.endDate} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="종료일(YYYY-MM-DD)" required/>
               <input name="festivalDetail.startTime" value={currentPost.festivalDetail.startTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="시작시간(HH:MM)" required/>
@@ -428,7 +464,7 @@ export default function Admin() {
               <input name="festivalDetail.reservationUrl" value={currentPost.festivalDetail.reservationUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="예약 URL" required/>
               <input name="festivalDetail.mainImage" value={currentPost.festivalDetail.mainImage} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="메인 이미지 URL" required/>
               <input name="festivalDetail.images" value={currentPost.festivalDetail.images} onChange={handleInputChange} className="input md:col-span-2" placeholder="추가 이미지 URL들(쉼표로 구분)" />
-              <input name="festivalDetail.onelineDescription" value={currentPost.festivalDetail.onelineDescription} onChange={handleInputChange} className="input md:col-span-2" placeholder="한 줄 설명(onelineDescription)" />
+              <input name="festivalDetail.onelineDescription" value={currentPost.festivalDetail.onelineDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="한 줄 설명(onelineDescription)" required/>
             </div>
             <textarea
               name="festivalDetail.description"

@@ -1,22 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+
 
 export default function PlaceCard({ place }) {
-  return (
-    <Link to={`/places/${place.id}`} className="card">    
-     
+  const location = useLocation();
+  const [imgError, setImgError] = useState(false);
 
+  console.log('location', location);
+
+  return (
+
+    <Link to={`${location.pathname}/${place.id}`} className="card">    
+    
+    
       <div key={place.id} className="theme-book-item">
         <div className="theme-book-img-container">
-        {place.image ? (
+        {place.imageUrl && !imgError ? (
             <img 
               className="theme-book-thumbnail" 
-              src={place.image} 
+              src={place.imageUrl} 
               alt={place.name}
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover'
               }}
+              onError={() => setImgError(true)}
             />
           ) : (
             <div 
@@ -32,7 +41,17 @@ export default function PlaceCard({ place }) {
                 fontSize: '14px'
               }}
             >
-              이미지 없음
+             <img 
+              className="theme-book-thumbnail" 
+              src={`/noimage.jpg`} 
+              alt={place.name}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+              onError={() => setImgError(true)}
+            />
             </div>
           )}
         </div>

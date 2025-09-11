@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import PlaceCard from "./PlaceCard";
-import MonthSlider from "./MonthSlider";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
@@ -89,9 +88,7 @@ export default function PlaceList() {
       <Navigation />     
 
       <div className="theme-book">
-        {location.state?.from === 'festivals' && (
-          <MonthSlider onMonthSelect={handleMonthSelect} />
-        )}
+        
         <div className="theme-book-title">{getTitle()}</div>        
         
         <div className="theme-book-body">

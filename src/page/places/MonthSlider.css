@@ -1,0 +1,145 @@
+.month-slider-container {
+  width: 100%;
+  margin: 20vh 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.month-slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.prev-button {
+  left: -20px;
+}
+
+.next-button {
+  right: -20px;
+}
+
+.month-slider-track {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  padding: 0 20px 2px;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.month-card {
+  width: 25vh;
+  height: 24vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+
+.month-card:hover {
+  transform: scale(1.001);
+  box-shadow: 0 4px 20px rgba(179, 179, 179, 0.2);
+}
+
+.month-card.selected {
+  transform: scale(1.001);
+  box-shadow: 0 6px 25px gray;
+  border: 1px solid gray;
+}
+
+.month-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 4px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .month-slider {
+    max-width: 100%;
+    height: 180px;
+  }
+  
+  .month-card {
+    min-width: 1vh;
+    height: 1vh;
+  }
+  
+  .month-name {
+    font-size: 16px;
+  }
+  
+  .month-slider-track {
+    gap: 12px;
+    padding: 0 15px;
+  }
+  
+  .nav-button {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .month-card {
+    min-width: 100px;
+    height: 140px;
+  }
+  
+  .month-name {
+    font-size: 14px;
+  }
+  
+  .month-slider-track {
+    gap: 10px;
+    padding: 0 10px;
+  }
+  
+  .nav-button {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+}

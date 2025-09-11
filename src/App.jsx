@@ -13,16 +13,15 @@ import Inquiry from './page/MyPage/Inquiry';
 import Withdraw from './page/MyPage/Withdraw';
 
 import Story from './page/places/Story';
-import Festival from './page/Series/Festival';
+import Festival from './page/places/Festival';
 import Admin from './page/MyPage/Admin';
 import CreatorPage from './page/CreatorPage';
 import PlaceList from './page/Series/PlaceList';
 import PlaceDetailPage from './page/Series/PlaceDetailPage';
-
-
 import CurationList from './page/places/CurationList';
 import TestFestival from './test/TestFestival';
-
+import FestivalDetail from './page/places/FestivalDetail';
+import FestivalList from './page/places/FestivalList';
 
 function App() {
   return (
@@ -41,6 +40,9 @@ function App() {
           </Route>
 
           <Route path="/test-festival" element={<TestFestival />} />
+
+          <Route path="/festivals" element={<FestivalList />} />
+          <Route path="/festivals/:id" element={<FestivalDetail />} />
 
            {/* 맛집 리스트/상세 (id 기반) */}
 

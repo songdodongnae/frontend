@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import PlaceCard from "./PlaceCard";
+import PlaceCard from "../Series/PlaceCard";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";

@@ -23,7 +23,7 @@
 .home-header {
     
     display: flex;
-    padding-top: 28vh;
+    padding-top: 20vh;
     justify-content: flex-start;
     text-align: left; align-self: flex-start;   /* 추가: 부모의 center 정렬 무시 */
     width: 100%;              /* 필요 시 추가 */

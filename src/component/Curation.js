@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "../css/Home.css";
 import { useGet } from "../hooks/httpShortcuts";
-import bookmark from '../images/bookmark.svg'
 
 export default function Curation() {
     const {data} = useGet('/api/curations', { currentPage: 1, pageSize: 100 }, true, []);
@@ -36,27 +34,18 @@ export default function Curation() {
 
     return (
 
-        <div className="home">
-            <div className="home-header">
-                <div className="home-title">방금 올라온 <span className="highlight">큐레이션</span></div>
+        <div className="pl-5 pr-[33px] mr-5 h-screen overflow-y-auto">
+            <div className="flex pt-[21vh] justify-start text-left self-start w-full font-['Noto_Sans_KR'] text-xl font-semibold leading-[140%] text-[#333]">
+                <div>
+                    방금 올라온 <span className="text-blue-600">큐레이션</span>
+                </div>
             </div>
-            <div className="home-body">
-
-
+            <div className="mt-[3vh] grid grid-cols-1 gap-6 w-full max-w-[960px]">
                 {data?.data?.content.map((item) => (
                     <div 
                         key={item.id} 
-                        className="home-item"
-
+                        className="cursor-pointer bg-gray-500 rounded-xl p-5 text-white shadow-md [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]"
                         onClick={() => navigate(`/places/${item.id}`)}
-                        style={{
-                            cursor: 'pointer',
-                            background: 'gray',
-                            borderRadius: '12px',
-                            padding: '20px',
-                            color: 'white',
-                            textShadow: '0 1px 3px rgba(0,0,0,0.3)'
-                        }}
                     >
                         <h3>{item.title}</h3>
                         <h4>ID: {item.id}</h4>

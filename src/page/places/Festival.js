@@ -3,7 +3,6 @@ import Header from "../../component/Header.js";
 import Navigation from "../../component/Navigation.js";
 import Footer from "../../component/Footer.js";
 import FestivalCalendar from "../../component/FestivalCalendar.js";
-import "../../css/Festival.css"
 import bookmark from "../../images/festivalBookmark.svg";
 import axios from "axios";
 
@@ -17,12 +16,12 @@ const Festival = () => {
             "/api/festivals?currentPage=1&pageSize=10"
           , {
         
-            validateStatus: (s) => s < 500,          // 401/403도 resolve로 받기
-            headers: { Authorization: undefined },   // 혹시 모를 인터셉터 영향 차단
+            validateStatus: (s) => s < 500,
+            headers: { Authorization: undefined },
           });
       
-          console.log("Full response:", response);   // 전체 응답 객체
-          console.log("Data only:", response.data.data.content);  // 실제 데이터(JSON)
+          console.log("Full response:", response);
+          console.log("Data only:", response.data.data.content);
           setFestivals(response.data.data.content);
         } catch (error) {
           console.error("Error fetching ads:", error);
@@ -36,24 +35,30 @@ const Festival = () => {
       console.log("f", festivals)
       
     return (
-        <div className="festival-list-page">
+        <div className="flex flex-col items-center">
             <Header />
             <Navigation />
             <FestivalCalendar />
-            <div className="festival-group">
+            <div className="flex flex-col justify-center items-center gap-12 mb-[158px]">
                 {festivals.map((fes) => (
-                    <div key={fes.id} className="festivals-item">
-                        <div className="festivals-img-container">
-                            <img className="festivals-thumbnail" src={fes.imageUrl} alt={fes.title} />
-                            <div className="festival-bookmark">
-                                <div className="festival-bookmark-dot" />
-                                <img className="festival-bookmark-icon" src={bookmark} />
+                    <div key={fes.id} className="flex w-[960px] items-center">
+                        <div className="w-[480px] h-[427px] relative">
+                            <img className="w-full h-full rounded-tl-[30px] rounded-bl-[30px] object-cover" src={fes.imageUrl} alt={fes.title} />
+                            <div className="flex w-14 h-14 justify-center items-center absolute right-[26px] bottom-[24px] z-50">
+                                <div className="w-full h-full flex bg-white rounded-full relative" />
+                                <img className="absolute right-[7px] top-[7px]" src={bookmark} alt="bookmark" />
                             </div>
                         </div>
-                        <div className="festivals-info-container">
-                            <div className="festivals-item-title">{fes.creatorName}</div>
-                            <div className="festivals-item-disc">{fes.creatorName}</div>
-                            <div className="festivals-contents-num">현재 예정 축제 개</div>
+                        <div className="flex w-[480px] h-[427px] flex-col items-start shrink-0 rounded-tr-[30px] rounded-br-[30px] bg-[#EFEFEF]">
+                            <div className="flex flex-col justify-center shrink-0 self-stretch pl-[25px] pr-[38px] pt-[25px] pb-[219px] text-[#1C1814] font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%]">
+                                {fes.creatorName}
+                            </div>
+                            <div className="text-[#1C1814] font-['Noto_Sans_KR'] text-lg font-semibold leading-[140%] px-[38px] pl-[25px] pb-4 break-words">
+                                {fes.creatorName}
+                            </div>
+                            <div className="text-[#4D4D4D] font-['Noto_Sans_KR'] text-lg font-medium leading-[140%] px-[38px] pl-[25px] pb-[25px]">
+                                현재 예정 축제 개
+                            </div>
                         </div>
                     </div>
                 ))}

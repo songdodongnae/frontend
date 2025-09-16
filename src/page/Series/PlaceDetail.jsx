@@ -6,7 +6,7 @@ import Footer from "../../component/Footer";
 import "../../css/PlaceDetailpage.css";
 import { useGet } from "../../hooks/httpShortcuts";
 
-export default function PlaceDetailPage() {
+export default function PlaceDetail() {
   const { id } = useParams();
   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);

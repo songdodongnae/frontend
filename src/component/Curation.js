@@ -34,8 +34,8 @@ export default function Curation() {
 
     return (
 
-        <div className="pl-5 pr-[33px] mr-5 h-screen overflow-y-auto">
-            <div className="flex pt-[21vh] justify-start text-left self-start w-full font-['Noto_Sans_KR'] text-xl font-semibold leading-[140%] text-[#333]">
+        <div className="pt-[30vh] pl-5 pr-[33px] mr-5 h-screen overflow-y-auto">
+            <div className="flex justify-start text-left self-start w-full font-['Noto_Sans_KR'] text-xl font-semibold leading-[140%] text-[#333]">
                 <div>
                     방금 올라온 <span className="text-blue-600">큐레이션</span>
                 </div>
@@ -45,7 +45,7 @@ export default function Curation() {
                     <div 
                         key={item.id} 
                         className="cursor-pointer bg-gray-500 rounded-xl p-5 text-white shadow-md [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]"
-                        onClick={() => navigate(`/places/${item.id}`)}
+                        onClick={() => navigate(`/curations/${item.id}`)}
                     >
                         <h3>{item.title}</h3>
                         <h4>ID: {item.id}</h4>

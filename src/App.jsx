@@ -17,8 +17,9 @@ import Festival from './page/places/Festival';
 import Admin from './page/MyPage/Admin';
 import CreatorPage from './page/CreatorPage';
 import PlaceList from './page/Series/PlaceList';
-import PlaceDetailPage from './page/Series/PlaceDetailPage';
+import PlaceDetail from './page/Series/PlaceDetail';
 import CurationList from './page/places/CurationList';
+import Curation from './page/places/Curation';
 import TestFestival from './test/TestFestival';
 import FestivalDetail from './page/places/FestivalDetail';
 import FestivalList from './page/places/FestivalList';
@@ -47,13 +48,14 @@ function App() {
            {/* 맛집 리스트/상세 (id 기반) */}
 
           <Route path="/places" element={<PlaceList />} />
-          <Route path="/places/:id" element={<PlaceDetailPage />} />
+          <Route path="/places/:id" element={<PlaceDetail />} />
           <Route path="/theme" element={<PlaceList />} />
           
           <Route path="/login" element={<LoginPage />} />
           <Route path="/story" element={<Story />} />
 
-          <Route path="/curation" element={<CurationList />} />
+          <Route path="/curations" element={<CurationList />} />
+          <Route path="/curations/:id" element={<Curation />} />
           <Route path="/festival" element={<Festival />} />
           <Route path="/creator" element={<CreatorPage />} />
           

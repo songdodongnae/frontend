@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
-import "../../css/PlaceDetailpage.css";
+
 import { useGet } from "../../hooks/httpShortcuts";
 
 export default function FestivalDetail() {
@@ -39,10 +39,10 @@ export default function FestivalDetail() {
   // 로딩 중일 때 표시
   if (loading || apiLoading) {
     return (
-      <div className="series-page-4">
+      <div className="flex flex-col w-full h-full items-center">
         <Header />
         <Navigation />
-        <div className="loading">로딩 중...</div>
+        <div className="text-center py-16 px-5 text-xl text-gray-600">로딩 중...</div>
         <Footer />
       </div>
     );
@@ -51,126 +51,160 @@ export default function FestivalDetail() {
   // 장소를 찾을 수 없을 때 표시
   if (!place) {
     return (
-      <div className="series-page-4">
+      <div className="flex flex-col w-full h-full items-center">
         <Header />
         <Navigation />
-        <div className="error">장소를 찾을 수 없습니다.</div>
+        <div className="text-center py-16 px-5 text-xl text-red-600">장소를 찾을 수 없습니다.</div>
         <Footer />
       </div>
     );
   }
 
   return (
-    <div className="series-page-4">
+    <div className="mt-20 flex flex-col w-full items-center">
       <Header />
       <Navigation />
       
+      {/* 메인 이미지 */}
       {place.imageUrl ? (
-        <img src={place.imageUrl} alt={place.title} className="place-main-image" />
+        <img 
+          src={place.imageUrl} 
+          alt={place.title} 
+          className="mx-auto h-[35vh] w-full object-cover shadow-lg" 
+        />
       ) : (
         <div 
-          className="place-main-image"
-          style={{
-            backgroundColor: 'skyblue',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#999',
-            fontSize: '18px'
-          }}
+          className="mx-auto h-[35vh] w-full bg-sky-400 flex items-center justify-center text-gray-500 text-lg shadow-lg"
         >
           이미지 없음
         </div>
       )}
       
-      <div className="place-detail">
+      <div className="w-full max-w-4xl mx-auto px-4">
         {/* 헤더 정보 */}
-        <div className="place-header">
-          <div className="place-info">
-            <h1 className="place-title">{place.title}</h1>
-            <p className="place-address">{place.address || '주소 정보 없음'}</p>
+        <div className="mt-10">
+          <h6 className="text-2xl font-bold truncate">{place.title}</h6>
 
-            <div className="place-ratings">
-              <div className="rating-item">
-                <span className="rating-label">시작</span>
-                <span className="rating-value">
-                  {place.startDate || '-'} {place.startTime || ''}
-                </span>
-              </div>
-              <div className="rating-item">
-                <span className="rating-label">종료</span>
-                <span className="rating-value">
-                  {place.endDate || '-'} {place.endTime || ''}
-                </span>
-              </div>
+          <div className="mt-10 text-sm">
+              <span className="text-gray-500">시작</span>{' '}
+              <span className="text-gray-800 font-medium">{place.startDate || '-'} {place.startTime || ''}</span>
+          </div>
+          <div className="text-sm">
+              <span className="text-gray-500">종료</span>{' '}
+              <span className="text-gray-800 font-medium">{place.endDate || '-'} {place.endTime || ''}</span>
+          </div>
+          <div className="text-sm">
+              <span className="text-gray-500">요금</span>{' '}
+              <span className="text-gray-800 font-medium">{place.fee || '정보 없음'}</span>
+          </div>
+          <div className="text-sm">
+              <span className="text-gray-500">연락처</span>{' '}
+              <span className="text-gray-800 font-medium">{place.contact || '정보 없음'}</span>
+          </div>
+          <div className="text-sm">
+              <span className="text-gray-500">주소</span>{' '}
+              <span className="text-gray-800 font-medium">{place.address || '주소 정보 없음'}</span>
+          </div>
+
+          {/* 운영시간 안내 */}
+          {place.timeDescription && (
+            <div className="text-sm mt-4">
+              <span className="text-gray-500">🕒 운영시간 안내</span>
+              <p className="mt-1 text-gray-700 whitespace-pre-line break-words leading-relaxed">
+                {place.timeDescription}
+              </p>
             </div>
+          )}
 
-            <div className="place-price">요금: {place.fee ? place.fee : '정보 없음'}</div>
-
-            {place.timeDescription && (
-              <div className="detail-item">
-                <h3>🕒 운영시간 안내</h3>
-                <p>{place.timeDescription}</p>
+          {/* 홈페이지 및 예약 링크 */}
+          <div className="text-sm mt-4">
+            {place.homePageUrl && (
+              <div className="mb-2">
+                <span className="text-gray-500">🔗 홈페이지: </span>
+                <a 
+                  href={place.homePageUrl} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="text-blue-600 hover:text-blue-800 underline"
+                >
+                  {place.homePageUrl}
+                </a>
               </div>
             )}
+            {place.reservationUrl && (
+              <div>
+                <span className="text-gray-500">📝 예약: </span>
+                <a 
+                  href={place.reservationUrl} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="text-blue-600 hover:text-blue-800 underline"
+                >
+                  {place.reservationUrl}
+                </a>
+              </div>
+            )}
+          </div>
 
-            <div className="detail-item">
-              {place.homePageUrl && (
-                <p>
-                  🔗 홈페이지: <a href={place.homePageUrl} target="_blank" rel="noreferrer">{place.homePageUrl}</a>
-                </p>
-              )}
-              {place.reservationUrl && (
-                <p>
-                  📝 예약: <a href={place.reservationUrl} target="_blank" rel="noreferrer">{place.reservationUrl}</a>
-                </p>
-              )}
+          {/* 한 줄 소개 */}
+          {place.onelineDescription && (
+            <div className="text-sm mt-6">
+              <span className="text-gray-500">한 줄 소개</span>
+              <p className="mt-1 text-gray-700 whitespace-pre-line break-words leading-relaxed">
+                {place.onelineDescription}
+              </p>
             </div>
-          </div>
-        </div>
-        
-        {/* 한 줄 설명 */}
-        <div className="place-description">
-          <h2>한 줄 소개</h2>
-          <p>{place.onelineDescription || '설명이 없습니다.'}</p>
-        </div>
-        
-        {/* 상세 설명 */}
-        <div className="place-description">
-          <h2>상세 설명</h2>
-          <p>{place.description || '설명이 없습니다.'}</p>
-        </div>
-        
-        {/* 추가 이미지들 */}
-        {Array.isArray(place.festivalImages) && place.festivalImages.length > 0 && (
-          <div className="place-images">
-            <h2>추가 이미지</h2>
-            <div className="image-gallery">
-              {place.festivalImages.map((img, index) => {
-                const url = typeof img === 'string' ? img : img?.url || img?.imageUrl;
-                if (!url) return null;
-                return (
-                  <img
-                    key={index}
-                    src={url}
-                    alt={`${place.title} 이미지 ${index + 1}`}
-                    className="gallery-image"
-                    onError={(e) => (e.currentTarget.style.display = 'none')}
-                  />
-                );
-              })}
+          )}
+
+          {/* 상세 설명 */}
+          {place.description && (
+            <div className="text-sm mt-6">
+              <span className="text-gray-500">상세 설명</span>
+              <p className="mt-1 text-gray-700 whitespace-pre-line break-words leading-relaxed">
+                {place.description}
+              </p>
             </div>
-          </div>
-        )}
-        
-        {/* 운영/연락 정보 */}
-        <div className="place-details">
-          <div className="detail-item">
-            <h3>📞 연락처</h3>
-            <p>{place.contact || '정보 없음'}</p>
+          )}
+
+          {/* 이미지 갤러리 */}
+          <div className="mt-10 flex flex-col w-full h-[60vh] rounded-xl border border-gray-200 bg-white shadow-lg overflow-hidden">
+            <div className="flex h-3/4 border-b border-gray-200">
+              <div className="w-full h-full">
+                <img
+                  className="w-full h-full object-cover"
+                  src={place.imageUrl || '/noimage.svg'}
+                  alt={place.title}
+                />
+              </div>                       
+            </div>
+            <div className="h-1/4 p-2">
+              <div className="grid grid-cols-4 gap-2 h-full">
+                {Array.isArray(place.festivalImages) && place.festivalImages.slice(0, 3).map((img, index) => {
+                  const url = typeof img === 'string' ? img : img?.url || img?.imageUrl;
+                  return (
+                    <div key={index} className="w-full h-full">
+                      {url ? (
+                        <img
+                          className="w-full h-full object-cover rounded-md"
+                          src={url}
+                          alt={`${place.title} 이미지 ${index + 1}`}
+                          onError={(e) => (e.currentTarget.style.display = 'none')}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-100 rounded-md"></div>
+                      )}
+                    </div>
+                  );
+                })}
+                {(!place.festivalImages || place.festivalImages.length < 3) && (
+                  <div className="w-full h-full bg-gray-100 rounded-md"></div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      
       <Footer />
     </div>
   );

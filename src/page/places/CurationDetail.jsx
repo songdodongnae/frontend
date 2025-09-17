@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
-import "../../css/PlaceDetailpage.css";
+
 import { useGet } from "../../hooks/httpShortcuts";
 
 export default function CurationDetail() {

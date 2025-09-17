@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
-import "../../css/PlaceDetailpage.css";
+
 import { useGet } from "../../hooks/httpShortcuts";
 import { Link } from 'react-router-dom';
 
@@ -129,7 +129,7 @@ export default function Curation() {
                                 <p className="mt-1 text-gray-700 whitespace-pre-line break-words leading-relaxed">
                                 {item.description}
                                 </p>
-                        </div>
+                            </div>
                     </div>
                        
                     </div>

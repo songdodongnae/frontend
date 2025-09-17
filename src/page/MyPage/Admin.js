@@ -437,7 +437,7 @@ export default function Admin() {
   }[type] || type);
   
     
-  const getAuthorLabel = (author) => ({ song: '송이', parang: '파랑', dodong: '도동' }[author] || author);
+  const getAuthorLabel = (author) => ({ song: '송이', do: '도이', dong: '동이', parang: '파랑'}[author] || author);
   const getAuthorColor = (author) =>
     ({ song: 'bg-pink-100 text-pink-800', dodong: 'bg-green-100 text-green-800', parang: 'bg-blue-100 text-blue-800' }[
       author
@@ -601,7 +601,8 @@ export default function Admin() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="song">송이</option>
-              <option value="dodong">도동</option>
+              <option value="do">도이</option>
+              <option value="dong">동이</option>
               <option value="parang">파랑</option>
             </select>
           </div>: ''}

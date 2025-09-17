@@ -3,9 +3,7 @@ import Header from "../component/Header";
 import Navigation from "../component/Navigation";
 import Footer from "../component/Footer";
 
-import { useNavigate } from "react-router-dom";
-
-import '../css/CreatorPage.css';
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import charaSong from '../images/song.svg';
 import charaDodong from '../images/dodong.svg';
@@ -14,106 +12,109 @@ import charaNe from '../images/ne.svg';
 
 const CreatorPage = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const selectedCreator = searchParams.get('creator');
 
-    const [creOther, setcreOther] = useState([]);
+    // 크리에이터 데이터 정의
+    const creators = [
+        {
+            id: 'song',
+            name: '송이',
+            image: charaSong,
+            backgroundColor: '#FFF4C9',
+            description: '매운 음식 좋아하는 송이입니다. 매운맛을 좋아하는 사람들을 위한 맛집을 소개합니다.',
+            articleCount: 5
+        },
+        {
+            id: 'do',
+            name: '도이',
+            image: charaDodong,
+            backgroundColor: '#CBE6FF',
+            description: '혼자 놀기 만렙 도이입니다. 혼자서도 즐길 수 있는 곳들을 소개합니다.',
+            articleCount: 3
+        },
+        {
+            id: 'dong',
+            name: '동이',
+            image: charaDong,
+            backgroundColor: '#71B8FA',
+            description: '빵과 커피를 사랑하는 동이입니다. 맛있는 베이커리와 카페를 소개합니다.',
+            articleCount: 7
+        },
+        {
+            id: 'ne',
+            name: '네이',
+            image: charaNe,
+            backgroundColor: '#FFD9C6',
+            description: '운동 마니아 네이입니다. 건강한 라이프스타일을 위한 운동 관련 정보를 공유합니다.',
+            articleCount: 4
+        }
+    ];
 
-    useEffect(() => {
-        fetch("https://picsum.photos/v2/list?page=1&limit=10") // 더미 API
-            .then((response) => response.json())
-            .then((data) => setcreOther(data))
-            .catch((error) => console.error("Error fetching ads:", error));
-    }, []);
-/*
-    const goTocreator-other = (num) => {
-        navigate('/creator-otherPage'+num);
-    };*/
+    // 선택된 크리에이터가 있으면 해당 크리에이터만 필터링
+    const displayCreators = selectedCreator 
+        ? creators.filter(creator => creator.id === selectedCreator)
+        : creators;
+
+    const goBackToAll = () => {
+        navigate('/creator');
+    }
 
     return (
         <div>
             <Header />
             <Navigation /> 
-            <div className="creator-title-text">
-                <div className="creator-title-text-1">크리에이터</div>
-                <div className="creator-title-text-2">관심있는 크리에이터의 글을 읽어보세요.</div>
-            </div>
-            <div className="creator-page-body">
-                <div className="creator-mascotte">
-                    <div className="creator-mascotte-title">
-                        <div className="creator-mascotte-title-text">송도동네 친구들</div>
+            
+            {/* 제목 섹션 */}
+            
+
+            <div className="pt-[30vh] flex flex-row justify-center gap-16 mb-96">
+                <div className="flex flex-col h-screen overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                    {/* 크리에이터 섹션 제목 */}
+                    <div className="flex pb-4 ml-2 text-black font-semibold text-2xl leading-tight">
+                        {selectedCreator ? `${creators.find(c => c.id === selectedCreator)?.name}의 글` : "송도동네 친구들"}
                     </div>
-                    <div className="creator-mascotte-body">
-                        <div className="creator-item" style={{backgroundColor: '#FFF4C9'}}>
-                            <div className="creator-article-container">
-                                <div className="creator-article-num">아티클 {0}개</div>
-                            </div>
-                            <div className="creator-info-container">
-                                <div className="creator-img-container">
-                                    <img className="creator-thumbnail" src={charaSong}/>
+                    
+                    {/* 크리에이터 목록 */}
+                    <div className="flex flex-col gap-10 pt-4 mr-8">
+                        {displayCreators.map((creator) => (
+                            <div 
+                                key={creator.id} 
+                                className="flex w-96 pt-5 pb-14 flex-col rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+                                style={{backgroundColor: creator.backgroundColor}}
+                            >
+                                {/* 아티클 개수 컨테이너 */}
+                                <div className="flex w-28 h-10 ml-5 justify-center items-center rounded-full bg-white/70">
+                                    <div className="flex justify-start text-gray-600 text-center font-normal text-base leading-tight">
+                                        아티클 {creator.articleCount}개
+                                    </div>
                                 </div>
-                                <div className="creator-item-title">송이</div>
-                                <div className="creator-item-intro">크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 </div>
-                            </div>
-                        </div>
-                        <div className="creator-item" style={{backgroundColor: '#CBE6FF'}}>
-                            <div className="creator-article-container">
-                                <div className="creator-article-num">아티클 {0}개</div>
-                            </div>
-                            <div className="creator-info-container">
-                                <div className="creator-img-container">
-                                    <img className="creator-thumbnail" src={charaDodong}/>
+                                
+                                {/* 크리에이터 정보 컨테이너 */}
+                                <div className="flex flex-col justify-center items-center gap-6 px-16">
+                                    {/* 이미지 컨테이너 */}
+                                    <div className="flex w-36 h-36 p-1.5 flex-col justify-center items-center gap-0.5 rounded-full bg-white">
+                                        <img 
+                                            className="w-36 h-36 rounded-full object-cover" 
+                                            src={creator.image} 
+                                            alt={creator.name}
+                                        />
+                                    </div>
+                                    
+                                    {/* 크리에이터 이름 */}
+                                    <div className="text-black text-center font-semibold text-lg leading-tight">
+                                        {creator.name}
+                                    </div>
+                                    
+                                    {/* 크리에이터 소개 */}
+                                    <div className="text-black text-center font-normal text-base leading-tight break-words">
+                                        {creator.description}
+                                    </div>
                                 </div>
-                                <div className="creator-item-title">도동이</div>
-                                <div className="creator-item-intro">크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 </div>
                             </div>
-                        </div>
-                        <div className="creator-item" style={{backgroundColor: '#71B8FA'}}>
-                            <div className="creator-article-container">
-                                <div className="creator-article-num">아티클 {0}개</div>
-                            </div>
-                            <div className="creator-info-container">
-                                <div className="creator-img-container">
-                                    <img className="creator-thumbnail" src={charaDong}/>
-                                </div>
-                                <div className="creator-item-title">동이</div>
-                                <div className="creator-item-intro">크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 </div>
-                            </div>
-                        </div>
-                        <div className="creator-item" style={{backgroundColor: '#FFD9C6'}}>
-                            <div className="creator-article-container">
-                                <div className="creator-article-num">아티클 {0}개</div>
-                            </div>
-                            <div className="creator-info-container">
-                                <div className="creator-img-container">
-                                    <img className="creator-thumbnail" src={charaNe}/>
-                                </div>
-                                <div className="creator-item-title">네이</div>
-                                <div className="creator-item-intro">크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 크리에이터 소개 </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
-                {/* <div className="creator-others">
-                    <div className="creator-others-title">
-                        <div className="creator-others-title-text">송도동네 친구들</div>
-                        <div className="overall">전체보기</div>
-                    </div>
-                    <div className="creator-others-body">
-                        {creOther.map((cro) => (
-                            <div key={cro.id} className="creator-item">
-                                <div className="creator-article-container">
-                                    <div className="creator-article-num">아티클 {cro.id}개</div>
-                                </div>
-                                <div className="creator-info-container">
-                                    <div className="creator-img-container">
-                                        <img className="creator-thumbnail" src={cro.download_url} alt={cro.title} />
-                                    </div>
-                                    <div className="creator-item-title">{cro.author}</div>
-                                    <div className="creator-item-intro">{cro.author}{cro.author}{cro.author}{cro.author}{cro.author}{cro.author}{cro.author}</div>
-                                </div>
-                            </div>
-                        ))} 
-                    </div>
-                </div> */}
             </div>
             
             <Footer />

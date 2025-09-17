@@ -35,12 +35,14 @@ export default function CurationList() {
       <Navigation />
 
       <div className="w-full mt-[20vh] bg-[#e8e5e5] flex justify-center items-center min-h-[35vh] gap-[25vh]">
-        <div className="m-0 pl-0 whitespace-nowrap min-w-fit text-left -translate-x-[10vh] transform">
+        
+        
+        <div className="m-0 ml-24 pl-0 whitespace-nowrap min-w-fit text-left -translate-x-[10vh] transform ">
           <div className="font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] text-[#333] self-start">
             {getTitle()}
           </div>
         </div>
-        <div className="flex flex-col justify-center">
+        <div className="flex ml-24 justify-center">
 
           {content.length > 0 && !imgError ? (
               <img
@@ -59,8 +61,8 @@ export default function CurationList() {
         </div>
       </div>
 
-      <div className="mt-[5vh] mb-[20vh]">       
-        <div className="grid grid-cols-3 gap-x-[2vh] gap-y-[22vh]">
+      <div className="w-3/5 mt-[5vh] mb-[20vh] items-center">       
+        <div className="grid grid-cols-3 gap-x-[4vh] gap-y-[4vh]">
           {content.map((place) => (
             <PlaceCard key={place.id} place={place} />
           ))}

@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import './MonthSlider.css';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 const months = [
   { id: 1, name: '1월', color: '#FF6B6B' },
@@ -16,96 +15,119 @@ const months = [
   { id: 12, name: '12월', color: '#82E0AA' }
 ];
 
-export default function MonthSlider({ onMonthSelect }) {
-  // 현재 날짜의 달로 초기값 설정
-  const [selectedMonth, setSelectedMonth] = useState(() => {
-    const currentMonth = new Date().getMonth() + 1;
-    return months.find(month => month.id === currentMonth) || months[0];
-  });
-  
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    const currentMonth = new Date().getMonth() + 1;
-    return Math.max(0, currentMonth - 3); // 현재 달을 중앙에 위치시키기 위해 조정
-  });
-
-  // 컴포넌트 마운트 시 부모에게 현재 달 전달
-  useEffect(() => {
-    if (onMonthSelect && selectedMonth) {
-      onMonthSelect(selectedMonth);
-    }
-  }, [onMonthSelect, selectedMonth]);
-
-  // currentIndex가 변경될 때마다 선택된 달도 업데이트
-  useEffect(() => {
-    const visibleMonths = months.slice(currentIndex, currentIndex + visibleCards);
-    const middleIndex = Math.floor(visibleMonths.length / 2);
-    const newSelectedMonth = visibleMonths[middleIndex];
-    
-    if (newSelectedMonth && newSelectedMonth.id !== selectedMonth?.id) {
-      setSelectedMonth(newSelectedMonth);
-      if (onMonthSelect) {
-        onMonthSelect(newSelectedMonth);
-      }
-    }
-  }, [currentIndex, onMonthSelect]);
-
-  // 한 번에 보여줄 카드의 개수 (화면 너비에 맞춰 조정)
+export default function MonthSlider({ onMonthSelect, initialMonth }) {
   const visibleCards = 5;
+  const centerOffset = Math.floor(visibleCards / 2);
 
-  const handleMonthClick = (month) => {
-    setSelectedMonth(month);
-    // 부모 컴포넌트에 선택된 월 전달
-    if (onMonthSelect) {
-      onMonthSelect(month);
+  // 부모로부터 받은 초기값이 있으면 사용, 없으면 현재 달 사용
+  const [selectedIndex, setSelectedIndex] = useState(() => {
+    if (initialMonth) {
+      const idx = months.findIndex(m => m.id === initialMonth.id);
+      return idx !== -1 ? idx : new Date().getMonth();
     }
-  };
+    return new Date().getMonth(); // 0 ~ 11
+  });
 
-  const handlePrev = () => {
-    setCurrentIndex(prev => Math.max(0, prev - 1));
-  };
+  // 현재 보여줄 달들의 시작 인덱스 계산
+  const windowStart = useMemo(() => {
+    return Math.max(
+      0,
+      Math.min(selectedIndex - centerOffset, months.length - visibleCards)
+    );
+  }, [selectedIndex, centerOffset]);
 
-  const handleNext = () => {
-    setCurrentIndex(prev => Math.min(months.length - visibleCards, prev + 1));
-  };
+  // 현재 보여줄 달들
+  const visibleMonths = useMemo(
+    () => months.slice(windowStart, windowStart + visibleCards),
+    [windowStart]
+  );
 
-  const getVisibleMonths = () => {
-    return months.slice(currentIndex, currentIndex + visibleCards);
-  };
+  // 선택된 달 객체
+  const selectedMonth = useMemo(() => months[selectedIndex], [selectedIndex]);
+
+  // 선택이 변경될 때마다 부모에게 알림
+  useEffect(() => {
+    console.log('MonthSlider: 선택된 달 변경:', selectedMonth);
+    onMonthSelect?.(selectedMonth);
+  }, [selectedIndex, onMonthSelect]);
+
+  const handleMonthClick = useCallback((month) => {
+    const monthIndex = months.findIndex(m => m.id === month.id);
+    if (monthIndex !== -1) {
+      console.log('MonthSlider: 달 클릭됨:', month, 'index:', monthIndex);
+      setSelectedIndex(monthIndex);
+    }
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    setSelectedIndex(prev => {
+      const newIndex = Math.max(0, prev - 1);
+      console.log('MonthSlider: 이전 버튼, 새 인덱스:', newIndex);
+      return newIndex;
+    });
+  }, []);
+
+  const handleNext = useCallback(() => {
+    setSelectedIndex(prev => {
+      const newIndex = Math.min(months.length - 1, prev + 1);
+      console.log('MonthSlider: 다음 버튼, 새 인덱스:', newIndex);
+      return newIndex;
+    });
+  }, []);
+
+  // 좌우 버튼 비활성화 조건
+  const isPrevDisabled = selectedIndex === 0;
+  const isNextDisabled = selectedIndex === months.length - 1;
 
   return (
-    <div className="month-slider-container">
-   
-      <div className="month-slider">
-        <button 
-          className="nav-button prev-button" 
+    <div className="w-full mt-[20vh] flex flex-col items-center">
+      <div className="w-full max-w-4xl mx-auto px-4 relative">
+        {/* 이전 버튼 */}
+        <button
+          className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 rounded-full bg-white/90 text-gray-800 text-xl font-bold cursor-pointer z-10 transition-all duration-200 shadow-lg hover:bg-white hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed`}
           onClick={handlePrev}
-          disabled={currentIndex === 0}
+          disabled={isPrevDisabled}
+          aria-label="이전 달"
         >
           ‹
         </button>
-        
-        <div className="month-slider-track">
-          {getVisibleMonths().map((month) => (
-            <div
-              key={month.id}
-              className={`month-card ${selectedMonth?.id === month.id ? 'selected' : ''}`}
-              style={{ backgroundColor: month.color }}
-              onClick={() => handleMonthClick(month)}
-            >
-              <div className="month-name">{month.name}</div>
-            </div>
-          ))}
+
+        {/* 월 버튼 슬라이더 */}
+        <div className="flex gap-3 justify-center overflow-hidden">
+          {visibleMonths.map((month) => {
+            const isSelected = selectedMonth?.id === month.id;
+            return (
+              <button
+                key={month.id}
+                className={`flex-shrink-0 w-32 h-32 flex items-center justify-center rounded-xl font-semibold text-white transition-all duration-200 hover:scale-105 ${
+                  isSelected
+                    ? 'scale-105 shadow-lg border-2 border-gray-500'
+                    : 'hover:shadow-md'
+                }`}
+                style={{ backgroundColor: month.color }}
+                onClick={() => handleMonthClick(month)}
+                aria-pressed={isSelected}
+                aria-label={`${month.name} 선택`}
+              >
+                <span className="text-sm">
+                  {month.name}
+                </span>
+              </button>
+            );
+          })}
         </div>
+
         
-        <button 
-          className="nav-button next-button" 
+        {/* 다음 버튼 */}
+        <button
+          className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 rounded-full bg-white/90 text-gray-800 text-xl font-bold cursor-pointer z-10 transition-all duration-200 shadow-lg hover:bg-white hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed`}
           onClick={handleNext}
-          disabled={currentIndex >= months.length - visibleCards}
+          disabled={isNextDisabled}
+          aria-label="다음 달"
         >
           ›
         </button>
       </div>
-      
     </div>
   );
 }

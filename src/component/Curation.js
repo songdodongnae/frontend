@@ -34,7 +34,7 @@ export default function Curation() {
 
     return (
 
-        <div className="pt-[30vh] pl-5 pr-[33px] mr-5 h-screen overflow-y-auto">
+        <div className="pt-[28vh] pl-5 pr-[33px] mr-5 h-screen overflow-y-auto">
             <div className="flex justify-start text-left self-start w-full font-['Noto_Sans_KR'] text-xl font-semibold leading-[140%] text-[#333]">
                 <div>
                     방금 올라온 <span className="text-blue-600">큐레이션</span>

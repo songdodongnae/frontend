@@ -50,25 +50,33 @@ const Series = () => {
         .catch((error) => console.error("Error fetching ads:", error));
       }, []);
 
-      console.log('count', counts)
-
-
     return (
 
-        <div className="pt-[15vh] flex flex-col pl-36 h-screen overflow-y-auto sticky top-[190px] bottom-0">
+        <div className="flex flex-col pl-36 h-screen overflow-y-auto sticky series">
             {/* 스크롤바 스타일링 */}
             <style jsx>{`
                 .series::-webkit-scrollbar {
                     width: 11px;
                 }
+                .series::-webkit-scrollbar-track {
+                    background: #f8fafc;
+                    border-radius: 73px;
+                }
                 .series::-webkit-scrollbar-thumb {
                     border-radius: 73px;
-                    background: #D9D9D9;
+                    background: #e2e8f0 !important;
+                }
+                .series::-webkit-scrollbar-thumb:hover {
+                    background: #cbd5e1 !important;
+                }
+                /* 다른 스크롤바 스타일 오버라이드 */
+                .series::-webkit-scrollbar-thumb:not(.scrollbar-thumb-gray-300) {
+                    background: #e2e8f0 !important;
                 }
             `}</style>
 
             
-            <div className="flex flex-col w-full gap-1 pt-9 items-end">
+            <div className="flex flex-col w-full gap-1 pt-48 items-end">
 
             <div className="pt-4 mr-5 mb-5 text-black font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] whitespace-nowrap">
                 송도동네 <span className="relative">

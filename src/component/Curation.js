@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useGet } from "../hooks/httpShortcuts";
 
 export default function Curation() {
@@ -34,12 +33,17 @@ export default function Curation() {
 
     return (
 
-        <div className="pt-[28vh] pl-5 pr-[33px] mr-5 h-screen overflow-y-auto">
-            <div className="flex justify-start text-left self-start w-full font-['Noto_Sans_KR'] text-xl font-semibold leading-[140%] text-[#333]">
-                <div>
-                    방금 올라온 <span className="text-blue-600">큐레이션</span>
-                </div>
+        <div className="flex flex-col h-screen overflow-y-auto sticky pl-5 pr-[33px] mr-5">
+
+            <div className="flex flex-col gap-1 pt-48 items-start">
+
+            <div className="pt-4 mr-5 mb-5 text-black font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] whitespace-nowrap">
+                     
+                방금 올라온 <span className="text-blue-600">큐레이션</span>
+               
+            </div> 
             </div>
+           
             <div className="mt-[3vh] grid grid-cols-1 gap-6 w-full max-w-[960px]">
                 {data?.data?.content.map((item) => (
                     <div 

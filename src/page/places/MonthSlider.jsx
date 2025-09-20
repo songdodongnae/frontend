@@ -1,18 +1,18 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 
 const months = [
-  { id: 1, name: '1월', color: '#FF6B6B' },
-  { id: 2, name: '2월', color: '#4ECDC4' },
-  { id: 3, name: '3월', color: '#45B7D1' },
-  { id: 4, name: '4월', color: '#96CEB4' },
-  { id: 5, name: '5월', color: '#FFEAA7' },
-  { id: 6, name: '6월', color: '#DDA0DD' },
-  { id: 7, name: '7월', color: '#98D8C8' },
-  { id: 8, name: '8월', color: '#F7DC6F' },
-  { id: 9, name: '9월', color: '#BB8FCE' },
-  { id: 10, name: '10월', color: '#85C1E9' },
-  { id: 11, name: '11월', color: '#F8C471' },
-  { id: 12, name: '12월', color: '#82E0AA' }
+  { id: 1, name: '1월', color: '#1F2937' },   // 회색-800
+  { id: 2, name: '2월', color: '#374151' },   // 회색-700
+  { id: 3, name: '3월', color: '#4B5563' },   // 회색-600
+  { id: 4, name: '4월', color: '#6B7280' },   // 회색-500
+  { id: 5, name: '5월', color: '#9CA3AF' },   // 회색-400
+  { id: 6, name: '6월', color: '#D1D5DB' },   // 회색-300
+  { id: 7, name: '7월', color: '#E5E7EB' },   // 회색-200
+  { id: 8, name: '8월', color: '#F3F4F6' },   // 회색-100
+  { id: 9, name: '9월', color: '#F9FAFB' },   // 회색-50
+  { id: 10, name: '10월', color: '#E5E7EB' }, // 회색-200
+  { id: 11, name: '11월', color: '#D1D5DB' }, // 회색-300
+  { id: 12, name: '12월', color: '#9CA3AF' }  // 회색-400
 ];
 
 export default function MonthSlider({ onMonthSelect, initialMonth }) {
@@ -109,7 +109,7 @@ export default function MonthSlider({ onMonthSelect, initialMonth }) {
                 aria-pressed={isSelected}
                 aria-label={`${month.name} 선택`}
               >
-                <span className="text-sm">
+                <span className="text-sm text-gray-900 font-medium">
                   {month.name}
                 </span>
               </button>

@@ -10,13 +10,6 @@ import Creator from '../component/Creator.js';
 import '../css/Main.css'
 
 const Main = () => {
-
-    const navigate = useNavigate();
-
-    const goToMyPage = () => {
-        navigate('/MyPage');
-    };
-
     return (
         <div className="main-page">
             {/*2025.03.01 Update*/}
@@ -27,6 +20,7 @@ const Main = () => {
                 <Curation />
                 <Creator />
             </div>
+            
             <Footer />
         </div>
     );

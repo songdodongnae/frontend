@@ -1,32 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import HeaderLogo from "../images/HeaderLogo.svg"
 import '../css/Header.css'
 import searchIcon from "../images/search-icon.svg"
 import userIcon from "../images/user-icon.svg"
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext.js"; // AuthContext import
+import { AuthContext } from "../contexts/AuthContext.js";
 
 const Header = () => {
-    const { accessToken, logout } = useContext(AuthContext); // 로그인 상태와 logout 함수 가져오기
-
-
-    const navigate = useNavigate(); 
+    const { accessToken, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
 
     const goToMain = () => {
         navigate('/');
     }
 
-    const goToLogin =() => {
+    const goToLogin = () => {
         navigate('/login');
     }
 
+    const goToSearch = () => {
+        if (searchQuery.trim()) {
+            navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+        } else {
+            navigate('/search');
+        }
+    };
+
     const goToMyPage = () => {
-        navigate("/mypage"); // 마이페이지로 이동
+        navigate("/mypage");
     };
 
     const handleLogout = () => {
-        logout(); // 로그아웃 처리
-        navigate("/"); // 메인 페이지로 리디렉션
+        logout();
+        navigate("/");
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            goToSearch();
+        }
     };
 
     return (
@@ -43,10 +56,19 @@ const Header = () => {
                             <input
                                 type="search"
                                 placeholder="찾고 있는 축제나 맛집을 검색해보세요"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onKeyPress={handleKeyPress}
                             />
                         </div>
                         <div className="img-box">
-                            <img id="search" src={searchIcon} onClick={null}/>
+                            <img 
+                                id="search" 
+                                src={searchIcon} 
+                                onClick={goToSearch}
+                                style={{ cursor: 'pointer' }}
+                                alt="검색"
+                            />
                         </div>
                     </div>
                     <div className="sign">

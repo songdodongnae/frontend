@@ -23,6 +23,7 @@ import Curation from './page/places/Curation';
 import TestFestival from './test/TestFestival';
 import FestivalDetail from './page/places/FestivalDetail';
 import FestivalList from './page/places/FestivalList';
+import SearchPage from './page/SearchPage';
 
 function App() {
   return (
@@ -58,6 +59,8 @@ function App() {
           <Route path="/curations/:id" element={<Curation />} />
           <Route path="/festival" element={<Festival />} />
           <Route path="/creator" element={<CreatorPage />} />
+
+          <Route path="/search" element={<SearchPage />} />
           
         </Routes>
       </BrowserRouter>

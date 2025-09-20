@@ -32,9 +32,9 @@ export default function MyPageLayout() {
             <Header />
             <Navigation />
             
-            <div className="pt-60 px-60 container mx-auto px-4 py-8">
-                <div className="flex gap-12">
-                    {/* 사이드바 */}
+            <div className="pl-[30vh] pt-60 px-4 container mx-auto py-8">
+                <div className="flex gap-6 lg:gap-12">
+                    {/* 사이드바 - 고정 너비로 설정 */}
                     <aside className="w-60 flex-shrink-0">
                         <div className="bg-white rounded-lg shadow-md p-6">
                             <h2 className="text-2xl font-bold text-gray-800 mb-6 pb-4 border-b-2 border-gray-200">
@@ -74,9 +74,9 @@ export default function MyPageLayout() {
                         </div>
                     </aside>
                     
-                    {/* 메인 콘텐츠 */}
-                    <main className="flex-1">
-                        <div className="bg-white rounded-lg shadow-md p-6 min-h-[500px] min-w-[90vh]">
+                    {/* 메인 콘텐츠 - 유연한 너비로 설정 */}
+                    <main className="flex-1 min-w-0 max-w-screen-md">
+                        <div className="bg-white rounded-lg shadow-md p-6 min-h-[500px] w-full">
                             <Outlet />
                         </div>
                     </main>

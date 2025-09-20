@@ -448,23 +448,23 @@ export default function Admin() {
       case 'festivals':
         return (
           <div className="mt-6 space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <input name="festivalDetail.title" value={currentPost.festivalDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="행사명(title)" required/>     
-              <input name="festivalDetail.startDate" value={currentPost.festivalDetail.startDate} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="시작일(YYYY-MM-DD)" required/>
-              <input name="festivalDetail.endDate" value={currentPost.festivalDetail.endDate} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="종료일(YYYY-MM-DD)" required/>
-              <input name="festivalDetail.startTime" value={currentPost.festivalDetail.startTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="시작시간(HH:MM)" required/>
-              <input name="festivalDetail.endTime" value={currentPost.festivalDetail.endTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="종료시간(HH:MM)" required/>                
-              <input name="festivalDetail.timeDescription" value={currentPost.festivalDetail.timeDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="시간 설명(timeDescription)" required/>
-              <input name="festivalDetail.latitude" value={currentPost.festivalDetail.latitude} onChange={handleInputChange} className="input w-auto" placeholder="위도(latitude, 숫자)" />
-              <input name="festivalDetail.longitude" value={currentPost.festivalDetail.longitude} onChange={handleInputChange} className="input w-auto" placeholder="경도(longitude, 숫자)" />
-              <input name="festivalDetail.address" value={currentPost.festivalDetail.address} onChange={handleInputChange} className="input w-auto" placeholder="주소(address)" />
-              <input name="festivalDetail.fee" value={currentPost.festivalDetail.fee} onChange={handleInputChange} className="input w-auto" placeholder="요금(fee)" />
-              <input name="festivalDetail.contact" value={currentPost.festivalDetail.contact} onChange={handleInputChange} className="input w-auto" placeholder="문의(contact)" />
-              <input name="festivalDetail.homePageUrl" value={currentPost.festivalDetail.homePageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="홈페이지 URL" required/>
-              <input name="festivalDetail.reservationUrl" value={currentPost.festivalDetail.reservationUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="예약 URL" required/>
-              <input name="festivalDetail.mainImage" value={currentPost.festivalDetail.mainImage} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="메인 이미지 URL" required/>
-              <input name="festivalDetail.images" value={currentPost.festivalDetail.images} onChange={handleInputChange} className="input md:col-span-2 w-auto" placeholder="추가 이미지 URL들(쉼표로 구분)" />
-              <input name="festivalDetail.onelineDescription" value={currentPost.festivalDetail.onelineDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="한 줄 설명(onelineDescription)" required/>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+              <input name="festivalDetail.title" value={currentPost.festivalDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="행사명(title)" required/>     
+              <input name="festivalDetail.startDate" value={currentPost.festivalDetail.startDate} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="시작일(YYYY-MM-DD)" required/>
+              <input name="festivalDetail.endDate" value={currentPost.festivalDetail.endDate} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="종료일(YYYY-MM-DD)" required/>
+              <input name="festivalDetail.startTime" value={currentPost.festivalDetail.startTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="시작시간(HH:MM)" required/>
+              <input name="festivalDetail.endTime" value={currentPost.festivalDetail.endTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="종료시간(HH:MM)" required/>                
+              <input name="festivalDetail.timeDescription" value={currentPost.festivalDetail.timeDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="시간 설명(timeDescription)" required/>
+              <input name="festivalDetail.latitude" value={currentPost.festivalDetail.latitude} onChange={handleInputChange} className="input w-full" placeholder="위도(latitude, 숫자)" />
+              <input name="festivalDetail.longitude" value={currentPost.festivalDetail.longitude} onChange={handleInputChange} className="input w-full" placeholder="경도(longitude, 숫자)" />
+              <input name="festivalDetail.address" value={currentPost.festivalDetail.address} onChange={handleInputChange} className="input w-full" placeholder="주소(address)" />
+              <input name="festivalDetail.fee" value={currentPost.festivalDetail.fee} onChange={handleInputChange} className="input w-full" placeholder="요금(fee)" />
+              <input name="festivalDetail.contact" value={currentPost.festivalDetail.contact} onChange={handleInputChange} className="input w-full" placeholder="문의(contact)" />
+              <input name="festivalDetail.homePageUrl" value={currentPost.festivalDetail.homePageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="홈페이지 URL" required/>
+              <input name="festivalDetail.reservationUrl" value={currentPost.festivalDetail.reservationUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="예약 URL" required/>
+              <input name="festivalDetail.mainImage" value={currentPost.festivalDetail.mainImage} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="메인 이미지 URL" required/>
+              <input name="festivalDetail.images" value={currentPost.festivalDetail.images} onChange={handleInputChange} className="input md:col-span-2 w-full" placeholder="추가 이미지 URL들(쉼표로 구분)" />
+              <input name="festivalDetail.onelineDescription" value={currentPost.festivalDetail.onelineDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="한 줄 설명(onelineDescription)" required/>
             </div>
             <textarea
               name="festivalDetail.description"
@@ -481,25 +481,29 @@ export default function Admin() {
       case 'delicious-spots':
         return (
           <div className="mt-6 space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <input name="restaurantDetail.title" value={currentPost.restaurantDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="맛집명(title)" required/>
-            <input name="restaurantDetail.latitude" value={currentPost.restaurantDetail.latitude} onChange={handleInputChange} className="input w-auto" placeholder="위도(latitude)" />
-            <input name="restaurantDetail.longitude" value={currentPost.restaurantDetail.longitude} onChange={handleInputChange} className="input w-auto" placeholder="경도(longitude)" />
-            <input name="restaurantDetail.address" value={currentPost.restaurantDetail.address} onChange={handleInputChange} className="input w-auto" placeholder="주소(address)" />
-            <input name="restaurantDetail.price" value={currentPost.restaurantDetail.price} onChange={handleInputChange} className="input w-auto" placeholder="가격(price)" />
-            <input name="restaurantDetail.naverRating" value={currentPost.restaurantDetail.naverRating} onChange={handleInputChange} className="input w-auto" placeholder="네이버 평점(naverRating)" />
-            <input name="restaurantDetail.kakaoRating" value={currentPost.restaurantDetail.kakaoRating} onChange={handleInputChange} className="input w-auto" placeholder="카카오 평점(kakaoRating)" />
-            <input name="restaurantDetail.startTime" value={currentPost.restaurantDetail.startTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="시작시간(startTime)" required/>
-            <input name="restaurantDetail.endTime" value={currentPost.restaurantDetail.endTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="종료시간(endTime)" required/>
-            <input name="restaurantDetail.timeDescription" value={currentPost.restaurantDetail.timeDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="운영시간 설명(timeDescription)" required/>
-            <input name="restaurantDetail.waiting" value={currentPost.restaurantDetail.waiting} onChange={handleInputChange} className="input w-auto" placeholder="대기시간(waiting)" />
-            <input name="restaurantDetail.parking" value={currentPost.restaurantDetail.parking} onChange={handleInputChange} className="input w-auto" placeholder="주차 정보(parking)" />
-            <input name="restaurantDetail.suggestionMenu" value={currentPost.restaurantDetail.suggestionMenu} onChange={handleInputChange} className="input w-auto" placeholder="추천 메뉴(suggestionMenu)" />
-            <input name="restaurantDetail.thumbnailImageUrl" value={currentPost.restaurantDetail.thumbnailImageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="썸네일 이미지 URL" required/>
-            <input name="restaurantDetail.imageUrls" value={currentPost.restaurantDetail.imageUrls} onChange={handleInputChange} className="input w-auto" placeholder="추가 이미지 URL들(쉼표로 구분)" />
-            <input name="restaurantDetail.onelineDescription" value={currentPost.restaurantDetail.onelineDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="한 줄 설명(onelineDescription)" required/>
-            <input name="restaurantDetail.instagram" value={currentPost.restaurantDetail.instagram} onChange={handleInputChange} className="input w-auto" placeholder="인스타그램(instagram)" />
-            <input name="restaurantDetail.contact" value={currentPost.restaurantDetail.contact} onChange={handleInputChange} className="input w-auto" placeholder="연락처(contact)" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+              <input name="restaurantDetail.title" value={currentPost.restaurantDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="맛집명(title)" required/>
+              <input name="restaurantDetail.latitude" value={currentPost.restaurantDetail.latitude} onChange={handleInputChange} className="input w-full" placeholder="위도(latitude)" />
+              <input name="restaurantDetail.longitude" value={currentPost.restaurantDetail.longitude} onChange={handleInputChange} className="input w-full" placeholder="경도(longitude)" />
+              <input name="restaurantDetail.address" value={currentPost.restaurantDetail.address} onChange={handleInputChange} className="input w-full" placeholder="주소(address)" />
+            <input name="restaurantDetail.title" value={currentPost.restaurantDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="맛집명(title)" required/>
+            <input name="restaurantDetail.latitude" value={currentPost.restaurantDetail.latitude} onChange={handleInputChange} className="input w-full" placeholder="위도(latitude)" />
+            <input name="restaurantDetail.longitude" value={currentPost.restaurantDetail.longitude} onChange={handleInputChange} className="input w-full" placeholder="경도(longitude)" />
+            <input name="restaurantDetail.address" value={currentPost.restaurantDetail.address} onChange={handleInputChange} className="input w-full" placeholder="주소(address)" />
+            <input name="restaurantDetail.price" value={currentPost.restaurantDetail.price} onChange={handleInputChange} className="input w-full" placeholder="가격(price)" />
+            <input name="restaurantDetail.naverRating" value={currentPost.restaurantDetail.naverRating} onChange={handleInputChange} className="input w-full" placeholder="네이버 평점(naverRating)" />
+            <input name="restaurantDetail.kakaoRating" value={currentPost.restaurantDetail.kakaoRating} onChange={handleInputChange} className="input w-full" placeholder="카카오 평점(kakaoRating)" />
+            <input name="restaurantDetail.startTime" value={currentPost.restaurantDetail.startTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="시작시간(startTime)" required/>
+            <input name="restaurantDetail.endTime" value={currentPost.restaurantDetail.endTime} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="종료시간(endTime)" required/>
+            <input name="restaurantDetail.timeDescription" value={currentPost.restaurantDetail.timeDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="운영시간 설명(timeDescription)" required/>
+            <input name="restaurantDetail.waiting" value={currentPost.restaurantDetail.waiting} onChange={handleInputChange} className="input w-full" placeholder="대기시간(waiting)" />
+            <input name="restaurantDetail.parking" value={currentPost.restaurantDetail.parking} onChange={handleInputChange} className="input w-full" placeholder="주차 정보(parking)" />
+            <input name="restaurantDetail.suggestionMenu" value={currentPost.restaurantDetail.suggestionMenu} onChange={handleInputChange} className="input w-full" placeholder="추천 메뉴(suggestionMenu)" />
+            <input name="restaurantDetail.thumbnailImageUrl" value={currentPost.restaurantDetail.thumbnailImageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="썸네일 이미지 URL" required/>
+            <input name="restaurantDetail.imageUrls" value={currentPost.restaurantDetail.imageUrls} onChange={handleInputChange} className="input w-full" placeholder="추가 이미지 URL들(쉼표로 구분)" />
+            <input name="restaurantDetail.onelineDescription" value={currentPost.restaurantDetail.onelineDescription} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="한 줄 설명(onelineDescription)" required/>
+            <input name="restaurantDetail.instagram" value={currentPost.restaurantDetail.instagram} onChange={handleInputChange} className="input w-full" placeholder="인스타그램(instagram)" />
+            <input name="restaurantDetail.contact" value={currentPost.restaurantDetail.contact} onChange={handleInputChange} className="input w-full" placeholder="연락처(contact)" />
           </div>      
             <textarea
               name="restaurantDetail.description"
@@ -516,8 +520,8 @@ export default function Admin() {
       case 'curations':
         return (
           <div className="mt-6 space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <input name="curationDetail.title" value={currentPost.curationDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="큐레이션 제목(title)" required/>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+            <input name="curationDetail.title" value={currentPost.curationDetail.title} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="큐레이션 제목(title)" required/>
               
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">타입(type)</label>
@@ -531,8 +535,8 @@ export default function Admin() {
                   <option value="DELICIOUS_SPOT">맛집</option>
                 </select>
               </div>
-              <input name="curationDetail.ids" value={Array.isArray(currentPost.curationDetail.ids) ? currentPost.curationDetail.ids.join(', ') : currentPost.curationDetail.ids} onChange={handleInputChange} className="input md:col-span-2" placeholder="포함된 ID들(쉼표로 구분)" />
-              <input name="curationDetail.imageUrl" value={currentPost.curationDetail.imageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500" placeholder="이미지 URL" required/>
+              <input name="curationDetail.ids" value={Array.isArray(currentPost.curationDetail.ids) ? currentPost.curationDetail.ids.join(', ') : currentPost.curationDetail.ids} onChange={handleInputChange} className="input md:col-span-2 w-full" placeholder="포함된 ID들(쉼표로 구분)" />
+              <input name="curationDetail.imageUrl" value={currentPost.curationDetail.imageUrl} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="이미지 URL" required/>
             </div>
             <textarea
               name="curationDetail.description"
@@ -549,10 +553,10 @@ export default function Admin() {
       case 'creators':
         return (
           <div className="mt-6 space-y-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <input name="creatorDetail.name" value={currentPost.creatorDetail.name} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="크리에이터 이름(name)" required/>
-              <input name="creatorDetail.introduction" value={currentPost.creatorDetail.introduction} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="introcuction" required/>
-              <input name="creatorDetail.image" value={currentPost.creatorDetail.image} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-auto" placeholder="프로필 이미지 URL" required/>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+            <input name="creatorDetail.name" value={currentPost.creatorDetail.name} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="크리에이터 이름(name)" required/>
+              <input name="creatorDetail.introduction" value={currentPost.creatorDetail.introduction} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="introcuction" required/>
+              <input name="creatorDetail.image" value={currentPost.creatorDetail.image} onChange={handleInputChange} className="input bg-red-50 border-red-300 focus:ring-red-500 w-full" placeholder="프로필 이미지 URL" required/>
             </div>
            
           </div>

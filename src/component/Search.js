@@ -37,9 +37,9 @@ export default function Search() {
     };
 
     return (
-        <div className="w-[120vh] flex">
+        <div className="w-full max-w-7xl mx-auto px-4 flex">
             {/* 왼쪽 상단 - 검색 결과 제목 */}
-            <div className="w-1/3 pr-12">
+            <div className="w-1/3 pr-12 flex-shrink-0">
                 {query && (
                     <div className="sticky top-0">
                         <h1 className="text-2xl font-bold text-gray-800">
@@ -53,7 +53,7 @@ export default function Search() {
             </div>
 
             {/* 오른쪽 - 검색 결과 내용 */}
-            <div className="w-2/3">
+            <div className="w-2/3 flex-shrink-0 min-w-0">
                 {loading && <div>검색 중...</div>}
                 
                 {query && data && (

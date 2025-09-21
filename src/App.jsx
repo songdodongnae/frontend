@@ -20,7 +20,6 @@ import PlaceList from './page/Series/PlaceList';
 import PlaceDetail from './page/Series/PlaceDetail';
 import CurationList from './page/places/CurationList';
 import Curation from './page/places/Curation';
-import TestFestival from './test/TestFestival';
 import FestivalDetail from './page/places/FestivalDetail';
 import FestivalList from './page/places/FestivalList';
 import SearchPage from './page/SearchPage';
@@ -40,8 +39,6 @@ function App() {
             <Route path="inquiry" element={<Inquiry />} />
             <Route path="withdraw" element={<Withdraw />} />
           </Route>
-
-          <Route path="/test-festival" element={<TestFestival />} />
 
           <Route path="/festivals" element={<FestivalList />} />
           <Route path="/festivals/:id" element={<FestivalDetail />} />

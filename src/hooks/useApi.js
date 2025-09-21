@@ -43,12 +43,17 @@ export default function useApi({
   const execute = useCallback(async (override = {}) => {
     const finalParams = override.params ?? params;
     const finalBody = override.body ?? body;
-    const finalUrl = override.url ?? url;
+    let finalUrl = override.url ?? url;
 
     // url이 없으면 요청하지 않음
     if (!finalUrl) {
       setData(null);
       return null;
+    }
+
+    // 상대 경로인 경우 절대 경로로 변환
+    if (finalUrl.startsWith('/api')) {
+      finalUrl = `${window.location.origin}${finalUrl}`;
     }
 
     setLoading(true);
@@ -69,6 +74,16 @@ export default function useApi({
         ...(shouldAttachAuth && token ? { Authorization: `Bearer ${token}` } : {}),
       };
 
+      console.log('=== API 요청 상세 정보 ===');
+      console.log('Method:', method);
+      console.log('URL:', finalUrl);
+      console.log('Headers:', headers);
+      console.log('Body:', finalBody);
+      console.log('Params:', finalParams);
+      console.log('Auth:', auth);
+      console.log('Should Attach Auth:', shouldAttachAuth);
+      console.log('========================');
+
       const res = await axios.request({
         method,
         url: finalUrl,
@@ -81,6 +96,10 @@ export default function useApi({
       setData(res.data);
       return res.data;
     } catch (e) {
+      console.error('=== API 요청 실패 ===');
+      console.error('Error:', e);
+      console.error('Response:', e.response);
+      console.error('==================');
       setError(e);
       throw e;
     } finally {

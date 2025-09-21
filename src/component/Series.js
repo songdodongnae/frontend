@@ -125,7 +125,7 @@ const Series = () => {
                 
                 <div 
                     className="flex flex-col items-end w-3/5 h-80 w-[35vh] mr-5 rounded-[30px] transition-all duration-200 ease-in-out hover:-translate-y-1 cursor-pointer"
-                    onClick={() => navigate('/curation', { state: { from: 'trip' } })}
+                    onClick={() => navigate('/curations', { state: { from: 'trip' } })}
                 >
                     <div className="w-full h-[209px]">
                         <img className="w-full h-full object-fill rounded-t-[30px]" src={dummy} alt="curation" />

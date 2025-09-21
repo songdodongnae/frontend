@@ -66,8 +66,8 @@ export default function Admin() {
     festivalDetail: {
       title: '송도 원두의 꽃 축제',
       creatorName: '송이',
-      startDate: '2024-05-15',
-      endDate: '2024-05-20',
+      startDate: '2025-09-15',
+      endDate: '2025-09-20',
       startTime: '21:00',
       endTime: '21:00',
       timeDescription: '매일 10:00-21:00, 우천시 일정 변경',
@@ -143,11 +143,17 @@ export default function Admin() {
         return currentPost.restaurantDetail.creatorName;
       case 'curations':
         return currentPost.curationDetail.creatorName;
-      case 'creator':
+      case 'creators':
         return currentPost.creatorDetail.name;
       default:
         return '';
     }
+  };
+
+  const getAuthorLabel = (author) => {
+    // 이미 한글 이름이면 그대로 반환, 영문 key면 한글로 변환
+    const authorMap = { song: '송이', do: '도이', dong: '동이', parang: '파랑' };
+    return authorMap[author] || author;
   };
 
   const handleInputChange = (e) => {
@@ -155,13 +161,16 @@ export default function Admin() {
     
     // author 필드 처리
     if (name === 'author') {
+      // getAuthorLabel 함수를 사용해서 한글 이름으로 변환
+      const koreanName = getAuthorLabel(value);
+      
       switch (activeTab) {
         case 'festivals':
           setCurrentPost(prev => ({
             ...prev,
             festivalDetail: {
               ...prev.festivalDetail,
-              creatorName: value
+              creatorName: koreanName
             }
           }));
           break;
@@ -170,7 +179,7 @@ export default function Admin() {
             ...prev,
             restaurantDetail: {
               ...prev.restaurantDetail,
-              creatorName: value
+              creatorName: koreanName
             }
           }));
           break;
@@ -179,7 +188,7 @@ export default function Admin() {
             ...prev,
             curationDetail: {
               ...prev.curationDetail,
-              creatorName: value
+              creatorName: koreanName
             }
           }));
           break;
@@ -188,7 +197,7 @@ export default function Admin() {
             ...prev,
             creatorDetail: {
               ...prev.creatorDetail,
-              name: value
+              name: koreanName
             }
           }));
           break;
@@ -272,6 +281,12 @@ export default function Admin() {
             postData = currentPost.festivalDetail;
         }
         
+        console.log('=== POST 요청 데이터 확인 ===');
+        console.log('Active Tab:', activeTab);
+        console.log('Post Data:', JSON.stringify(postData, null, 2));
+        console.log('Creator Name:', postData.creatorName);
+        console.log('============================');
+        
         await createPost({ body: postData });
       }
       
@@ -280,7 +295,9 @@ export default function Admin() {
       resetForm();
       alert(isEditing ? '수정되었습니다!' : '등록되었습니다!');
     } catch (err) {
-      alert(`${isEditing ? '수정' : '등록'} 실패: ${err?.message || err}`);
+      console.error('Submit error:', err);
+      console.error('Error response:', err.response?.data);
+      alert(`${isEditing ? '수정' : '등록'} 실패: ${err?.response?.data?.message || err?.message || err}`);
     }
   };
 
@@ -289,8 +306,8 @@ export default function Admin() {
       festivalDetail: {
         title: '송도 원두의 꽃 축제',
         creatorName: '송이',
-        startDate: '2024-05-15',
-        endDate: '2024-05-20',
+        startDate: '2025-09-15',
+        endDate: '2025-09-20',
         startTime: '11:00',
         endTime: '21:00',
         timeDescription: '매일 10:00-21:00, 우천시 일정 변경',
@@ -437,7 +454,6 @@ export default function Admin() {
   }[type] || type);
   
     
-  const getAuthorLabel = (author) => ({ song: '송이', do: '도이', dong: '동이', parang: '파랑'}[author] || author);
   const getAuthorColor = (author) =>
     ({ song: 'bg-pink-100 text-pink-800', dodong: 'bg-green-100 text-green-800', parang: 'bg-blue-100 text-blue-800' }[
       author

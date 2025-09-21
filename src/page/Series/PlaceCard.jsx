@@ -8,7 +8,7 @@ export default function PlaceCard({ place }) {
   return (
     <Link to={`${location.pathname}/${place.id}`} className="block">
       <div className="rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-        <div className="w-full h-48 md:h-56 lg:h-60">
+        <div className="w-full h-32 md:h-40 lg:h-44">
           {place.imageUrl && !imgError ? (
             <img
               className="w-full h-full object-cover"
@@ -19,7 +19,7 @@ export default function PlaceCard({ place }) {
           ) : (
             <img
             className="w-full h-full object-cover"
-            src={`/noimage.svg`}
+            src={`/noimage.png`}
             alt={place.name}
             onError={() => setImgError(true)}
           />
@@ -27,13 +27,13 @@ export default function PlaceCard({ place }) {
         </div>
 
         <div className="relative w-full bg-white border-t border-gray-200">
-          <div className="ml-20 mt-7 text-gray-600 font-['Noto_Sans_KR'] text-sm leading-[140%]">
+          <div className="ml-20 mt-5 text-gray-600 font-['Noto_Sans_KR'] text-sm leading-[140%]">
             {place.creatorName}
           </div>
-          <div className="ml-20 mb-16 text-[#2E2E2E] font-['Noto_Sans_KR'] text-base font-semibold leading-[140%]">
+          <div className="ml-20 mb-12 text-[#2E2E2E] font-['Noto_Sans_KR'] text-base font-semibold leading-[140%]">
             {place.title}
           </div>
-          <div className="ml-20 mb-7 text-gray-300 font-['Noto_Sans_KR'] text-xs leading-[140%]">
+          <div className="ml-20 mb-5 text-gray-300 font-['Noto_Sans_KR'] text-xs leading-[140%]">
             {place.id}
           </div>
         </div>

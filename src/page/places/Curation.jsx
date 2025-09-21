@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
+import CreatorPage from "../CreatorPage";
 
 import { useGet } from "../../hooks/httpShortcuts";
 import { Link } from 'react-router-dom';
@@ -17,6 +18,8 @@ export default function Curation() {
   const [imgError, setImgError] = useState(false);
   console.log('API data:', apiData);
   console.log('Selected place:', place);
+  const creator = apiData?.data?.creator?.name;
+  console.log('creator', creator)
 
   useEffect(() => {
     if (!apiData) return;
@@ -62,7 +65,7 @@ export default function Curation() {
   }
 
   return (
-    <div className="container pt-[30vh] border-gray-300">
+    <div className="w-full pt-[30vh] border-gray-300 border border-gray-200">
       <Header />
       <Navigation />
       
@@ -76,7 +79,7 @@ export default function Curation() {
               ) : (
                 <img
                 className="w-[80vh] h-[40vh] object-cover rounded-[15px] shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
-                src={`/noimage.svg`}
+                src={`/noimage.png`}
                 onError={() => setImgError(true)}
               />
             )}
@@ -95,7 +98,7 @@ export default function Curation() {
                         <div className="w-1/2 h-full ">
                         <img
                             className="w-full h-full object-cover"
-                            src={item.imageUrl || '/noimage.svg'}
+                            src={item.imageUrl || '/noimage.png'}
                             alt={item.title}
                         />
                         </div>
@@ -145,9 +148,13 @@ export default function Curation() {
                 </Link>
                   
                 ))}
+                <CreatorPage selectedCreator={creator} showArticle={false}/>
               </div>
             )}
+
     </div>
+    <Footer />
     </div>
+    
   );
 }

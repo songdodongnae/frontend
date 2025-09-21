@@ -107,7 +107,7 @@ export default function PlaceDetail() {
                 <div className="w-full h-full">
                 <img
                     className="w-full h-full object-cover"
-                    src={place.imageUrl || '/noimage.svg'}
+                    src={place.imageUrl || '/noimage.png'}
                     alt={place.title}
                 />
                 </div>                       

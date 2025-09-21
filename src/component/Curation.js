@@ -44,7 +44,7 @@ export default function Curation() {
             </div> 
             </div>
            
-            <div className="mt-[3vh] grid grid-cols-1 gap-6 w-full max-w-[960px]">
+            <div className="mt-2 grid grid-cols-1 gap-6 w-full max-w-[960px]">
                 {data?.data?.content.map((item) => (
                     <div 
                         key={item.id} 

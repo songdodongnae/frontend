@@ -90,9 +90,8 @@ export default function Curation() {
             {Array.isArray(place.deliciousSpots) && place.deliciousSpots.length > 0 && (
               <div className="mt-6 justify-items-center">
                 {place.deliciousSpots.map((item, idx) => (
-                <Link to={`/places/${item.id ?? idx}`} className="block mb-6">
+                <Link key={item.id ?? idx} to={`/places/${item.id ?? idx}`} className="block mb-6">
                     <div
-                    key={idx}
                     className="flex-col w-[100vh] h-[60vh] rounded-[12px] border border-gray-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden">
                     <div className="flex h-3/4 border border-gray-200">
                         <div className="w-1/2 h-full ">
@@ -147,9 +146,69 @@ export default function Curation() {
                     </div>
                 </Link>
                   
-                ))}
+                ))}          
                 <CreatorPage selectedCreator={creator} showArticle={false}/>
               </div>
+            )}
+
+            {Array.isArray(place.festivals) && place.festivals.length > 0 && (
+              <div className="mt-6 justify-items-center">
+                {place.festivals.map((item, idx) => (
+                  <Link key={item.id ?? idx} to={`/festivals/${item.id ?? idx}`} className="block mb-6">
+                    <div className="flex-col w-[100vh] h-[60vh] rounded-[12px] border border-gray-200 bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden">
+                      <div className="flex h-full border border-gray-200">
+                        
+                        <div className="w-1/2 h-full p-6 flex flex-col items-start gap-2">
+                          <h6 className="text-xl font-bold truncate">{item.title}</h6>
+                          <h6 className="text-sm truncate mb-8">{item.onelineDescription}</h6>
+                          {(item.startDate || item.endDate) && (
+                            <div className="text-sm">
+                              <span className="text-gray-500">일정</span>{' '}
+                              <span className="text-gray-800 font-medium">{item.startTime} ~ {item.endTime}</span>
+                            </div>
+                          )}
+                          {item.timeDescription && (
+                            <div className="text-sm">
+                              <span className="text-gray-500">입장시간</span>{' '}
+                              <span className="text-gray-800 font-medium">{item.timeDescription || ''}</span>
+                            </div>
+                          )}
+                          {item.parking && (
+                            <div className="text-sm">
+                              <span className="text-gray-500">주차장</span>{' '}
+                              <span className="text-gray-800 font-medium">{item.parking || ''}</span>
+                            </div>
+                          )}
+                          {item.price && (
+                            <div className="text-sm">
+                              <span className="text-gray-500">입장료</span>{' '}
+                              <span className="text-gray-800 font-medium">{item.price}</span>
+                            </div>
+                          )}
+                          {item.description && (
+                            <div className="text-sm">
+                              <span className="text-gray-500">설명</span>
+                              <p className="mt-1 text-gray-700 whitespace-pre-line break-words leading-relaxed">
+                                {item.description}
+                              </p>
+                            </div>
+                          )}
+                          {item.address && (
+                            <div className="text-sm">
+                              <span className="text-gray-500">주소</span>
+                              <p className="mt-1 text-gray-700 whitespace-pre-line break-words leading-relaxed">
+                               {item.address}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+         
+                    </div>
+                  </Link>
+                ))}
+               <CreatorPage selectedCreator={creator} showArticle={false}/>
+               </div>
             )}
 
     </div>

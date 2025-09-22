@@ -10,6 +10,7 @@ export default function FestivalDetail() {
   const { id } = useParams();
   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [imgError, setImgError] = useState(false);
 
   // PlaceListPage와 동일한 API 호출
   const { data: apiData, loading: apiLoading, error } = useGet(`/api/festivals/${id}`, { currentPage: 1, pageSize: 100 }, true, []);
@@ -66,18 +67,18 @@ export default function FestivalDetail() {
       <Navigation />
       
       {/* 메인 이미지 */}
-      {place.imageUrl ? (
+      {place.imageUrl && imgError ? (
         <img 
           src={place.imageUrl} 
           alt={place.title} 
           className="mx-auto h-[35vh] w-full object-cover shadow-lg" 
         />
       ) : (
-        <div 
-          className="mx-auto h-[35vh] w-full bg-sky-400 flex items-center justify-center text-gray-500 text-lg shadow-lg"
-        >
-          이미지 없음
-        </div>
+        <img
+        className="w-full h-[35vh] rounded-tl-[30px] object-cover border border-gray-200"
+        src="/noimage.png"
+        onError={() => setImgError(true)}
+       />
       )}
       
       <div className="w-full max-w-4xl mx-auto px-4">

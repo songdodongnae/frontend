@@ -37,7 +37,7 @@ const CreatorPage = ({ selectedCreator: propSelectedCreator, showArticle = true 
             image: charaSong,
             backgroundColor: '#FFF4C9',
             description: '매운 음식 좋아하는 송이입니다. 매운맛을 좋아하는 사람들을 위한 맛집을 소개합니다.',
-            articleCount: 5,
+            articleCount: 1,
             idNum: 1
         },
         {
@@ -46,7 +46,7 @@ const CreatorPage = ({ selectedCreator: propSelectedCreator, showArticle = true 
             image: charaDodong,
             backgroundColor: '#CBE6FF',
             description: '혼자 놀기 만렙 도이입니다. 혼자서도 즐길 수 있는 곳들을 소개합니다.',
-            articleCount: 3,
+            articleCount: 1,
             idNum: 6
         },
         {
@@ -55,7 +55,7 @@ const CreatorPage = ({ selectedCreator: propSelectedCreator, showArticle = true 
             image: charaDong,
             backgroundColor: '#71B8FA',
             description: '빵과 커피를 사랑하는 동이입니다. 맛있는 베이커리와 카페를 소개합니다.',
-            articleCount: 7,
+            articleCount: 1,
             idNum:7
         },
         {
@@ -64,7 +64,7 @@ const CreatorPage = ({ selectedCreator: propSelectedCreator, showArticle = true 
             image: charaNe,
             backgroundColor: '#FFD9C6',
             description: '운동 마니아 네이입니다. 건강한 라이프스타일을 위한 운동 관련 정보를 공유합니다.',
-            articleCount: 4,
+            articleCount: 1,
             idNum:8
         }
     ];

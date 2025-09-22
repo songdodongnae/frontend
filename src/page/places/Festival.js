@@ -69,6 +69,7 @@ const FestivalCard = ({ festival }) => {
     const [imgError, setImgError] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    console.log('im', imgError)
 
     const handleBookmarkClick = (e) => {
         e.stopPropagation(); // 부모 요소의 클릭 이벤트 방지
@@ -85,7 +86,7 @@ const FestivalCard = ({ festival }) => {
             onClick={handleCardClick}
         >
             <div className="w-[480px] h-[427px] relative">
-                {festival.imageUrl && !imgError ? (
+                {festival.imageUrl && imgError ? (
                     <img 
                         className="w-full h-full rounded-tl-[30px] rounded-bl-[30px] object-cover border border-gray-200" 
                         src={festival.imageUrl} 

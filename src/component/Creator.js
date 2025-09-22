@@ -19,7 +19,7 @@ const Creator = () => {
     }
 
     return (
-        <div className="flex w-32 px-3 py-7 flex-col items-center gap-4 sticky top-60 rounded-full bg-gray-200 mt-60">
+        <div className="flex w-32 px-3 py-7 flex-col items-center gap-4 sticky top-3 rounded-full bg-gray-200 mt-52">
             {/* 헤더 */}
             <div className="self-stretch">
                 <div className="text-black text-center font-medium text-base leading-tight tracking-tight">

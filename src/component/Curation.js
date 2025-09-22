@@ -8,41 +8,28 @@ export default function Curation() {
     console.log("data", data?.data?.content)
     const [curation, setCuration] = useState();
     const navigate = useNavigate();
-    const [isBookmarked, setIsBookmarked] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
+    const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
+	const [hoveredId, setHoveredId] = useState(null);
+	const [imgError, setImgError] = useState(false);
+	const content = data?.data?.content;
 
-    const handleBookmarkClick = (e) => {
-        e.stopPropagation(); // 부모 요소의 클릭 이벤트 방지
-        setIsBookmarked(!isBookmarked);
-    };
+	const handleBookmarkClick = (e, id) => {
+		e.stopPropagation();
+		setBookmarkedIds(prev => {
+			const next = new Set(prev);
+			if (next.has(id)) next.delete(id);
+			else next.add(id);
+			return next;
+		});
+	};
 
     const [charaName, setCharaName] = useState(['송이', '도동이', '동이', '네이']);
 
-    const goToCuration = () => {
-        navigate('/curation')
-    }
-
     
-    useEffect(() => {
-        // 더미 데이터로 단색 이미지 생성
-        const dummyData = Array.from({ length: 5 }, (_, index) => ({
-            id: index + 1,
-            // 다양한 색상 배열
-            color: [
-                '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
-                '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
-                '#F8C471', '#82E0AA', '#F1948A', '#85C1E9', '#D7BDE2'
-            ][index % 15],
-            title: `큐레이션 ${index + 1}`,
-            description: `매력적인 큐레이션 ${index + 1}입니다.`
-        }));
-        
-        setCuration(dummyData);
-    }, []);
 
     return (
 
-        <div className="flex flex-col h-screen overflow-y-auto sticky pl-5 pr-[33px] mr-5">
+        <div className="flex flex-col h-[120vh] overflow-y-auto sticky pl-5 pr-[33px] mr-5">
 
             <div className="flex flex-col gap-1 pt-48 items-start">
 
@@ -54,7 +41,7 @@ export default function Curation() {
             </div>
            
             <div className="mt-2 grid grid-cols-1 gap-6 w-full max-w-[960px]">
-                {data?.data?.content.map((item) => (
+                {content?.map((item) => (
                     <div 
                         key={item.id} 
                         className="flex 
@@ -63,29 +50,44 @@ export default function Curation() {
                         w-[65vh] rounded-[30px] transition-all duration-200 ease-in-out hover:-translate-y-1 cursor-pointer relative overflow-hidden"
                         onClick={() => navigate(`/curations/${item.id}`)}
                     >
-                        <div className="w-full h-[209px] rounded-t-[30px]"></div>
+                        <div className="w-full h-[209px] rounded-t-[30px]">
+
+                        {content.length > 0 && !imgError ? (
+                            <img
+                                className="object-cover rounded-[15px] shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
+                                src={content[0]?.imageUrl}
+                                onError={() => setImgError(true)}
+                            />
+                            ) : (
+                            <img
+                            className="object-cover rounded-[15px] shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
+                            src={`/noimage.png`}
+                            onError={() => setImgError(true)}
+                            />
+                        )}
+
+                        </div>
                         <div className="flex w-full flex-col items-start rounded-b-[30px] bg-gray-200 relative">
-                            <div 
-                                className="flex w-10 h-10 justify-center items-center absolute right-[10px] bottom-[23px] z-50 cursor-pointer transition-all duration-200 hover:scale-110"
-                                onClick={handleBookmarkClick}
-                                onMouseEnter={() => setIsHovered(true)}
-                                onMouseLeave={() => setIsHovered(false)}
-                            >
-                                <div className={`w-full h-full flex rounded-full relative transition-all duration-200 ${
-                                    isBookmarked || isHovered 
-                                        ? 'bg-gray-800 shadow-lg' 
-                                        : 'bg-white'
-                                }`} />
-                                <img 
-                                    className={`absolute right-[1px] top-[1px] transition-all duration-200 ${
-                                        isBookmarked || isHovered 
-                                            ? 'opacity-100 scale-110' 
-                                            : 'opacity-80'
-                                    }`} 
-                                    src={bookmark} 
-                                    alt="bookmark" 
-                                />
-                            </div>
+							<div 
+								className="flex w-10 h-10 justify-center items-center absolute right-[10px] bottom-[23px] z-50 cursor-pointer transition-all duration-200 hover:scale-110"
+								onClick={(e) => handleBookmarkClick(e, item.id)}
+								onMouseEnter={() => setHoveredId(item.id)}
+								onMouseLeave={() => setHoveredId(null)}
+							>
+								{(() => {
+									const isActive = bookmarkedIds.has(item.id) || hoveredId === item.id;
+									return (
+										<>
+											<div className={`w-full h-full flex rounded-full relative transition-all duration-200 ${isActive ? 'bg-gray-800 shadow-lg' : 'bg-white'}`} />
+											<img 
+												className={`absolute top-[1px] transition-all duration-200 ${isActive ? 'opacity-100 scale-110' : 'opacity-80'}`} 
+												src={bookmark} 
+												alt="bookmark" 
+											/>
+										</>
+									);
+								})()}
+							</div>
                             
                             <div className="text-black font-['Noto_Sans_KR'] text-base font-semibold leading-[140%] pt-4 pl-6">
                                 {item.title}

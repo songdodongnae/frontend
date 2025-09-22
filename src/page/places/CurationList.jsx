@@ -41,6 +41,9 @@ export default function CurationList() {
           <div className="font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] text-[#333] self-start">
             {getTitle()}
           </div>
+          <div className="pt-4 font-['Noto_Sans_KR'] text-md leading-[140%] text-[#333] self-start">
+            지금 송도에서 가장 주목받는 콘첸츠들을 정리해봤어요
+          </div>
         </div>
         <div className="flex ml-24 justify-center">
 
@@ -61,7 +64,7 @@ export default function CurationList() {
         </div>
       </div>
 
-      <div className="w-4/5 ml-14 mt-[5vh] mb-[20vh] items-center">       
+      <div className="w-4/7 ml-14 mt-[5vh] mb-[20vh] items-center">       
         <div className="grid grid-cols-3 gap-x-[2vh] gap-y-[4vh]">
           {content.map((place) => (
             <PlaceCard key={place.id} place={place} />

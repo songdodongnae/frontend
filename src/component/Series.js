@@ -52,7 +52,7 @@ const Series = () => {
 
     return (
 
-        <div className="flex flex-col pl-36 h-screen-md overflow-y-auto sticky series">
+        <div className="flex flex-col pl-36 h-[120vh] overflow-y-auto sticky series">
             {/* 스크롤바 스타일링 */}
             <style jsx>{`
                 .series::-webkit-scrollbar {

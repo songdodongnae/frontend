@@ -60,11 +60,11 @@ export default function FestivalList() {
       <Header />
       <Navigation />     
 
-      <div className="flex-1 w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-10">
+      <div className="flex-1 pt-20 w-full max-w-5xl mx-auto px-4 md:px-6 lg:px-8 py-10">
         <MonthSlider onMonthSelect={handleMonthSelect} initialMonth={selectedMonth} />
       
 
-        <div className="font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] text-[#333] mt-6 mb-8">
+        <div className="pt-4 font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%] text-[#333] mt-6 mb-8">
           {getTitle()}
         </div>
 

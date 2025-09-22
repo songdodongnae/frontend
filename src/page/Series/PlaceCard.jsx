@@ -1,9 +1,22 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import bookmark from "../../images/festivalBookmark.svg";
 
 export default function PlaceCard({ place }) {
   const location = useLocation();
   const [imgError, setImgError] = useState(false);
+  const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
+	const [hoveredId, setHoveredId] = useState(null);
+
+	const handleBookmarkClick = (e, id) => {
+		e.stopPropagation();
+		setBookmarkedIds(prev => {
+			const next = new Set(prev);
+			if (next.has(id)) next.delete(id);
+			else next.add(id);
+			return next;
+		});
+	};
 
   return (
     <Link to={`${location.pathname}/${place.id}`} className="block">
@@ -27,6 +40,27 @@ export default function PlaceCard({ place }) {
         </div>
 
         <div className="relative w-full bg-white border-t border-gray-200">
+
+        <div 
+								className="flex w-10 h-10 justify-center items-center absolute right-[10px] bottom-[7vh] z-50 cursor-pointer transition-all duration-200 hover:scale-110"
+								onClick={(e) => handleBookmarkClick(e, place.id)}
+								onMouseEnter={() => setHoveredId(place.id)}
+								onMouseLeave={() => setHoveredId(null)}
+							>
+								{(() => {
+									const isActive = bookmarkedIds.has(place.id) || hoveredId === place.id;
+									return (
+										<>
+											<div className={`w-full h-full flex rounded-full relative transition-all duration-200 ${isActive ? 'bg-gray-800 shadow-lg' : 'bg-white'}`} />
+											<img 
+												className={`absolute top-[1px] transition-all duration-200 ${isActive ? 'opacity-100 scale-110' : 'opacity-80'}`} 
+												src={bookmark} 
+												alt="bookmark" 
+											/>
+										</>
+									);
+								})()}
+							</div>
           <div className="ml-20 mt-5 text-gray-600 font-['Noto_Sans_KR'] text-sm leading-[140%]">
             {place.creatorName}
           </div>

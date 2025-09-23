@@ -9,8 +9,6 @@ import { useGet } from "../../hooks/httpShortcuts";
 
 export default function FestivalList() {
 
-  const location = useLocation();
-  
   // 현재 달로 초기값 설정
   const [selectedMonth, setSelectedMonth] = useState(() => {
     const currentMonth = new Date().getMonth() + 1;
@@ -23,8 +21,8 @@ export default function FestivalList() {
   const { data, loading, error, execute: refetch } = useGet(
     `/api/festivals/day`, 
     { year: 2025, month: selectedMonth.id }, 
-    true, 
-    [selectedMonth.id] // selectedMonth.id가 변경될 때마다 재호출
+    false, 
+    []
   );
 
   useEffect(() => {
@@ -52,7 +50,7 @@ export default function FestivalList() {
     window.scrollTo(0, 0);
   }, []);
 
-  const content = data?.data ?? [];
+  const content = loading? [] : (data?.data);
 
 
   return (

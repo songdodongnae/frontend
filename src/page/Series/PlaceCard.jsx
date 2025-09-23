@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import bookmark from "../../images/festivalBookmark.svg";
 
-export default function PlaceCard({ place }) {
+export default function PlaceCard({ place, topLabel }) {
   const location = useLocation();
   const [imgError, setImgError] = useState(false);
   const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
@@ -65,15 +65,17 @@ export default function PlaceCard({ place }) {
         </div>
 
         <div className="relative w-full bg-white">
-
+          {topLabel && (
+                <div className="ml-10 mt-2 mb-1 text-gray-600 text-[#6B7280] text-sm font-semibold"> {topLabel} </div>
+            )}
             
-          <div className="ml-20 mt-5 text-gray-600 font-['Noto_Sans_KR'] text-sm leading-[140%]">
+          <div className="ml-12 mt-2 text-gray-600 font-['Noto_Sans_KR'] text-sm leading-[140%]">
             {place.creatorName}
           </div>
-          <div className="ml-20 mb-12 text-[#2E2E2E] font-['Noto_Sans_KR'] text-base font-semibold leading-[140%]">
+          <div className="ml-12 mb-2 text-[#2E2E2E] font-['Noto_Sans_KR'] text-base font-semibold leading-[140%]">
             {place.title}
           </div>
-          <div className="ml-20 mb-5 text-gray-300 font-['Noto_Sans_KR'] text-xs leading-[140%]">
+          <div className="ml-12 mb-5 text-gray-300 font-['Noto_Sans_KR'] text-xs leading-[140%]">
             {place.createdAt}
           </div>
         </div>

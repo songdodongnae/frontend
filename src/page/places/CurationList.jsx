@@ -5,6 +5,7 @@ import Header from "../../component/Header";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
 import { useGet } from "../../hooks/httpShortcuts";
+import { FestivalCard } from "../places/Festival";
     
 export default function CurationList() {
   const {data} = useGet('/api/curations', { currentPage: 1, pageSize: 100 }, true, []);
@@ -64,11 +65,22 @@ export default function CurationList() {
         </div>
       </div>
 
-      <div className="w-4/7 ml-14 mt-[5vh] mb-[20vh] items-center">       
+
+      {location.state?.from === 'edition' && content[0] && (
+        <div className="w-2/3 flex justify-center mt-[5vh]">
+          <FestivalCard activeTab={content[0]} topLabel="TOP 1"/>
+        </div>
+      )}
+
+      <div className="w-2/3 mt-[5vh] mb-[20vh] items-center">
         <div className="grid grid-cols-3 gap-x-[2vh] gap-y-[4vh]">
-          {content.map((place) => (
-            <PlaceCard key={place.id} place={place} />
-          ))}
+        {(location.state?.from === 'edition' ? content.slice(1) : content).map((place, idx) => (
+          <PlaceCard
+            key={place.id}
+            place={place}
+            topLabel={location.state?.from === 'edition' ? `TOP ${idx + 2}` : undefined}
+          />
+        ))}
         </div>
       </div>
 

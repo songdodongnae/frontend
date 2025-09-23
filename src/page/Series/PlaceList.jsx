@@ -21,6 +21,7 @@ export default function PlaceList() {
     return { id: currentMonth, name: `${currentMonth}월` };
   });
 
+  console.log('data', data)
 
   
   // 이전 페이지 경로에 따른 제목 설정

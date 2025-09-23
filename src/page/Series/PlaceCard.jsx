@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import bookmark from "../../images/festivalBookmark.svg";
 
 export default function PlaceCard({ place, topLabel }) {
   const location = useLocation();
   const [imgError, setImgError] = useState(false);
+  const [displaySrc, setDisplaySrc] = useState('/noimage.png');
   const [bookmarkedIds, setBookmarkedIds] = useState(new Set());
 	const [hoveredId, setHoveredId] = useState(null);
 
@@ -17,6 +18,23 @@ export default function PlaceCard({ place, topLabel }) {
 			return next;
 		});
 	};
+
+  useEffect(() => {
+    setImgError(false);
+    const url = place?.imageUrl;
+    if (!url) {
+      setDisplaySrc('/noimage.png');
+      return;
+    }
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => setDisplaySrc(url);
+    img.onerror = () => {
+      setImgError(true);
+      setDisplaySrc('/noimage.png');
+    };
+    img.src = url;
+  }, [place?.imageUrl]);
 
   return (
     <Link to={`${location.pathname}/${place.id}`} className="block">
@@ -45,21 +63,11 @@ export default function PlaceCard({ place, topLabel }) {
             );
           })()}
           </div>
-          {place.imageUrl && !imgError ? (
-            <img
-              className="w-full h-full object-cover"
-              src={place.imageUrl}
-              alt={place.name}
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <img
+          <img
             className="w-full h-full rounded-xl object-cover"
-            src={`/noimage.png`}
+            src={displaySrc}
             alt={place.name}
-            onError={() => setImgError(true)}
           />
-          )}
 
            
         </div>

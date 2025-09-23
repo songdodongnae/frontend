@@ -12,6 +12,9 @@ export default function CurationList() {
   const location = useLocation();
   const [imgError, setImgError] = useState(false);
 
+  
+  console.log('data', data)
+
   const getTitle = () => {
     if (location.state?.from === 'trip') {
       return '송도동네 나들이';

@@ -6,6 +6,8 @@ import Footer from "../../component/Footer.js";
 import FestivalCalendar from "../../component/FestivalCalendar.js";
 import bookmark from "../../images/festivalBookmark.svg";
 import { useGet } from "../../hooks/httpShortcuts";
+import {useLocation} from 'react-router-dom';
+
 
 const Festival = () => {
     const { data, loading, error } = useGet(
@@ -53,9 +55,9 @@ const Festival = () => {
             <Header />
             <Navigation />
             <FestivalCalendar />
-            <div className="flex flex-col justify-center items-center gap-12 mb-[158px]">
+            <div className="flex w-2/3 flex-col justify-center items-center gap-12 mb-[158px]">
                 {festivals.map((fes) => (
-                    <FestivalCard key={fes.id} festival={fes} />
+                    <FestivalCard key={fes.id} activeTab={fes} />
                 ))}
             </div>
             <Footer />
@@ -64,12 +66,14 @@ const Festival = () => {
 }
 
 // FestivalCard 컴포넌트 분리
-const FestivalCard = ({ festival }) => {
+export const FestivalCard = ({ activeTab }) => {
+
     const navigate = useNavigate();
     const [imgError, setImgError] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    console.log('im', imgError)
+    const location = useLocation();
+    console.log('activeTab', activeTab)
 
     const handleBookmarkClick = (e) => {
         e.stopPropagation(); // 부모 요소의 클릭 이벤트 방지
@@ -77,32 +81,32 @@ const FestivalCard = ({ festival }) => {
     };
 
     const handleCardClick = () => {
-        navigate(`/festivals/${festival.id}`);
+        navigate(`${location.pathname}/${activeTab.id}`);
     };
 
     return (
         <div 
-            className="flex w-[960px] items-center cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-lg"
+            className="flex w-full items-center cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:shadow-lg"
             onClick={handleCardClick}
         >
-            <div className="w-[480px] h-[427px] relative">
-                {festival.imageUrl && imgError ? (
+            <div className="w-1/3 h-[20vh] relative">
+                {activeTab?.imageUrl && imgError ? (
                     <img 
                         className="w-full h-full rounded-tl-[30px] rounded-bl-[30px] object-cover border border-gray-200" 
-                        src={festival.imageUrl} 
-                        alt={festival.title}
+                        src={activeTab.imageUrl} 
+                        alt={activeTab?.title}
                         onError={() => setImgError(true)}
                     />
                 ) : (
                     <img
                         className="w-full h-full rounded-tl-[30px] rounded-bl-[30px] object-cover border border-gray-200"
                         src="/noimage.png"
-                        alt={festival.title}
+                        alt={activeTab?.title}
                         onError={() => setImgError(true)}
                     />
                 )}
                 <div 
-                    className="flex w-14 h-14 justify-center items-center absolute right-[26px] bottom-[24px] z-50 cursor-pointer transition-all duration-200 hover:scale-110"
+                    className="flex w-10 h-10 justify-center items-center absolute right-[20px] bottom-[20px] z-50 cursor-pointer transition-all duration-200 hover:scale-110"
                     onClick={handleBookmarkClick}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
@@ -113,7 +117,7 @@ const FestivalCard = ({ festival }) => {
                             : 'bg-white'
                     }`} />
                     <img 
-                        className={`absolute right-[7px] top-[7px] transition-all duration-200 ${
+                        className={`absolute transition-all duration-200 ${
                             isBookmarked || isHovered 
                                 ? 'opacity-100 scale-110' 
                                 : 'opacity-80'
@@ -123,15 +127,12 @@ const FestivalCard = ({ festival }) => {
                     />
                 </div>
             </div>
-            <div className="flex w-[480px] h-[427px] flex-col items-start shrink-0 rounded-tr-[30px] rounded-br-[30px] bg-[#EFEFEF]">
-                <div className="flex flex-col justify-center shrink-0 self-stretch pl-[25px] pr-[38px] pt-[25px] pb-[219px] text-[#1C1814] font-['Noto_Sans_KR'] text-2xl font-semibold leading-[140%]">
-                    {festival.title}
+            <div className="flex w-2/3 h-[20vh] flex-col items-start shrink-0 rounded-tr-[30px] rounded-br-[30px] bg-[#EFEFEF]">
+                <div className="flex flex-col justify-center shrink-0 self-stretch pl-[25px] pr-[38px] pt-[25px] pb-[10vh] text-[#1C1814] font-['Noto_Sans_KR'] text-lg font-semibold leading-[140%]">
+                    {activeTab?.title}
                 </div>
-                <div className="text-[#1C1814] font-['Noto_Sans_KR'] text-lg font-semibold leading-[140%] px-[38px] pl-[25px] pb-4 break-words">
-                    {festival.creatorName}
-                </div>
-                <div className="text-[#4D4D4D] font-['Noto_Sans_KR'] text-lg font-medium leading-[140%] px-[38px] pl-[25px] pb-[25px]">
-                    현재 예정 축제 개
+                <div className="text-[#1C1814] font-['Noto_Sans_KR'] text-md leading-[140%] px-[38px] pl-[25px] pb-8 break-words">
+                    {activeTab?.creatorName}
                 </div>
             </div>
         </div>

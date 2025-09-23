@@ -20,8 +20,31 @@ export default function PlaceCard({ place }) {
 
   return (
     <Link to={`${location.pathname}/${place.id}`} className="block">
-      <div className="rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-        <div className="w-full h-32 md:h-40 lg:h-44">
+      <div className="rounded-xl overflow-hidden bg-white hover:shadow-md transition-shadow">
+
+      
+        <div className="relative w-full h-32 md:h-40 lg:h-44 ">
+
+        <div 
+        className="flex w-10 h-10 justify-center items-center absolute right-3 bottom-3 z-50 cursor-pointer transition-all duration-200 hover:scale-110"
+        onClick={(e) => handleBookmarkClick(e, place.id)}
+        onMouseEnter={() => setHoveredId(place.id)}
+        onMouseLeave={() => setHoveredId(null)}
+        >
+          {(() => {
+            const isActive = bookmarkedIds.has(place.id) || hoveredId === place.id;
+            return (
+              <>
+                <div className={`w-full h-full flex rounded-full relative transition-all duration-200 ${isActive ? 'bg-gray-800 shadow-lg' : 'bg-white'}`} />
+                <img 
+                  className={`absolute top-[1px] transition-all duration-200 ${isActive ? 'opacity-100 scale-110' : 'opacity-80'}`} 
+                  src={bookmark} 
+                  alt="bookmark" 
+                />
+              </>
+            );
+          })()}
+          </div>
           {place.imageUrl && !imgError ? (
             <img
               className="w-full h-full object-cover"
@@ -31,36 +54,19 @@ export default function PlaceCard({ place }) {
             />
           ) : (
             <img
-            className="w-full h-full object-cover"
+            className="w-full h-full rounded-xl object-cover"
             src={`/noimage.png`}
             alt={place.name}
             onError={() => setImgError(true)}
           />
           )}
+
+           
         </div>
 
-        <div className="relative w-full bg-white border-t border-gray-200">
+        <div className="relative w-full bg-white">
 
-        <div 
-								className="flex w-10 h-10 justify-center items-center absolute right-[10px] bottom-[7vh] z-50 cursor-pointer transition-all duration-200 hover:scale-110"
-								onClick={(e) => handleBookmarkClick(e, place.id)}
-								onMouseEnter={() => setHoveredId(place.id)}
-								onMouseLeave={() => setHoveredId(null)}
-							>
-								{(() => {
-									const isActive = bookmarkedIds.has(place.id) || hoveredId === place.id;
-									return (
-										<>
-											<div className={`w-full h-full flex rounded-full relative transition-all duration-200 ${isActive ? 'bg-gray-800 shadow-lg' : 'bg-white'}`} />
-											<img 
-												className={`absolute top-[1px] transition-all duration-200 ${isActive ? 'opacity-100 scale-110' : 'opacity-80'}`} 
-												src={bookmark} 
-												alt="bookmark" 
-											/>
-										</>
-									);
-								})()}
-							</div>
+            
           <div className="ml-20 mt-5 text-gray-600 font-['Noto_Sans_KR'] text-sm leading-[140%]">
             {place.creatorName}
           </div>
@@ -68,7 +74,7 @@ export default function PlaceCard({ place }) {
             {place.title}
           </div>
           <div className="ml-20 mb-5 text-gray-300 font-['Noto_Sans_KR'] text-xs leading-[140%]">
-            {place.id}
+            {place.createdAt}
           </div>
         </div>
       </div>

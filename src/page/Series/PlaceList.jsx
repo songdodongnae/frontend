@@ -6,6 +6,7 @@ import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
 import "../../css/PlaceList.css";
 import { useGet } from '../../hooks/httpShortcuts';
+import { FestivalCard } from '../places/Festival';
 
 
 export default function PlaceList() {
@@ -20,7 +21,7 @@ export default function PlaceList() {
     return { id: currentMonth, name: `${currentMonth}월` };
   });
 
-  
+
   
   // 이전 페이지 경로에 따른 제목 설정
   const getTitle = () => {
@@ -93,7 +94,7 @@ export default function PlaceList() {
         
         <div className="theme-book-body">
           {data?.data?.content?.map((place, idx) => (
-            <PlaceCard key={place.id} place={place} />
+            <FestivalCard key={place.id} activeTab={place} />
           ))}
         </div>
       </div>

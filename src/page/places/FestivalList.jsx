@@ -6,6 +6,7 @@ import MonthSlider from "../places/MonthSlider";
 import Navigation from "../../component/Navigation";
 import Footer from "../../component/Footer";
 import { useGet } from "../../hooks/httpShortcuts";
+import { FestivalCard } from "./Festival";
 
 export default function FestivalList() {
 
@@ -15,8 +16,6 @@ export default function FestivalList() {
     return { id: currentMonth, name: `${currentMonth}월` };
   });
 
-  console.log('select', selectedMonth)
-  console.log('selectedMonth', selectedMonth.id);
 
   const { data, loading, error, execute: refetch } = useGet(
     `/api/festivals/day`, 
@@ -32,7 +31,6 @@ export default function FestivalList() {
     }
   }, [selectedMonth.id, refetch]);
 
-  console.log('data', data);
 
   const getTitle = () => {
     if (selectedMonth) {
@@ -52,6 +50,8 @@ export default function FestivalList() {
 
   const content = loading? [] : (data?.data);
 
+  console.log('festival', content)
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -67,9 +67,9 @@ export default function FestivalList() {
         </div>
 
         {content && content.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10">
+          <div className="flex flex-col items-center justify-center gap-4">
             {content.map((place) => (
-              <PlaceCard key={place.id} place={place} />
+              <FestivalCard key={place.id} activeTab={place} />
             ))}
           </div>
         ) : (

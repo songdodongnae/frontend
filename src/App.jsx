@@ -31,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/auth" element={<CallbackPage />} />
+          <Route path="/login/oauth2/code/:provider" element={<CallbackPage />} />
         
 
           <Route path="/mypage" element={<MyPageLayout />}>

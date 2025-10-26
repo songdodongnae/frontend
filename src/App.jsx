@@ -26,7 +26,7 @@ import SearchPage from './page/SearchPage';
 
 function App() {
   return (
-    <AuthProvider> {/* AuthProvider로 앱을 감싸기 */}
+    <AuthProvider> {/* AuthProvider로 앱을 감싸기 */} 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />

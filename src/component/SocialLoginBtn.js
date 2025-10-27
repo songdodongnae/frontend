@@ -46,7 +46,7 @@ const SocialLoginBtn = () => {
 
   const loginButtonClick = (url, provider) => {
     localStorage.setItem("recentLoginProvider", provider); // 클릭한 provider 저장
-    window.location.href = '';
+    window.location.href = `/oauth2/authorization/${provider}`;
   };
 
   return (

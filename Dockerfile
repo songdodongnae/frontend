@@ -11,6 +11,8 @@ RUN npm run build
 FROM nginx:stable-alpine
 # builder 스테이지에서 빌드된 결과물을 Nginx의 기본 정적 파일 경로로 복사
 COPY --from=builder /app/build /usr/share/nginx/html
+# 커스텀 Nginx 설정 파일 복사
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Nginx 포트 노출
 EXPOSE 80
 # 컨테이너 실행 시 Nginx 실행
